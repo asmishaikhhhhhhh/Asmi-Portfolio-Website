@@ -1,0 +1,30 @@
+[
+  {
+    "file": "/images/projects/fiama/cover/old-front.webp",
+    "shows": "The existing Fiama Blackcurrant & Bearberry gel bar carton, front, held in a hand (thin audit callout lines cross it)",
+    "w": 530,
+    "h": 390,
+    "bg": "#B4A4AD"
+  },
+  {
+    "file": "/images/projects/fiama/cover/new-front.webp",
+    "shows": "Flat front panel of the redesigned carton: painted berries above a wavy navy band",
+    "w": 833,
+    "h": 625,
+    "bg": "#3F3652"
+  },
+  {
+    "file": "/images/projects/fiama/cover/mockup-3d.webp",
+    "shows": "3D render of the redesigned carton floating over a dark grey marbled surface",
+    "w": 745,
+    "h": 683,
+    "bg": "#616782"
+  },
+  {
+    "file": "/images/projects/fiama/cover/mockup-3d-back.webp",
+    "shows": "3D render of the redesigned carton's back, with the How to use panel",
+    "w": 745,
+    "h": 683,
+    "bg": "#4E5165"
+  }
+]

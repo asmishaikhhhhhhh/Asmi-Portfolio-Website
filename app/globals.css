@@ -1,26 +1,995 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* ──────────────────────────────────────────────────────────────────────────
+   Design tokens. Documented in docs/03-design-system.md.
+   Tailwind utilities are generated from @theme (bg-paper, text-ink, …).
+   ────────────────────────────────────────────────────────────────────────── */
+@theme {
+  /* Colour */
+  --color-paper: #f4f0e8;
+  --color-paper-deep: #ebe5d9;
+  --color-card: #fbf9f4;
+  --color-ink: #1a1916;
+  --color-ink-soft: #4a4740; /* 8.2:1 on paper */
+  --color-ink-mute: #6e6a61; /* 4.7:1 on paper (AA body) */
+  --color-line: #d8d1c4;
+  --color-forest: #1f4d3a; /* 8.5:1 on paper */
+  --color-forest-soft: #dce6dc;
+  --color-marigold: #e3a23b; /* accents only (1.9:1 on paper), never text; ink on marigold is 8:1 */
+  --color-marigold-ink: #8a5a0b; /* marigold-family text, 5.2:1 on paper */
+  --color-marigold-deep: #b87a12; /* marigold for LARGE text only (≥24px), 3.2:1 on paper */
+  --color-night: #15140f;
+
+  /* Type */
+  --font-display: var(--font-fraunces), "Iowan Old Style", Georgia, serif;
+  --font-sans: var(--font-geist), ui-sans-serif, system-ui, sans-serif;
+
+  --text-meta: 0.8125rem;
+  --text-meta--line-height: 1.35;
+  --text-meta--letter-spacing: 0.06em;
+
+  /* Fluid scale: min @ 360px → max @ 1440px */
+  --text-display: clamp(3.5rem, 1.9rem + 7.1vw, 8.5rem);
+  --text-display--line-height: 0.92;
+  --text-h1: clamp(2.5rem, 1.75rem + 3.3vw, 4.5rem);
+  --text-h1--line-height: 1;
+  --text-h2: clamp(1.75rem, 1.35rem + 1.8vw, 2.75rem);
+  --text-h2--line-height: 1.08;
+  --text-h3: clamp(1.25rem, 1.15rem + 0.45vw, 1.625rem);
+  --text-h3--line-height: 1.2;
+  --text-lede: clamp(1.25rem, 1.1rem + 0.7vw, 1.75rem);
+  --text-lede--line-height: 1.35;
+  --text-body: clamp(1.0625rem, 1.03rem + 0.15vw, 1.1875rem);
+  --text-body--line-height: 1.6;
+
+  /* Radius */
+  --radius-tag: 2px;
+  --radius-control: 10px;
+  --radius-media: 20px;
+
+  /* Shadow (floating UI only) */
+  --shadow-float: 0 1px 2px rgb(26 25 22 / 0.06), 0 12px 32px -8px rgb(26 25 22 / 0.18);
+
+  /* Motion */
+  --ease-out-soft: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --ease-in-out-soft: cubic-bezier(0.65, 0, 0.35, 1);
+  --duration-fast: 160ms;
+  --duration-base: 280ms;
+  --duration-slow: 520ms;
+
+  --breakpoint-xs: 30rem;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+/* ─────────────────────────────── base ─────────────────────────────── */
+@layer base {
+  html {
+    color-scheme: light;
+    -webkit-text-size-adjust: 100%;
+    scroll-padding-top: 6rem;
+  }
+  body {
+    background: var(--color-paper);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-size: var(--text-body);
+    line-height: var(--text-body--line-height);
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+  }
+  ::selection {
+    background: var(--color-marigold);
+    color: var(--color-ink);
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-forest);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+  h1, h2, h3 {
+    text-wrap: balance;
+  }
+  p {
+    text-wrap: pretty;
+  }
+  img, video {
+    max-width: 100%;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* ─────────────────────────── utilities ─────────────────────────── */
+@utility font-display-soft {
+  font-family: var(--font-display);
+  font-variation-settings: "SOFT" 100, "WONK" 0;
+  font-optical-sizing: auto;
+}
+@utility font-display-wonk {
+  font-family: var(--font-display);
+  font-variation-settings: "SOFT" 100, "WONK" 1;
+  font-optical-sizing: auto;
+}
+@utility meta {
+  font-size: var(--text-meta);
+  line-height: var(--text-meta--line-height);
+  letter-spacing: var(--text-meta--letter-spacing);
+  text-transform: uppercase;
+  font-weight: 500;
+}
+@utility container-page {
+  width: 100%;
+  max-width: 90rem;
+  margin-inline: auto;
+  padding-inline: clamp(1rem, 0.4rem + 2.6vw, 2.5rem);
+}
+@utility hairline {
+  border-color: var(--color-line);
+}
+@utility no-scrollbar {
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/* Paper grain: a single tiny SVG noise, used sparingly on large surfaces */
+@utility grain {
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 .035 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+}
+
+/* ─────────────────────── view transitions (routes) ─────────────────────── */
+::view-transition-group(.morph) {
+  animation-duration: 460ms;
+  animation-timing-function: var(--ease-out-soft);
+}
+::view-transition-image-pair(.morph) {
+  animation-name: via-blur;
+}
+@keyframes via-blur {
+  35% {
+    filter: blur(4px);
+  }
+}
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 240ms;
+}
+
+/* ─────────────────────────── photo ticker (About) ─────────────────────────── */
+.pt-viewport {
+  mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+}
+.pt-track {
+  animation: pt-slide 36s linear infinite;
+}
+.pt-viewport:hover .pt-track,
+.pt-viewport:focus-within .pt-track,
+.pt-viewport[data-paused] .pt-track {
+  animation-play-state: paused;
+}
+.pt-photo {
+  transform: rotate(var(--tilt, 0deg));
+  transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.pt-photo:hover {
+  transform: rotate(0deg) scale(1.04);
+}
+@keyframes pt-slide {
+  /* The list is doubled and each item carries its own spacing, so half the track is exactly one set */
+  to {
+    transform: translateX(-50%);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .pt-track {
+    animation: none !important;
+  }
+  .pt-viewport {
+    overflow-x: auto;
+    mask-image: none;
+  }
+  .pt-track > li[aria-hidden],
+  .pt-toggle {
+    display: none;
+  }
+}
+
+/* ─────────────────────────── process loop (About) ─────────────────────────── */
+.pl-orbit {
+  transform-box: view-box;
+  transform-origin: 200px 200px;
+  animation: pl-orbit 14s linear infinite;
+}
+.pl-arc {
+  transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.pl-spin {
+  display: inline-block;
+  animation: pl-orbit 14s linear infinite;
+}
+.pl-fade {
+  animation: pl-fade 0.45s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+@keyframes pl-orbit {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@keyframes pl-fade {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .pl-orbit,
+  .pl-spin {
+    animation: none !important;
+  }
+}
+
+/* ─────────────────────────── typewriter (Playground) ─────────────────────────── */
+.tw-desk {
+  background:
+    radial-gradient(120% 80% at 50% 0%, #fbf9f4 0%, transparent 60%),
+    repeating-linear-gradient(0deg, rgb(26 25 22 / 0.025) 0 1px, transparent 1px 28px),
+    repeating-linear-gradient(90deg, rgb(26 25 22 / 0.025) 0 1px, transparent 1px 28px),
+    var(--color-paper-deep);
+}
+.tw-in {
+  animation: tw-in 0.45s ease-out;
+}
+.tw-sheet {
+  background:
+    linear-gradient(90deg, transparent calc(9% - 10px), rgb(227 162 59 / 0.55) calc(9% - 10px), rgb(227 162 59 / 0.55) calc(9% - 9px), transparent calc(9% - 9px)),
+    repeating-linear-gradient(180deg, transparent 0 calc(var(--tw-line) - 1px), #e4ddd0 calc(var(--tw-line) - 1px) var(--tw-line)) 0 2rem / 100% 100% local,
+    #fffdf8;
+  box-shadow: 0 -1px 0 #e4ddd0, 0 18px 30px -18px rgb(26 25 22 / 0.35);
+}
+.tw-caret {
+  display: inline-block;
+  width: 2px;
+  margin-left: 1px;
+  vertical-align: text-bottom;
+  animation: tw-blink 1s steps(1) infinite;
+}
+.tw-body {
+  background: linear-gradient(180deg, #2c2a25 0%, #1a1916 55%, #121110 100%);
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 0.08),
+    inset 0 -6px 0 rgb(0 0 0 / 0.35),
+    0 30px 40px -24px rgb(26 25 22 / 0.6);
+}
+.tw-spool {
+  width: 1.6rem;
+  height: 1.6rem;
+  border-radius: 999px;
+  background: radial-gradient(circle, #15140f 22%, #1f4d3a 24% 62%, #2f6a51 64%);
+  box-shadow: 0 2px 0 rgb(0 0 0 / 0.4);
+}
+.tw-key {
+  aspect-ratio: 1;
+  min-width: 0;
+  border-radius: 999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(circle at 50% 35%, #fffdf8, #ebe5d9 70%);
+  border: 2px solid #3a3832;
+  box-shadow: 0 4px 0 #0b0b09, 0 5px 6px rgb(0 0 0 / 0.4);
+  color: #1a1916;
+  font-family: var(--font-typewriter), "Courier New", monospace;
+  font-size: clamp(0.55rem, 0.35rem + 0.6vw, 0.85rem);
+  transition: transform 0.08s, box-shadow 0.08s;
+  cursor: pointer;
+  user-select: none;
+  touch-action: manipulation;
+}
+.tw-key-accent {
+  aspect-ratio: auto;
+  border-radius: 0.8rem;
+  background: radial-gradient(circle at 50% 35%, #f0b95c, #e3a23b 70%);
+}
+.tw-key-space {
+  aspect-ratio: auto;
+  height: clamp(1.6rem, 1rem + 2vw, 2.6rem);
+  border-radius: 0.8rem;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  background: linear-gradient(180deg, #2f6a51, #1f4d3a);
+  color: var(--color-paper);
+  border-color: #15140f;
+}
+.tw-key-down {
+  transform: translateY(3px);
+  box-shadow: 0 1px 0 #0b0b09, 0 1px 2px rgb(0 0 0 / 0.4);
+  filter: brightness(0.92);
+}
+.tw-chip {
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 999px;
+  border: 1.5px solid var(--color-line);
+  background: var(--color-card);
+  color: var(--color-ink-soft);
+  transition: border-color 0.2s, background-color 0.2s, color 0.2s;
+}
+.tw-chip:hover {
+  border-color: var(--color-ink);
+}
+.tw-chip-on {
+  border-color: var(--color-forest);
+  background: var(--color-forest);
+  color: var(--color-paper);
+}
+.tw-hit {
+  animation: tw-hit 0.12s ease-out;
+}
+.tw-cr {
+  animation: tw-cr 0.34s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+@keyframes tw-hit {
+  40% {
+    transform: translateY(1.5px);
+  }
+}
+@keyframes tw-cr {
+  0% {
+    transform: translateX(-7%);
+  }
+  70% {
+    transform: translateX(1%);
+  }
+}
+@keyframes tw-blink {
+  50% {
+    opacity: 0;
+  }
+}
+@keyframes tw-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+}
+
+/* ─────────────────────────── proof card emblems (home) ─────────────────────────── */
+.pm * {
+  transform-box: view-box;
+  transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1), stroke-dashoffset 0.6s ease-out, opacity 0.4s;
+}
+/* Mortarboard tips, tassel swings */
+.pm-cap-hat {
+  transform-origin: 32px 40px;
+}
+.pm-cap-tassel {
+  transform-origin: 52px 31px;
+}
+[data-on="true"] .pm-cap-hat {
+  transform: rotate(-10deg) translateY(-3px);
+}
+[data-on="true"] .pm-cap-tassel {
+  transform: rotate(18deg);
+  transition-delay: 0.1s;
+}
+/* Five role cards fan out */
+.pm-stack-card {
+  transform-origin: 32px 60px;
+  transform: rotate(calc(var(--i) * 2deg));
+}
+[data-on="true"] .pm-stack-card {
+  transform: rotate(calc(var(--i) * 13deg)) translateY(-2px);
+}
+/* Rosette turns */
+.pm-rosette-wheel {
+  transform-origin: 32px 28px;
+}
+[data-on="true"] .pm-rosette-wheel {
+  transform: rotate(45deg) scale(1.06);
+}
+/* Page lifts, its lines write themselves */
+.pm-page-sheet {
+  transform-origin: 32px 58px;
+}
+.pm-page-line {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 0;
+}
+[data-on="true"] .pm-page-sheet {
+  transform: rotate(-6deg) translateY(-3px);
+}
+[data-on="true"] .pm-page-line {
+  animation: pm-write 0.5s ease-out both;
+  animation-delay: calc(var(--i) * 0.08s);
+}
+@keyframes pm-write {
+  from {
+    stroke-dashoffset: 1;
+  }
+}
+
+/* ─────────────────────────── Netflix cover (nf-) ─────────────────────────── */
+/* Still frame: the wordmark. Everything else waits for [data-playing]. */
+.nf-stage * {
+  transform-box: view-box;
+}
+.nf-n,
+.nf-streak,
+.nf-black {
+  opacity: 0;
+}
+.nf-glow {
+  opacity: 0.6;
+}
+.nf-n,
+.nf-word {
+  transform-origin: 640px 360px;
+}
+.nf-stem-l,
+.nf-stem-r {
+  transform-origin: 640px 561px;
+}
+.nf-fold {
+  transform-origin: 640px 160px;
+}
+.nf-streak {
+  transform-origin: 640px 360px;
+}
+.nf-stage[data-playing="true"] .nf-letter {
+  animation: nf-letter 8s cubic-bezier(0.2, 0.8, 0.2, 1) infinite both;
+}
+.nf-stage[data-playing="true"] .nf-word {
+  animation: nf-word 8s ease-in infinite both;
+}
+.nf-stage[data-playing="true"] .nf-glow {
+  animation: nf-glow 8s ease-in-out infinite both;
+}
+.nf-stage[data-playing="true"] .nf-n {
+  animation: nf-n 8s ease-in infinite both;
+}
+.nf-stage[data-playing="true"] .nf-stem-l {
+  animation: nf-stem-l 8s cubic-bezier(0.3, 0.7, 0.2, 1) infinite both;
+}
+.nf-stage[data-playing="true"] .nf-fold {
+  animation: nf-fold 8s cubic-bezier(0.3, 0.7, 0.2, 1) infinite both;
+}
+.nf-stage[data-playing="true"] .nf-stem-r {
+  animation: nf-stem-r 8s cubic-bezier(0.3, 0.7, 0.2, 1) infinite both;
+}
+.nf-stage[data-playing="true"] .nf-streak {
+  animation: nf-streak 8s ease-out infinite both;
+}
+.nf-stage[data-playing="true"] .nf-black {
+  animation: nf-black 8s linear infinite both;
+}
+/* 0–12%: letters rise in. 12–32%: hold. 32–38%: step back. */
+@keyframes nf-letter {
+  0% {
+    opacity: 0;
+    transform: translateY(60px);
+  }
+  12%,
+  32% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  38%,
+  100% {
+    opacity: 0;
+    transform: translateY(0);
+  }
+}
+@keyframes nf-word {
+  0%,
+  28% {
+    transform: scale(1);
+  }
+  38%,
+  100% {
+    transform: scale(0.86);
+  }
+}
+@keyframes nf-glow {
+  0% {
+    opacity: 0;
+  }
+  14%,
+  30% {
+    opacity: 0.8;
+  }
+  40% {
+    opacity: 0.3;
+  }
+  66% {
+    opacity: 0.9;
+  }
+  86%,
+  100% {
+    opacity: 0;
+  }
+}
+/* 38%: the N appears; 40–56% it builds; 60–88% the dive. */
+@keyframes nf-n {
+  0%,
+  37.9% {
+    opacity: 0;
+    transform: scale(1);
+  }
+  38%,
+  60% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  86% {
+    opacity: 1;
+    transform: scale(7);
+  }
+  90%,
+  100% {
+    opacity: 0;
+    transform: scale(9);
+  }
+}
+@keyframes nf-stem-l {
+  0%,
+  39% {
+    transform: scaleY(0);
+  }
+  45%,
+  100% {
+    transform: scaleY(1);
+  }
+}
+@keyframes nf-fold {
+  0%,
+  44% {
+    transform: scaleY(0);
+  }
+  51%,
+  100% {
+    transform: scaleY(1);
+  }
+}
+@keyframes nf-stem-r {
+  0%,
+  50% {
+    transform: scaleY(0);
+  }
+  56%,
+  100% {
+    transform: scaleY(1);
+  }
+}
+@keyframes nf-streak {
+  0%,
+  66% {
+    opacity: 0;
+    transform: translateX(0) scale(0.6, 0.3);
+  }
+  74% {
+    opacity: 0.95;
+    transform: translateX(var(--dx)) scale(1, 1.3);
+  }
+  86% {
+    opacity: 0.8;
+    transform: translateX(calc(var(--dx) * 3)) scale(1.6, 2);
+  }
+  92%,
+  100% {
+    opacity: 0;
+    transform: translateX(calc(var(--dx) * 4)) scale(2, 2.4);
+  }
+}
+@keyframes nf-black {
+  0% {
+    opacity: 1;
+  }
+  4%,
+  88% {
+    opacity: 0;
+  }
+  96%,
+  100% {
+    opacity: 1;
+  }
+}
+
+/* ─────────────────────────── Fiama cover (fs2-) ─────────────────────────── */
+.fs2-before {
+  clip-path: inset(0 50% 0 0);
+}
+.fs2-handle {
+  left: 50%;
+}
+.fs2-stage[data-playing="true"] .fs2-before {
+  animation: fs2-clip 7s cubic-bezier(0.65, 0, 0.35, 1) infinite;
+}
+.fs2-stage[data-playing="true"] .fs2-handle {
+  animation: fs2-handle 7s cubic-bezier(0.65, 0, 0.35, 1) infinite;
+}
+/* 50% → after (0) → hold → before (100%) → hold → back to the middle */
+@keyframes fs2-clip {
+  0% { clip-path: inset(0 50% 0 0); }
+  18%, 32% { clip-path: inset(0 92% 0 0); }
+  58%, 74% { clip-path: inset(0 8% 0 0); }
+  100% { clip-path: inset(0 50% 0 0); }
+}
+@keyframes fs2-handle {
+  0% { left: 50%; }
+  18%, 32% { left: 8%; }
+  58%, 74% { left: 92%; }
+  100% { left: 50%; }
+}
+
+/* ─────────────────────────── Clap It cover (ci-) ─────────────────────────── */
+.ci-arm {
+  transform-box: view-box;
+  transform-origin: 612px 108px; /* the hinge, at the body's front top corner */
+}
+.ci-sheet {
+  transform-box: view-box;
+}
+.ci-stage[data-playing="true"] .ci-arm {
+  animation: ci-clap 5s cubic-bezier(0.5, 0, 0.3, 1) infinite;
+}
+.ci-stage[data-playing="true"] .ci-sheet {
+  animation: ci-sheet 5s cubic-bezier(0.3, 0.7, 0.2, 1) infinite;
+}
+/* Paper slides up into the open clip, is held while closed, drops once it opens */
+@keyframes ci-sheet {
+  0% { opacity: 0; transform: translateY(240px); }
+  14%, 84% { opacity: 1; transform: none; }
+  96%, 100% { opacity: 0; transform: translateY(240px); }
+}
+@keyframes ci-clap {
+  0%, 18% { transform: none; }
+  34% { transform: translate(-52px, 42px) rotate(-45deg); }
+  38% { transform: translate(-50px, 40px) rotate(-41deg); }
+  42%, 66% { transform: translate(-52px, 42px) rotate(-44deg); }
+  86%, 100% { transform: none; }
+}
+
+/* ─────────────────────────── Adeiro cover (ad-) ─────────────────────────── */
+.ad-stage * {
+  transform-box: view-box;
+}
+.ad-photo {
+  transform-origin: 480px 310px;
+}
+.ad-stage[data-playing="true"] .ad-photo {
+  animation: ad-drift 7s ease-out infinite;
+}
+.ad-stage[data-playing="true"] .ad-letter {
+  animation: ad-letter 7s cubic-bezier(0.2, 0.8, 0.2, 1) infinite both;
+}
+.ad-stage[data-playing="true"] .ad-word {
+  animation: ad-word 7s cubic-bezier(0.2, 0.8, 0.2, 1) infinite both;
+}
+@keyframes ad-drift {
+  0% { transform: scale(1.1); }
+  100% { transform: scale(1); }
+}
+@keyframes ad-letter {
+  0% { opacity: 0; filter: blur(10px); transform: translateX(var(--d)) translateY(14px); }
+  14%, 80% { opacity: 1; filter: blur(0); transform: none; }
+  92%, 100% { opacity: 0; filter: blur(6px); transform: none; }
+}
+@keyframes ad-word {
+  0% { opacity: 0; transform: translateY(12px); }
+  12%, 72% { opacity: 1; transform: none; }
+  84%, 100% { opacity: 0; transform: none; }
+}
+
+/* ─────────────────────────── reduced motion ─────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation: none !important;
+  }
+}
+
+/* Native cursor hidden only when the custom cursor is active (fine pointer, motion OK). */
+html[data-custom-cursor="on"] body,
+html[data-custom-cursor="on"] a,
+html[data-custom-cursor="on"] button {
+  cursor: none;
+}
+html[data-custom-cursor="on"] input,
+html[data-custom-cursor="on"] textarea {
+  cursor: text;
+}
+
+/* ─────────────────────────── covers ─────────────────────────── */
+.cover-drift {
+  animation: cover-drift 6s var(--ease-in-out-soft) infinite alternate;
+}
+@keyframes cover-drift {
+  to {
+    translate: 0 -2.5%;
+  }
+}
+.cover-caption {
+  display: inline-block;
+  animation: cover-caption 500ms var(--ease-out-soft);
+}
+@keyframes cover-caption {
+  from {
+    opacity: 0;
+    transform: translateY(40%);
+  }
+}
+
+/* Ask Asmi ✦ twinkles once on load, then stays still */
+.ask-twinkle {
+  animation: ask-twinkle 1.2s var(--ease-out-soft) 1.5s 1 both;
+}
+@keyframes ask-twinkle {
+  0%, 100% { transform: scale(1) rotate(0); }
+  40% { transform: scale(1.6) rotate(90deg); }
+  70% { transform: scale(0.9) rotate(150deg); }
+}
+
+/* ───────────── Leapsters cover: three shapes taking small leaps ───────────── */
+.ls-stage .ls-hop,
+.ls-stage .ls-shadow,
+.ls-stage .ls-arm-l,
+.ls-stage .ls-arm-r,
+.ls-stage .ls-blink {
+  transform-box: fill-box;
+}
+.ls-stage .ls-hop { transform-origin: 50% 100%; }
+.ls-stage .ls-shadow { transform-origin: 50% 50%; }
+.ls-stage .ls-arm-l { transform-origin: 100% 0%; }
+.ls-stage .ls-arm-r { transform-origin: 0% 0%; }
+.ls-stage .ls-blink { transform-origin: 50% 50%; }
+
+/* Only animate while playing; otherwise everyone stands still (the poster frame). */
+.ls-stage[data-playing="true"] .ls-hop { animation: ls-hop 4.2s var(--ease-in-out-soft) infinite; }
+.ls-stage[data-playing="true"] .ls-shadow { animation: ls-shadow 4.2s var(--ease-in-out-soft) infinite; }
+.ls-stage[data-playing="true"] .ls-arm-l { animation: ls-arm-l 4.2s var(--ease-in-out-soft) infinite; }
+.ls-stage[data-playing="true"] .ls-arm-r { animation: ls-arm-r 4.2s var(--ease-in-out-soft) infinite; }
+.ls-stage[data-playing="true"] .ls-blink { animation: ls-blink 4.2s linear infinite; }
+.ls-stage[data-playing="true"] .ls-dots { animation: ls-dots 8.4s var(--ease-in-out-soft) infinite alternate; }
+
+@keyframes ls-hop {
+  0%, 30%, 52%, 100% { transform: translateY(0) scale(1, 1); }
+  /* small hop */
+  5%  { transform: translateY(0) scale(1.08, 0.9); }
+  13% { transform: translateY(-120px) scale(0.95, 1.06); }
+  21% { transform: translateY(0) scale(1.07, 0.93); }
+  26% { transform: translateY(0) scale(0.99, 1.01); }
+  /* the big leap */
+  58% { transform: translateY(0) scale(1.12, 0.86); }
+  70% { transform: translateY(-280px) scale(0.93, 1.09) rotate(-4deg); }
+  82% { transform: translateY(0) scale(1.1, 0.9); }
+  88% { transform: translateY(0) scale(0.98, 1.02); }
+}
+@keyframes ls-shadow {
+  0%, 30%, 52%, 100% { transform: scale(1); opacity: 0.12; }
+  13% { transform: scale(0.7); opacity: 0.07; }
+  70% { transform: scale(0.45); opacity: 0.04; }
+}
+@keyframes ls-arm-l {
+  0%, 30%, 52%, 90%, 100% { transform: rotate(0); }
+  13% { transform: rotate(25deg); }
+  70% { transform: rotate(55deg); }
+}
+@keyframes ls-arm-r {
+  0%, 30%, 52%, 90%, 100% { transform: rotate(0); }
+  13% { transform: rotate(-25deg); }
+  70% { transform: rotate(-55deg); }
+}
+@keyframes ls-blink {
+  0%, 93%, 97%, 100% { transform: scaleY(1); }
+  95% { transform: scaleY(0.1); }
+}
+@keyframes ls-dots {
+  to { transform: translate(-40px, 18px); }
+}
+
+/* ───────────── Greenly cover: channels draw in, the sprout grows ───────────── */
+.gl-stage .gl-channel { stroke-dasharray: 1; stroke-dashoffset: 0; }
+.gl-stage .gl-sprout { transform-box: view-box; transform-origin: 534px 300px; }
+.gl-stage .gl-leaf-l { transform-box: view-box; transform-origin: 531px 284px; }
+.gl-stage .gl-leaf-r { transform-box: view-box; transform-origin: 538px 251px; }
+
+.gl-stage[data-playing="true"] .gl-channel { animation: gl-draw 5.2s var(--ease-in-out-soft) infinite both; }
+.gl-stage[data-playing="true"] .gl-sprout { animation: gl-grow 5.2s var(--ease-out-soft) infinite both; }
+.gl-stage[data-playing="true"] .gl-leaf-l { animation: gl-sway-l 5.2s var(--ease-in-out-soft) infinite both; }
+.gl-stage[data-playing="true"] .gl-leaf-r { animation: gl-sway-r 5.2s var(--ease-in-out-soft) infinite both; }
+
+@keyframes gl-draw {
+  0% { stroke-dashoffset: 1; opacity: 1; }
+  30%, 88% { stroke-dashoffset: 0; opacity: 1; }
+  100% { stroke-dashoffset: 0; opacity: 0; }
+}
+@keyframes gl-grow {
+  0%, 34% { transform: scale(0); opacity: 0; }
+  46% { transform: scale(1.08); opacity: 1; }
+  52%, 88% { transform: scale(1); opacity: 1; }
+  100% { transform: scale(1); opacity: 0; }
+}
+@keyframes gl-sway-l {
+  0%, 52% { transform: rotate(0); }
+  64% { transform: rotate(-6deg); }
+  76% { transform: rotate(2deg); }
+  88%, 100% { transform: rotate(0); }
+}
+@keyframes gl-sway-r {
+  0%, 52% { transform: rotate(0); }
+  64% { transform: rotate(6deg); }
+  76% { transform: rotate(-2deg); }
+  88%, 100% { transform: rotate(0); }
+}
+
+/* ───────────── Fire Safe cover: chevrons lock in, beacon turn, alarm glow ───────────── */
+.fs-stage .fs-emblem,
+.fs-stage .fs-piece,
+.fs-stage .fs-glow { transform-box: view-box; transform-origin: 900px 428px; }
+.fs-stage .fs-glow { opacity: 0.35; }
+
+.fs-stage[data-playing="true"] .fs-piece { animation: fs-in 6s var(--ease-out-soft) infinite both; }
+.fs-stage[data-playing="true"] .fs-emblem { animation: fs-turn 6s var(--ease-in-out-soft) infinite both; }
+.fs-stage[data-playing="true"] .fs-glow { animation: fs-alarm 6s ease-in-out infinite both; }
+.fs-stage[data-playing="true"] .fs-word { animation: fs-word 6s var(--ease-out-soft) infinite both; }
+
+@keyframes fs-in {
+  0% { transform: translate(var(--ox), var(--oy)) rotate(-50deg); opacity: 0; }
+  22%, 90% { transform: translate(0, 0) rotate(0); opacity: 1; }
+  100% { transform: translate(0, 0) rotate(0); opacity: 0; }
+}
+@keyframes fs-turn {
+  0%, 30% { transform: rotate(0); }
+  78%, 100% { transform: rotate(120deg); }
+}
+@keyframes fs-alarm {
+  0%, 26% { opacity: 0; transform: scale(0.8); }
+  38% { opacity: 0.9; transform: scale(1.08); }
+  50% { opacity: 0.25; transform: scale(0.95); }
+  62% { opacity: 0.9; transform: scale(1.08); }
+  80%, 100% { opacity: 0; transform: scale(0.9); }
+}
+@keyframes fs-word {
+  0%, 18% { opacity: 0; transform: translateY(24px); }
+  32%, 90% { opacity: 1; transform: translateY(0); }
+  100% { opacity: 0; transform: translateY(0); }
+}
+
+/* ───────────── Clab cover: letters settle, the A's halves meet in a handshake ───────────── */
+.cl-stage .cl-ring { transform-box: fill-box; transform-origin: 50% 50%; opacity: 0; }
+
+.cl-stage[data-playing="true"] .cl-c { animation: cl-from-left 5s var(--ease-out-soft) infinite both; }
+.cl-stage[data-playing="true"] .cl-l { animation: cl-from-left 5s var(--ease-out-soft) 120ms infinite both; }
+.cl-stage[data-playing="true"] .cl-b { animation: cl-from-right 5s var(--ease-out-soft) 120ms infinite both; }
+.cl-stage[data-playing="true"] .cl-a-left { animation: cl-half-left 5s var(--ease-in-out-soft) infinite both; }
+.cl-stage[data-playing="true"] .cl-a-right { animation: cl-half-right 5s var(--ease-in-out-soft) infinite both; }
+.cl-stage[data-playing="true"] .cl-ring { animation: cl-ring 5s var(--ease-out-soft) infinite both; }
+
+@keyframes cl-from-left {
+  0% { transform: translateX(-90px); opacity: 0; }
+  20%, 88% { transform: translateX(0); opacity: 1; }
+  100% { transform: translateX(0); opacity: 0; }
+}
+@keyframes cl-from-right {
+  0% { transform: translateX(90px); opacity: 0; }
+  20%, 88% { transform: translateX(0); opacity: 1; }
+  100% { transform: translateX(0); opacity: 0; }
+}
+@keyframes cl-half-left {
+  0%, 12% { transform: translateX(-140px); opacity: 0; }
+  40% { transform: translateX(4px); opacity: 1; }
+  46%, 88% { transform: translateX(0); opacity: 1; }
+  100% { transform: translateX(0); opacity: 0; }
+}
+@keyframes cl-half-right {
+  0%, 12% { transform: translateX(140px); opacity: 0; }
+  40% { transform: translateX(-4px); opacity: 1; }
+  46%, 88% { transform: translateX(0); opacity: 1; }
+  100% { transform: translateX(0); opacity: 0; }
+}
+@keyframes cl-ring {
+  0%, 42% { transform: scale(0.4); opacity: 0; }
+  46% { opacity: 0.9; }
+  70%, 100% { transform: scale(3.2); opacity: 0; }
+}
+
+/* ───────────── Child Help Foundation cover: figures pop up, the roof shelters them ───────────── */
+.chf-stage .chf-fig,
+.chf-stage .chf-roof { transform-box: view-box; }
+.chf-stage .chf-roof { transform-origin: 842px 420px; }
+
+.chf-stage[data-playing="true"] .chf-fig { animation: chf-pop 5.6s var(--ease-out-soft) infinite both; }
+.chf-stage[data-playing="true"] .chf-center { animation-name: chf-pop-center; }
+.chf-stage[data-playing="true"] .chf-roof { animation: chf-roof 5.6s var(--ease-out-soft) infinite both; }
+
+@keyframes chf-pop {
+  0%, 2% { transform: scale(0.2); opacity: 0; }
+  14% { transform: scale(1.06); opacity: 1; }
+  20%, 46% { transform: translateY(0) scale(1); opacity: 1; }
+  54% { transform: translateY(-34px) scale(1); }
+  62% { transform: translateY(0) scale(1.03, 0.97); }
+  70% { transform: translateY(-20px) scale(1); }
+  78%, 88% { transform: translateY(0) scale(1); opacity: 1; }
+  100% { transform: translateY(0) scale(1); opacity: 0; }
+}
+@keyframes chf-pop-center {
+  0%, 2% { transform: scale(0.2); opacity: 0; }
+  14% { transform: scale(1.06); opacity: 1; }
+  20%, 46% { transform: translateY(0) scale(1); opacity: 1; }
+  54% { transform: translateY(-62px) scale(1); }
+  62% { transform: translateY(0) scale(1.04, 0.96); }
+  70% { transform: translateY(-36px) scale(1); }
+  78%, 88% { transform: translateY(0) scale(1); opacity: 1; }
+  100% { transform: translateY(0) scale(1); opacity: 0; }
+}
+@keyframes chf-roof {
+  0%, 20% { transform: translateY(-160px) scale(0.9); opacity: 0; }
+  36% { transform: translateY(10px) scale(1.02); opacity: 1; }
+  42%, 88% { transform: translateY(0) scale(1); opacity: 1; }
+  100% { transform: translateY(0) scale(1); opacity: 0; }
+}
+
+/* ───────────── AiStrike cover: letters type in, the figure stands guard, a scan sweeps ───────────── */
+.ai-stage .ai-glyph,
+.ai-stage .ai-arms,
+.ai-stage .ai-legs,
+.ai-stage .ai-head,
+.ai-stage .ai-scan { transform-box: view-box; }
+.ai-stage .ai-arms { transform-origin: 1439px 525px; }
+.ai-stage .ai-legs { transform-origin: 1439px 540px; }
+.ai-stage .ai-head { transform-origin: 1440px 495px; }
+.ai-stage .ai-scan { opacity: 0; }
+
+.ai-stage[data-playing="true"] .ai-glyph { animation: ai-type 6s var(--ease-out-soft) infinite both; }
+.ai-stage[data-playing="true"] .ai-arms { animation: ai-arms 6s var(--ease-out-soft) infinite both; }
+.ai-stage[data-playing="true"] .ai-legs { animation: ai-legs 6s var(--ease-out-soft) infinite both; }
+.ai-stage[data-playing="true"] .ai-head { animation: ai-head 6s var(--ease-out-soft) infinite both; }
+.ai-stage[data-playing="true"] .ai-scan { animation: ai-scan 6s var(--ease-in-out-soft) infinite both; }
+
+@keyframes ai-type {
+  0% { opacity: 0; transform: translateY(18px); }
+  8%, 90% { opacity: 1; transform: translateY(0); }
+  100% { opacity: 0; transform: translateY(0); }
+}
+@keyframes ai-arms {
+  0%, 18% { transform: scaleX(0); opacity: 0; }
+  28% { transform: scaleX(1.06); opacity: 1; }
+  32%, 90% { transform: scaleX(1); opacity: 1; }
+  100% { transform: scaleX(1); opacity: 0; }
+}
+@keyframes ai-legs {
+  0%, 26% { transform: scaleY(0); opacity: 0; }
+  36% { transform: scaleY(1.08); opacity: 1; }
+  40%, 90% { transform: scaleY(1); opacity: 1; }
+  100% { transform: scaleY(1); opacity: 0; }
+}
+@keyframes ai-head {
+  0%, 36% { transform: translateY(-40px) scale(0.4); opacity: 0; }
+  44% { transform: translateY(6px) scale(1.08); opacity: 1; }
+  48%, 90% { transform: translateY(0) scale(1); opacity: 1; }
+  100% { transform: translateY(0) scale(1); opacity: 0; }
+}
+@keyframes ai-scan {
+  0%, 52% { transform: translateX(0); opacity: 0; }
+  56% { opacity: 1; }
+  76% { transform: translateX(1080px); opacity: 1; }
+  80%, 100% { transform: translateX(1080px); opacity: 0; }
+}
+
+/* ───────────── Celestial cover: the zodiac wheel turns, stars twinkle ───────────── */
+.cw-stage .cw-wheel { transform-box: view-box; }
+.cw-stage .cw-star { opacity: 0.25; }
+.cw-stage[data-playing="true"] .cw-wheel { animation: cw-turn 48s linear infinite; }
+.cw-stage[data-playing="true"] .cw-star { animation: cw-twinkle 2.6s ease-in-out infinite; }
+@keyframes cw-turn { to { transform: rotate(360deg); } }
+@keyframes cw-twinkle {
+  0%, 100% { opacity: 0.15; }
+  50% { opacity: 1; }
 }

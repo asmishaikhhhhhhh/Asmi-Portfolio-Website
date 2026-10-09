@@ -1,0 +1,7 @@
+[
+  { "file": "home-student.webp", "shows": "CLAB home feed in the Student view: Company tab active, cards for Pilgrim and Zomato with skills required", "w": 334, "h": 670, "bg": "#FFFFFF" },
+  { "file": "home-professional.webp", "shows": "CLAB home feed in the Professional view: Student tab active, profile cards for Aditya and Aditi", "w": 334, "h": 670, "bg": "#FFFFFF" },
+  { "file": "home-company.webp", "shows": "CLAB home feed in the Company view: Professionals tab active, profile cards for Ajay and Susan", "w": 334, "h": 670, "bg": "#FFFFFF" },
+  { "file": "hand-phone.webp", "shows": "A hand holding a tilted phone open on the CLAB Course screen (New Course, Top Mentor)", "w": 645, "h": 730, "bg": "mixed: #FFFFFF top-left, purple #8F49CD band along the bottom and right edge" },
+  { "file": "splash.webp", "shows": "Upright phone showing the purple CLAB wordmark splash screen", "w": 390, "h": 795, "bg": "mixed: #FFFFFF top, purple #8F49CD lower half" }
+]

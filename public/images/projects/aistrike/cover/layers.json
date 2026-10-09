@@ -1,0 +1,6 @@
+[
+  { "file": "alert-dashboard-light.webp", "shows": "Light-mode AI Alert Dashboard screen: an Alerts Triage bubble diagram, an Alerts overview stacked bar chart with Critical/High/Medium/Low/Info counts, filter chips and an alerts table with colour-coded priority tags", "w": 2000, "h": 1265, "bg": "#EBEBEE" },
+  { "file": "ai-assistant.webp", "shows": "Dark Create Dashboard panel with the AI assistant tab active: a user prompt asking for an alert workload trend, and three suggested dashboard layouts with descriptions", "w": 2000, "h": 1612, "bg": "#000000" },
+  { "file": "case-center-charts.webp", "shows": "Three dark Case Center widgets: a green-and-amber Status Overview ring reading 108, and two Severity and Priority rings reading 58, each with a coloured legend", "w": 1680, "h": 528, "bg": "#151A1E" },
+  { "file": "color-tokens.webp", "shows": "Dark-mode colour tokens: a row of base neutral swatches from near-black to white, and base brand swatches in orange, cyan, dark cyan, dark blue, grey blue and red, orange and yellow severity colours", "w": 2000, "h": 595, "bg": "#435052" }
+]

@@ -1,0 +1,37 @@
+[
+  {
+    "file": "/images/projects/fire-safe/cover/ar-phone.webp",
+    "shows": "FireSafe AR game in a phone browser: virtual flames and a 3D extinguisher over a real room, level, timer, score, three lives and Class A–E extinguisher buttons",
+    "w": 340,
+    "h": 690,
+    "bg": "#010101"
+  },
+  {
+    "file": "/images/projects/fire-safe/cover/vr-scene.webp",
+    "shows": "Unity VR scene: controller hands reaching for grabbable CO2, gas and electric extinguishers in front of a red fire truck",
+    "w": 572,
+    "h": 250,
+    "bg": "#584e46"
+  },
+  {
+    "file": "/images/projects/fire-safe/cover/hologram.webp",
+    "shows": "FireSafe hologram interface: four red firefighter silhouettes arranged for a four-sided projection, with Firefighting Signals menu (\"Water Pressure Decrease\" playing)",
+    "w": 1120,
+    "h": 870,
+    "bg": "#000000"
+  },
+  {
+    "file": "/images/projects/fire-safe/cover/app-home.webp",
+    "shows": "FireSafe mobile app home: Week 3 module progress (28%), health readiness (92% recovery, high readiness), continue-where-you-left-off cards",
+    "w": 430,
+    "h": 686,
+    "bg": "#ffffff"
+  },
+  {
+    "file": "/images/projects/fire-safe/cover/vr-report.webp",
+    "shows": "Post-task VR report card: task completed, time taken, task completion, lives used, rescue rate, fire-left heatmap, time per level and feedback tips",
+    "w": 1126,
+    "h": 652,
+    "bg": "#141414"
+  }
+]

@@ -1,0 +1,30 @@
+[
+  {
+    "file": "/images/projects/clap-it/cover/sketch.webp",
+    "shows": "Pencil sketches of a wedge-shaped pinch-grip pin head with an extended needle",
+    "w": 528,
+    "h": 372,
+    "bg": "#FFFFFF"
+  },
+  {
+    "file": "/images/projects/clap-it/cover/foam-mockup.webp",
+    "shows": "Greyscale photo of a white foam wedge mock-up with a needle, held in a pinch grip",
+    "w": 290,
+    "h": 331,
+    "bg": "#D6D6D6"
+  },
+  {
+    "file": "/images/projects/clap-it/cover/final-render.webp",
+    "shows": "Black matte render of the final hinged clamshell, lid open, magnet discs on both inner faces",
+    "w": 780,
+    "h": 732,
+    "bg": "#D0CDCE"
+  },
+  {
+    "file": "/images/projects/clap-it/cover/in-hand.webp",
+    "shows": "A hand pinching the closed device, marked 2.7cm tall",
+    "w": 648,
+    "h": 624,
+    "bg": "#FFFFFF"
+  }
+]

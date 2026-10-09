@@ -1,0 +1,7 @@
+[
+  { "file": "mat.webp", "shows": "Corner of the Leapsters 2 ft play mat: rows of pastel pink, blue, peach and lime circles with an orange border and the leapsters wordmark", "w": 570, "h": 910, "bg": "#FFFFFF" },
+  { "file": "cards.webp", "shows": "The four challenge card decks fanned out: Creative Thinking (yellow), Listening Skills (blue), Writing Skills (peach), Speaking Skills (pink), each with a line-drawn character", "w": 625, "h": 255, "bg": "#FFFFFF" },
+  { "file": "app-splash.webp", "shows": "Phone showing the app splash screen: Koko, a pink pillow-shaped mascot waving, above the leapsters wordmark", "w": 395, "h": 600, "bg": "#FFFFFF" },
+  { "file": "app-word-cards.webp", "shows": "Phone showing the Word Cards screen with illustrated tiles: Animal (owl), Fruit (pineapple), Number (3), Insect (ladybug), Food, Vegetable", "w": 275, "h": 540, "bg": "#FFFFFF" },
+  { "file": "kids-testing.webp", "shows": "Three children in school uniform (faces blurred) sitting on the floor around the dot mat, placing tokens during a test session", "w": 320, "h": 365, "bg": "#CDC1B8" }
+]

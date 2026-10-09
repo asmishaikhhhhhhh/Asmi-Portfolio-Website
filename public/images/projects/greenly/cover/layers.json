@@ -1,0 +1,37 @@
+[
+  {
+    "file": "/images/projects/greenly/cover/dashboard.webp",
+    "shows": "Farmer \"Farm Management\" desktop dashboard (Fresh Roots demo farm): farm environment controls, orders, schedule delivery, crop cycles, low stocks, tracking",
+    "w": 1400,
+    "h": 788,
+    "bg": "#fffffb"
+  },
+  {
+    "file": "/images/projects/greenly/cover/farm-environment.webp",
+    "shows": "Farm Environment card: rack schematic plus temperature 23°C, humidity 48%, CO2 600 ppm, daylight cycle and pH 6 readings",
+    "w": 333,
+    "h": 660,
+    "bg": "#f7f7f7"
+  },
+  {
+    "file": "/images/projects/greenly/cover/app-phone.webp",
+    "shows": "Consumer app product page on a phone: \"Rise's Spinach\", 250g, Rs.80, 100% pesticide free, 15 days expiration, Add to cart",
+    "w": 298,
+    "h": 618,
+    "bg": "#f5f6ea"
+  },
+  {
+    "file": "/images/projects/greenly/cover/unit.webp",
+    "shows": "3D render of the modular zig-zag hydroponic channel with plants growing from each step",
+    "w": 620,
+    "h": 490,
+    "bg": "#fefff4"
+  },
+  {
+    "file": "/images/projects/greenly/cover/food-truck.webp",
+    "shows": "3D render of the branded dark-green \"Fresh Wheels\" food truck with three roof solar panels, hydroponic-row wrap and a \"Scan for app\" QR code",
+    "w": 1042,
+    "h": 562,
+    "bg": "#fefff4"
+  }
+]

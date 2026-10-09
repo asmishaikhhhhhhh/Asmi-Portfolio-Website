@@ -1,0 +1,30 @@
+[
+  {
+    "file": "/images/projects/adeiro/cover/monogram.webp",
+    "shows": "The Adeiro A monogram in dark green on cream",
+    "w": 150,
+    "h": 156,
+    "bg": "#FEFBF7"
+  },
+  {
+    "file": "/images/projects/adeiro/cover/product-range.webp",
+    "shows": "Photo of three real jars labelled Adeiro (Nourishing Gel, Exfoliating Scrub, Firming Mask Pack) on black satin",
+    "w": 1200,
+    "h": 816,
+    "bg": "#161411"
+  },
+  {
+    "file": "/images/projects/adeiro/cover/cards.webp",
+    "shows": "Two Adeiro cards on a wall with leaf shadows: gold card with green lockup above a deep green card with cream lockup",
+    "w": 582,
+    "h": 792,
+    "bg": "#52513D"
+  },
+  {
+    "file": "/images/projects/adeiro/cover/hang-tags.webp",
+    "shows": "Black hang tag with the A monogram and a textured white tag with the Adeiro wordmark, joined by black string",
+    "w": 804,
+    "h": 768,
+    "bg": "#C4C2BD"
+  }
+]

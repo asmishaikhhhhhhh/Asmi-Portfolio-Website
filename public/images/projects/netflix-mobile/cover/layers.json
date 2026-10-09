@@ -1,0 +1,7 @@
+[
+  { "file": "old-browse.webp", "shows": "Existing Netflix mobile web browse page (netflix.com/browse) with horizontal rows: US TV Shows, Trending Now, US Movies, Documentaries", "w": 242, "h": 546, "bg": "#FFFFFF (visible only in the rounded corners)" },
+  { "file": "old-burger-menu.webp", "shows": "Existing Netflix mobile web site with the burger menu open: account links and a long list of categories", "w": 242, "h": 546, "bg": "#FFFFFF (visible only in the rounded corners)" },
+  { "file": "new-home.webp", "shows": "Redesigned home: search bar, TV shows / Movies / My List pill tabs, Zombieverse hero, Continue Watching, My List, floating Recommend me button", "w": 272, "h": 565, "bg": "poster-wall (light grey, faded)" },
+  { "file": "new-tv-shows.webp", "shows": "Redesigned TV shows tab: three-column poster grid with + (add to My List) on each poster, filter icon, Recommend me button", "w": 272, "h": 565, "bg": "poster-wall (light grey, faded)" },
+  { "file": "recommend-me.webp", "shows": "The red-outlined white 'Recommend me' button on its own", "w": 208, "h": 86, "bg": "#FFFFFF" }
+]

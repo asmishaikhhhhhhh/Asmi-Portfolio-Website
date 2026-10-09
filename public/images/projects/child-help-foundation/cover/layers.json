@@ -1,0 +1,7 @@
+[
+  { "file": "dashboard.webp", "shows": "Phone showing the Child Help Foundation dashboard: Number of Beneficiary 45,678.90, Total Volunteers 2,405, a rising Events line chart and an Organizers list", "w": 400, "h": 816, "bg": "#F8F8F8" },
+  { "file": "sign-in.webp", "shows": "Phone showing the sign-in screen: a photo of smiling children above 'Welcome to Child Help Foundation', username and password fields and a navy Login button", "w": 400, "h": 820, "bg": "#F8F8F8" },
+  { "file": "zero-hunger.webp", "shows": "Editorial page with a black-and-white photo of two children eating on a mustard frame: SDG 02 Zero Hunger, 20,01457 beneficiaries", "w": 520, "h": 726, "bg": "#E2A93A" },
+  { "file": "annual-report.webp", "shows": "Annual report mockup: cover reading 'Enriching Minds, Providing Care.' and an open Objectives & Activities spread with SDG 3 and SDG 4 statistics", "w": 1216, "h": 842, "bg": "#D9D9D9" },
+  { "file": "collaterals.webp", "shows": "Stationery mockup for Child Help Foundation: letterheads, business cards, a navy notebook reading 'Changing Lives of Children in Need', an envelope, a badge and a coffee cup", "w": 2000, "h": 785, "bg": "#D6D6D6" }
+]
