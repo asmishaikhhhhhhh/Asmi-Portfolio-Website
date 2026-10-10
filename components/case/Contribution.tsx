@@ -8,7 +8,8 @@ import { isNeeded, type Project } from "@/lib/types";
  * production shows an honest line instead of guessing.
  */
 export function Contribution({ p }: { p: Project }) {
-  const { mine, team } = p.contribution;
+  const { mine, team, hidden } = p.contribution;
+  if (hidden) return null;
   const hasMine = !isNeeded(mine) && mine.length > 0;
   const hasTeam = team && !isNeeded(team) && team.length > 0;
   if (!hasMine && !showNeeded && p.team.solo) return null;
@@ -21,7 +22,7 @@ export function Contribution({ p }: { p: Project }) {
       <h2 id="contribution" className={`${p.team.hidden ? "" : "mt-2 "}font-display-soft text-h2`}>My contribution</h2>
       <div className="mt-8 grid gap-8 md:grid-cols-2">
         <div>
-          <p className="meta mb-3 text-forest">What I did</p>
+          <p className="meta mb-3 text-forest">My role</p>
           {hasMine ? (
             <ul className="space-y-2.5">
               {(mine as string[]).map((m) => (
@@ -39,7 +40,7 @@ export function Contribution({ p }: { p: Project }) {
         </div>
         {!p.team.solo && (
           <div>
-            <p className="meta mb-3 text-ink-mute">What the team did</p>
+            <p className="meta mb-3 text-ink-mute">Team contribution</p>
             {hasTeam ? (
               <ul className="space-y-2.5 text-ink-soft">
                 {(team as string[]).map((m) => <li key={m}>{m}</li>)}

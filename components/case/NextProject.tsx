@@ -2,23 +2,9 @@ import Link from "next/link";
 import { Cover } from "@/components/covers/Cover";
 import type { Project } from "@/lib/types";
 
-export function NextProject({ next, behance, external }: { next: Project; behance?: string; external?: { label: string; href: string } }) {
+export function NextProject({ next }: { next: Project }) {
   return (
     <section aria-label="Keep exploring" className="container-page mt-24 md:mt-32">
-      {(behance || external) && (
-        <p className="mb-12 flex flex-wrap gap-x-6 gap-y-2 text-ink-soft">
-          {external && (
-            <a href={external.href} target="_blank" rel="noreferrer" className="font-medium underline underline-offset-4">
-              {external.label} ↗
-            </a>
-          )}
-          {behance && (
-            <a href={behance} target="_blank" rel="noreferrer" className="underline decoration-line underline-offset-4 hover:decoration-ink">
-              View on Behance ↗
-            </a>
-          )}
-        </p>
-      )}
       <Link
         href={`/work/${next.slug}`}
         data-cursor="Explore"

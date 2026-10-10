@@ -19,12 +19,18 @@ export function Picture({
   className = "",
   priority = false,
   rounded = true,
+  fit = false,
+  contain = false,
 }: {
   img: Img;
   size?: keyof typeof sizesFor;
   className?: string;
   priority?: boolean;
   rounded?: boolean;
+  /** Keep the whole picture on screen: cap the height and centre it, never upscale past the column. */
+  fit?: boolean;
+  /** Fill the parent box and show the whole picture inside it (object-contain). */
+  contain?: boolean;
 }) {
   const dim = (manifest as Record<string, { w: number; h: number }>)[img.src] ?? { w: 1600, h: 1000 };
   return (
@@ -35,8 +41,12 @@ export function Picture({
       height={dim.h}
       sizes={sizesFor[size]}
       priority={priority}
-      className={`h-auto w-full ${rounded ? "rounded-media" : ""} bg-paper-deep ${className}`}
-      style={img.focus ? { objectPosition: img.focus } : undefined}
+      className={`${contain ? "h-full w-full object-contain" : fit ? "mx-auto block h-auto" : "h-auto w-full"} ${img.cutout ? "" : `${rounded ? "rounded-media" : ""} bg-paper-deep`} ${img.mono ? "grayscale" : ""} ${className}`}
+      style={{
+        // fit: as wide as the column allows, but never taller than ~64vh, so the whole picture stays on screen
+        ...(fit ? { width: `min(100%, calc(min(64vh, 560px) * ${(dim.w / dim.h).toFixed(4)})${img.native ? `, ${Math.round(dim.w * 1.15)}px` : ""})` } : {}),
+        ...(img.focus ? { objectPosition: img.focus } : {}),
+      }}
     />
   );
 }

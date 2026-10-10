@@ -54,7 +54,7 @@ const project: Project = {
     /* 1 ─────────────────────────────────────────────── */
     {
       id: "quiet-kid",
-      label: "Context",
+      stage: "overview",
       title: "The answer is in there",
       intro:
         "Every class has one: the child who knows more than they let on and says less than they know.",
@@ -87,7 +87,7 @@ const project: Project = {
     /* 2 ─────────────────────────────────────────────── */
     {
       id: "gap",
-      label: "Problem",
+      stage: "research",
       title: "Showing up isn't the same as learning",
       blocks: [
         {
@@ -141,7 +141,7 @@ const project: Project = {
     /* 3 ─────────────────────────────────────────────── */
     {
       id: "research",
-      label: "Research",
+      stage: "research",
       title: "63 people, one child at the centre",
       intro:
         "The objective: understand children's learning challenges, engagement barriers and emotional responses in hybrid learning environments.",
@@ -240,7 +240,7 @@ const project: Project = {
     /* 4 ─────────────────────────────────────────────── */
     {
       id: "insights",
-      label: "Insights",
+      stage: "research",
       title: "Presence over perfection",
       intro:
         "Affinity mapping sorted the notes into cognitive barriers, emotional support, home environment, school methods and the pull of screens. Five threads kept coming back.",
@@ -305,7 +305,7 @@ const project: Project = {
     /* 5 ─────────────────────────────────────────────── */
     {
       id: "opportunity",
-      label: "Opportunity",
+      stage: "problem",
       title: "Learn joyfully, feel seen",
       blocks: [
         {
@@ -334,7 +334,7 @@ const project: Project = {
     /* 6 ─────────────────────────────────────────────── */
     {
       id: "exploration",
-      label: "Exploration",
+      stage: "ideation",
       title: "30 ideas, 3 survivors",
       intro:
         "I sketched widely: focus pets, emotion dice, mood tiles, story blocks, counsellor dashboards, an AI study buddy, adaptive report cards.",
@@ -342,7 +342,8 @@ const project: Project = {
         {
           type: "image",
           image: {
-            src: `${IMG}/25.webp`,
+            src: `${IMG}/25-cut.webp`,
+            cutout: true,
             alt: "Grid of thirty numbered black-and-white concept sketches, including emotion dice, mood floor tiles, story blocks, a growth jar, a heatmap dashboard, a play-to-learn arcade and a collaboration hub.",
             caption: "30+ concept sketches.",
           },
@@ -388,7 +389,8 @@ const project: Project = {
         {
           type: "image",
           image: {
-            src: `${IMG}/23.webp`,
+            src: `${IMG}/23-cut.webp`,
+            cutout: true,
             alt: "Three cards of pencil concept sketches, each rated Low to High on Impactful, Engaging and Accessibility sliders: a challenge spinner with mood tiles, story blocks, and micro-learning bursts.",
             caption: "The shortlist, scored on impact, engagement and accessibility.",
           },
@@ -407,7 +409,7 @@ const project: Project = {
     /* 7 ─────────────────────────────────────────────── */
     {
       id: "reveal",
-      label: "Solution",
+      stage: "solution",
       title: "Meet Leapsters",
       intro:
         "A board game played on a mat, with an app inside it for everyday practice. The manual says it best: take small leaps with confidence.",
@@ -553,7 +555,7 @@ const project: Project = {
     /* 8 ─────────────────────────────────────────────── */
     {
       id: "testing",
-      label: "Validation",
+      stage: "testing",
       title: "122 tests later",
       intro: "Then I put it in front of children: at tables, on classroom floors, phones in hand.",
       blocks: [
@@ -601,7 +603,7 @@ const project: Project = {
     /* 9 ─────────────────────────────────────────────── */
     {
       id: "reflection",
-      label: "Reflection",
+      stage: "future",
       title: "What I'd do next",
       blocks: [
         {

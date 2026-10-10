@@ -1,6 +1,7 @@
-import { needed, type Project } from "@/lib/types";
+import type { Project } from "@/lib/types";
 
 const IMG = "/images/projects/clab";
+const PDF = `${IMG}/pdf`;
 
 const project: Project = {
   slug: "clab",
@@ -11,463 +12,417 @@ const project: Project = {
   tier: "focused",
   order: 0,
   kind: "Mobile app · Collaboration and networking platform",
-  year: needed("Year the project was done (Behance published Sept 2025; the UI mock data uses Aug 2024)"),
-  duration: needed("Project duration"),
+  year: "2024",
+  duration: "8 weeks",
   role: "User research, interviews and synthesis, UX design, material design, prototyping",
-  team: {
-    solo: false,
-    collaborators: ["Adele P."],
-    note: "Credited on the cover; Adele's role not stated",
-  },
+  team: { solo: false, collaborators: ["Adele P."] },
   disciplines: ["research", "ux-ui", "systems"],
   thinking: ["people", "research", "systems", "business"],
-  tags: ["Mobile app", "UX research", "Collaboration", "Networking", "Design system", "Prototyping", "Branding"],
+  tags: ["Web & mobile design", "Prototyping", "Branding", "UX/UI", "Team project"],
   tools: ["Figma"],
   accent: "#8F49CD",
   cover: {
     type: "motion",
     composition: "clab",
     poster: {
-      src: `${IMG}/33.webp`,
+      src: `${IMG}/33-cut.webp`,
+      cutout: true,
       alt: "Three CLAB phone screens side by side: the home feed as seen by a student, a professional and a company, each showing profile cards.",
     },
   },
-  proofPoint: "30 interviews · 20 user tests",
+  proofPoint: "20 user tests with professionals and students",
   quickRead: {
     problem:
       "Professional networking platforms don't support project work or mentorship. Companies, creative professionals and students can connect, but they can't really build anything together.",
     insight:
-      "People were frustrated at juggling several platforms for one project: one for chat, one for files, one for tasks. That fragmentation led to inefficiency and miscommunication.",
+      "Users struggle with the inefficiency of switching between multiple collaboration tools, and trust in remote work depends on transparency and open dialogue.",
     solution:
       "CLAB: one mobile app with a home feed tailored to each user type, a shared project workspace, webinars and competitions hosted by companies, and portfolios generated straight from your CLAB projects.",
-    result: needed("Outcome of the project (no results, grade or impact are stated on the slides)"),
+    result:
+      "In 20 user tests, the workspace felt clean, intuitive and easy to navigate, and auto-generated portfolios looked polished and professional.",
   },
   chapters: [
     {
-      id: "context",
-      label: "Context",
-      title: "Networking, minus the work",
+      id: "overview",
+      stage: "overview",
+      title: "Connecting creative minds",
       intro:
-        "LinkedIn is built for connecting people, but it has no workspace for what happens next, when people actually need to work together.",
+        "Existing professional networking platforms lack integrated features for collaborative project work and mentorship, so professionals and students can't connect meaningfully.",
       blocks: [
         {
           type: "text",
           body: [
-            "Existing professional networking platforms don't have integrated features for collaborative project work or mentorship. Professionals and university students can find each other, but there's no seamless place to work together, learn from each other, or enter competitions as a team.",
-            "We set out to design a platform that closes that gap, with tools for collaboration, mentorship and competitions built in from the start.",
-            "We designed for three groups: companies and universities, working professionals, and students.",
+            "That gap holds back real-time collaboration, skill development and career growth. Our project set out to create an innovative platform that bridges it, with tools for collaboration, mentorship and taking part in competitions.",
           ],
         },
         {
-          type: "text",
-          heading: "What we wanted to find out",
-          body: [
-            "What are the limits of the platforms people already use?",
-            "What do companies, creative professionals and students each need?",
-            "How does relying on several platforms affect the speed and quality of collaboration in the creative industry?",
+          type: "stakeholderRings",
+          heading: "Stakeholder mapping",
+          rings: [
+            { name: "Core", members: ["Working professionals", "Students"] },
+            {
+              name: "Direct influence",
+              members: ["Development team", "Product managers", "Customer support team", "Founders and executives", "Marketing and sales teams"],
+            },
+            {
+              name: "Indirect influence",
+              members: ["Investors and shareholders", "Partners and integrators", "Competitors", "Regulatory bodies", "Industry influencers and advocates"],
+            },
           ],
         },
+      ],
+    },
+    {
+      id: "process",
+      stage: "process",
+      title: "A user-centred path",
+      intro: "We followed a user-centred design approach, from choosing the topic to refining the tested design.",
+      blocks: [
         {
-          type: "image",
-          size: "wide",
-          image: {
-            src: `${IMG}/04.webp`,
-            alt: "Left: a mind map centred on 'Work Collaboration' branching into problems, existing solutions, uniqueness, business, impact and analysis. Right: an isometric purple-and-blue illustration labelled with web coding, new connections, online meets, hybrid work, hiring, planning, calendar, timeline, data transfer and security.",
-            caption: "We started with a mind map and a rich picture to map the space before doing any research.",
-          },
+          type: "processPath",
+          steps: [
+            "Topic selection",
+            "Brainstorming",
+            "Rich picture",
+            "Secondary research",
+            "Primary research",
+            "Data analysis",
+            "Problem statement",
+            "Conceptualisation",
+            "Paper prototype",
+            "Mid-fidelity prototyping",
+            "High-fidelity prototyping",
+            "User testing",
+            "Refinement",
+          ],
         },
       ],
     },
     {
       id: "research",
-      label: "Research",
-      title: "63 sources, 30 conversations",
-      intro: "Secondary research first, then the people themselves.",
+      stage: "research",
+      title: "What the research left open",
       blocks: [
         {
-          type: "researchMethods",
-          heading: "How we listened",
-          groups: [
-            { label: "Working professionals interviewed", value: 20 },
-            { label: "University students interviewed", value: 10 },
-          ],
-          methods: [
-            {
-              name: "Literature review",
-              detail: "63 sources: 29 articles, 18 research papers, 10 blogs, 4 theses, 2 conference papers",
-            },
-            { name: "Online survey", detail: "35 responses" },
-            { name: "Interviews", detail: "30 interviews: 20 working professionals, 10 university students" },
-            {
-              name: "Competitor analysis",
-              detail: "9 tools: LinkedIn, Bumble Bizz, Slack, Microsoft Teams, Zoom, Google Meet, Figma, Canva, Instagram",
-            },
-            { name: "Synthesis", detail: "Personas, user journeys, empathy maps, affinity mapping, gap analysis" },
+          type: "iconCards",
+          heading: "Secondary gaps",
+          items: [
+            { title: "Creativity", icon: "creativity", body: "Limited research on how collaboration platforms **influence creativity** in professional settings." },
+            { title: "Engagement", icon: "engagement", body: "The long-term impact on user engagement and **productivity is underexplored**." },
+            { title: "Accessibility", icon: "accessibility", body: "**Insufficient understanding** of accessibility for users with disabilities or **low digital literacy**." },
+            { title: "Emerging tech", icon: "emerging", body: "**A lack of studies on integration** with emerging technologies like AI, VR and AR." },
           ],
         },
         {
-          type: "text",
-          heading: "What the literature said",
-          body: [
-            "Collaboration measurably improves performance. Teams achieve more than individuals working alone.",
-            "Social networking platforms play a real role in career growth.",
-            "Virtual teams struggle with communication, coordination and staying cohesive.",
-            "In education, good collaboration deepens learning and better prepares students for real work.",
-          ],
-        },
-        {
-          type: "text",
-          heading: "Where the competitors fall short",
-          body: [
-            "Of the eight tools we compared feature by feature, only LinkedIn covered networking, group collaboration, live chat, video calls and document sharing. Microsoft Teams covered everything except networking. The rest covered one to three.",
-            "LinkedIn: information overload, job-application spam, unfamiliar terminology, and no workspace. Bumble Bizz: a small user base and a mix of personal and professional. Slack: notification overload, a learning curve, and channels that are hard to manage.",
-          ],
-        },
-        {
-          type: "text",
-          heading: "What people told us",
-          body: [
-            "Professionals: complex navigation and feature overload; expensive premium tiers and limited free versions; steep learning curves with little training.",
-            "Students: switching between apps for different tasks; too many features, when the essentials should be easy to reach; free tiers that cap collaborators, storage and advanced features.",
+          type: "iconCards",
+          heading: "Primary insights",
+          items: [
+            { title: "Leadership shapes teams", icon: "leadership", body: "Team motivation and performance are shaped by **leadership style, decision-making and cognitive biases**." },
+            { title: "Too many tools", icon: "tools", body: "Users struggle with the inefficiency of **switching between multiple collaboration tools**." },
+            { title: "Trust needs openness", icon: "trust", body: "**Transparency and open dialogue** are key to building trust in remote work settings." },
           ],
         },
       ],
     },
     {
-      id: "people",
-      label: "Personas",
-      title: "Two people, two journeys",
-      intro: "We built two personas and mapped how each one looks for collaborators and opportunities today.",
+      id: "problem",
+      stage: "problem",
+      title: "Connect, collaborate, mentor",
       blocks: [
-        {
-          type: "personas",
-          items: [
-            {
-              name: "Arihant Khicha",
-              age: "35",
-              descriptor: "Working professional · Marketing manager in Mumbai with 10+ years in digital marketing · Prefers hybrid work",
-              needs: [
-                "Partnerships with educational institutions for student projects and talent development",
-                "Like-minded professionals and startups for business ventures",
-              ],
-              frustrations: [
-                "Balancing daily responsibilities with collaborative projects",
-                "Keeping communication and coordination working across teams and projects",
-                "Finding partners whose goals and values match the company's",
-              ],
-            },
-            {
-              name: "Suhani Mishra",
-              age: "23",
-              descriptor: "Student · Design student in Mumbai focused on visual communication and UX · Prefers working in an office",
-              needs: [
-                "Connections with professionals and peers in the design community",
-                "Guidance and mentorship from experienced professionals",
-              ],
-              frustrations: [
-                "Balancing coursework with extracurriculars and collaborative projects",
-                "Keeping up with fast-moving design trends and tools",
-                "Finding mentors willing to guide her",
-              ],
-            },
-          ],
-        },
-        { type: "needed", items: ["Confirm the professional persona's name: the slide calls him Arihant Khicha, but his bio calls him 'Alex'"] },
-        {
-          type: "gallery",
-          heading: "User journeys",
-          layout: "grid",
-          columns: 2,
-          images: [
-            {
-              src: `${IMG}/14.webp`,
-              alt: "User journey grid for a working professional across four stages, with rows for task, thinking, emotions, an emotion curve, pain points and suggestions. The curve starts lowest at stage one and peaks at stage four.",
-              caption: "The professional starts out 'overwhelming and confusing', searching LinkedIn and forums for partners.",
-            },
-            {
-              src: `${IMG}/15.webp`,
-              alt: "User journey grid for a student across five stages, from exploring LinkedIn for opportunities to networking with professionals, with an emotion curve that is low at first and peaks at stage four.",
-              caption: "The student's lowest point is the first one: too much information online to find relevant opportunities.",
-            },
-          ],
-        },
-        {
-          type: "image",
-          size: "wide",
-          image: {
-            src: `${IMG}/20.webp`,
-            alt: "Affinity map of colour-coded sticky notes grouped under networking behaviours, challenges and barriers to collaboration, environmental influences, applications and tools used, behavioural insights, and student needs and wants.",
-            caption: "Affinity mapping, part one of two.",
-          },
-        },
-      ],
-    },
-    {
-      id: "insights",
-      label: "Insights",
-      title: "Too many tabs, not enough trust",
-      blocks: [
-        {
-          type: "insightChain",
-          heading: "What the research added up to",
-          items: [
-            {
-              observation:
-                "People were frustrated at having to use several platforms to manage one project: communication in one, files in another, tasks in a third.",
-              insight: "This platform fragmentation often led to inefficiency and miscommunication.",
-              opportunity: "One collaboration space with project management built in, next to the network itself.",
-            },
-            {
-              observation:
-                "Professionals flagged feature overload, complex navigation and steep learning curves; students said too many features were overwhelming.",
-              insight: "Essential functions need to be easy to reach. More features isn't the answer.",
-              opportunity: "A five-item bottom nav (Home, Event, Create, Workspace, Account) and a single Create menu.",
-            },
-            {
-              observation: "Virtual teams often struggle with communication, coordination and staying cohesive.",
-              insight: "Building trust through transparency and collaborative practice helps teams overcome the challenges of remote work.",
-              opportunity: "Transparent profiles: company verification, plus skills and experience visible on every card.",
-            },
-          ],
-        },
-        {
-          type: "text",
-          heading: "Gaps we found",
-          body: [
-            "Our gap analysis flagged four areas that existing research hasn't covered well: how collaboration platforms help or hinder creativity; integration with emerging technologies like AI, VR and AR; long-term engagement and productivity; and accessibility for people with disabilities or lower tech literacy.",
-          ],
-        },
         {
           type: "hmw",
           label: "Problem statement",
           statement:
-            "Professional networking platforms lack integrated features for collaborative project work and mentorship, failing to provide a seamless environment where Companies, creative professionals and university students can connect and collaborate on competitions, and develop meaningful mentorship relationships.",
+            "Existing professional networking platforms lack integrated features for collaborative project work and mentorship, failing to provide a seamless environment where companies, creative professionals and students can connect, collaborate on competitions, and develop meaningful mentorship relationships.",
+        },
+        {
+          type: "image",
+          size: "full",
+          fill: true,
+          heading: "Rich picture",
+          image: {
+            src: `${PDF}/rich-picture.webp`,
+            alt: "Isometric purple-and-blue illustration of modern collaboration, labelled web coding, new connections, online meets, hybrid work, next project, hiring, process, planning, collaboration, calendar, timeline, data transfer and security",
+            caption: "A visual snapshot of modern collaboration, to inform our design direction.",
+          },
         },
       ],
     },
     {
       id: "design",
-      label: "Exploration",
-      title: "Three tasks, three flows",
-      intro: "Before we drew any screens, we wrote one key task for each type of user and mapped how they'd complete it.",
+      stage: "ideation",
+      title: "From mind map to wireframes",
+      intro:
+        "During ideation we explored many ways, and products, that could deliver unique value to each stakeholder, which led us to Clab.",
       blocks: [
         {
-          type: "process",
-          heading: "How we got from idea to screens",
-          steps: [
-            { title: "Structure", body: "Site maps and information architecture, then task identification." },
-            { title: "Flows", body: "A task flow and user journey for each of the three user types." },
-            { title: "Paper prototype", body: "Hand-drawn screens tested with users, then refined." },
-            { title: "Mid fidelity", body: "Greyscale screens, followed by a round of feedback." },
-            { title: "High fidelity", body: "Full visual design, then user testing and refinement." },
-          ],
+          type: "image",
+          size: "wide",
+          heading: "Mind mapping",
+          image: {
+            src: `${PDF}/mind-map-v2.webp`,
+            cutout: true,
+            alt: "Large mind map centred on Work Collaboration, branching into challenges faced, current solutions and their drawbacks, target audience, impact and need to fix the problem, impact created by existing solutions, problems faced by existing solutions and impact on their work life, with colour-coded notes",
+          },
         },
         {
           type: "image",
           size: "wide",
+          heading: "Low-fidelity prototype",
           image: {
-            src: `${IMG}/27.webp`,
-            alt: "Three columns of prototype screens: two photos of hand-drawn paper screens, two greyscale mid-fidelity screens (a Walmart company profile and Settings), and two high-fidelity screens (company Verification and a Webinar page).",
-            caption: "Paper, then grey, then purple.",
+            src: `${PDF}/low-fidelity.webp`,
+            alt: "Photos of hand-drawn paper screens: login pages, sign-up and account set-up steps, a CLAB splash screen, a home feed with professional and company cards, a premium subscription screen and portfolio screens",
+            caption: "Rapid sketches to explore flows, tested for clarity and usability, then refined through feedback.",
           },
         },
         {
-          type: "features",
-          heading: "One task per user type",
-          items: [
+          type: "image",
+          size: "wide",
+          heading: "Mid-fidelity prototype",
+          image: {
+            src: `${PDF}/mid-fidelity.webp`,
+            cutout: true,
+            alt: "Seven greyscale wireframes: an ongoing webinar, Enter Your Details, a Coming Up Webinar with previous webinars, the Walmart company profile, a portfolio editor, a portfolio preview and Settings",
+            caption: "Sketches turned into structured wireframes to test layout, flow and function before visual design.",
+          },
+        },
+      ],
+    },
+    {
+      id: "brand",
+      stage: "ideation",
+      title: "Colours and fonts",
+      blocks: [
+        {
+          type: "colorSystem",
+          groups: [
             {
-              title: "Company: sign in and host a webinar",
-              body: "Three parts: sign up and choose a membership; sign in, complete the company profile and upload verification documents; then go to Event, create a webinar, enter the details and host it.",
-              image: {
-                src: `${IMG}/29.webp`,
-                alt: "Task flow diagram in three parts, from Start and Sign Up through verification and membership payment, then profile completion and document upload, then creating and hosting a webinar to Finish.",
-              },
+              title: "Brand colours",
+              note: "primary",
+              display: "circles",
+              swatches: [
+                { name: "Light purple", hex: "#F0E5FA" },
+                { name: "Purple", hex: "#8F49CD" },
+                { name: "Dark purple", hex: "#63328D" },
+              ],
             },
             {
-              title: "Professional: create a project and build a team",
-              body: "Create a project, add details and the skills you need, wait for requests, view profiles and accept members, then open the project workspace and set permissions and roles.",
-              image: {
-                src: `${IMG}/30.webp`,
-                alt: "Task flow diagram: Home Dashboard, Events, Projects, Create Project, add project details and skill requirements, wait for request, view and accept requests, team management, open workspace, share terms, set permissions and configure workspace settings.",
-              },
+              title: "Brand colours",
+              note: "secondary",
+              display: "circles",
+              swatches: [
+                { name: "Baby pink", hex: "#FCE5FF" },
+                { name: "Pale yellow", hex: "#FFF0C3" },
+                { name: "Light blue", hex: "#B7D6F2" },
+                { name: "Baby blue", hex: "#C9ECF2" },
+                { name: "Bright green", hex: "#D0FFD8" },
+                { name: "Lilac purple", hex: "#E7DAFF" },
+              ],
             },
             {
-              title: "Student: create a portfolio with premium",
-              body: "Go to Create, then Portfolio. Start from scratch, upload work from the app, subscribe to premium, then edit, save and view the finished portfolio.",
-              image: {
-                src: `${IMG}/31.webp`,
-                alt: "Task flow diagram: Create, Portfolio, Create Portfolio, create from scratch, add content, upload from app, view subscription, subscribe, then upload, edit, save and view the portfolio.",
-              },
+              title: "Premium colours",
+              display: "bands",
+              swatches: [
+                { name: "Light blue", hex: "#D3E3F5" },
+                { name: "Blue", hex: "#7F99B2" },
+                { name: "Dark blue", hex: "#003466" },
+              ],
+            },
+            {
+              title: "Typeface colours",
+              display: "ramp",
+              swatches: [
+                { name: "White", hex: "#FFFFFF" },
+                { name: "Grey light 3", hex: "#E6E6E6" },
+                { name: "Grey light 2", hex: "#CBCBCB" },
+                { name: "Grey", hex: "#737373" },
+                { name: "Grey dark 2", hex: "#191919" },
+                { name: "Grey dark 3", hex: "#010101" },
+              ],
             },
           ],
+          specimen: {
+            label: "Fonts used",
+            image: {
+              src: `${PDF}/fonts-v3.webp`,
+              alt: "Poppins specimen: the alphabet in capitals and lower case, numerals and symbols, and the weights Black, ExtraBold, Bold, SemiBold, Medium, Regular, Light, Extralight and Thin",
+            },
+          },
         },
       ],
     },
     {
       id: "solution",
-      label: "Solution",
+      stage: "solution",
       title: "One app, three front doors",
       intro:
-        "CLAB looks different depending on who opens it. The home feed changes with the user type, with tabs for browsing companies, professionals or students.",
+        "We designed tailored interfaces for students, companies and working professionals, with personalised journeys, clear calls to action and seamless navigation for each group's needs. These screens reflect UX decisions refined through earlier testing and feedback.",
       blocks: [
         {
-          type: "image",
-          size: "wide",
-          image: {
-            src: `${IMG}/33.webp`,
-            alt: "Three high-fidelity CLAB home screens labelled Student, Professional and Company. Each has a search bar, date pills and user-type tabs, with profile cards for Pilgrim and Zomato, Aditya and Aditi, and Ajay and Susan.",
-          },
+          type: "groups",
+          columns: 2,
+          groups: [
+            {
+              title: "For students",
+              items: [
+                "Discover companies, professionals and webinars on one feed",
+                "Learn through courses and top mentors",
+                "Turn CLAB projects into a portfolio with Premium",
+              ],
+            },
+            {
+              title: "For working professionals",
+              items: [
+                "Find students and professionals by their skills",
+                "Create team projects, list the skills needed and accept requests",
+                "Run the project in one workspace: files, tracker, mood board, documents, meetings and reports",
+              ],
+            },
+          ],
         },
         {
-          type: "features",
-          heading: "What's inside",
+          type: "clabPrototype",
+          heading: "Try the prototype",
+          intro: "Switch between the student, working professional and company experiences, or follow one of the four journeys. Everything on the phone works.",
+        },
+        {
+          type: "clabMaterial",
+          heading: "Material design",
+        },
+        {
+          type: "keyFeatures",
+          heading: "Key features",
+          centre: "Clab",
           items: [
             {
-              title: "All-inclusive collaboration space",
-              body: "One place for professionals and students to connect, collaborate on projects and share ideas across disciplines.",
+              title: "Integrated connection and collaboration tools",
+              body: "Real-time connecting and collaboration features that let users work together seamlessly.",
+              icon: "collaborate",
             },
             {
-              title: "Project management",
-              body: "Every team project opens into New File, Tracker, Mood board, Documents, Meetings and Reports.",
+              title: "Portfolio management",
+              body: "An intuitive system for creating quick, professional portfolios and showcasing them within the same platform.",
+              icon: "portfolio",
             },
             {
-              title: "Competitions and webinars",
-              body: "Organisations post competitions and host webinars; users register, join and form teams without leaving the app.",
-            },
-            {
-              title: "Portfolio creation",
-              body: "Pick your CLAB projects and generate a portfolio from them, then show it off on the same platform.",
-            },
-            {
-              title: "Cross-disciplinary collaboration",
-              body: "Profile cards put skills and experience up front, and projects list the key skills they need.",
+              title: "Competition and webinar participation",
+              body: "Easy access to industry competitions and webinars, with tools to form teams and collaborate directly within the app.",
+              icon: "community",
             },
           ],
-        },
-        {
-          type: "gallery",
-          heading: "The three tasks, screen by screen",
-          layout: "strip",
-          images: [
-            {
-              src: `${IMG}/34.webp`,
-              alt: "Eight company screens in a row: company home page, Event, Create menu, Verification form, Enter Webinar Details, My Coming Up Webinar, Explore feed and the Walmart account page.",
-              caption: "Task 1, company: verify, then host a webinar.",
-            },
-            {
-              src: `${IMG}/35.webp`,
-              alt: "Seven professional screens: home page, Your Workspace with illustrated tiles, Create menu, New Team Projects form, Project Preview, Team Projects grid and the Project 1 options (New File, Tracker, Mood board, Documents, Meetings, Reports).",
-              caption: "Task 2, professional: from an empty form to a working project space.",
-            },
-            {
-              src: `${IMG}/36.webp`,
-              alt: "Six student screens: home page with Pilgrim and Zomato, Event, Your Workspace, Course page with progress bar and top mentors, Portfolio page, and the 'Clab with Confidence!' premium screen.",
-              caption: "Task 3, student: courses, portfolios and the premium upsell.",
-            },
-            {
-              src: `${IMG}/37.webp`,
-              alt: "Six student screens: CLAB Premium payment options, UPI AutoPay setup at ₹287 a month for students, the portfolio editor, a Select Projects checklist, the generated portfolio, and the portfolio list.",
-              caption: "Task 3 continued: pay, pick projects, and generate the portfolio from them.",
-            },
-          ],
-        },
-        {
-          type: "gallery",
-          heading: "Design system",
-          layout: "grid",
-          columns: 2,
-          images: [
-            {
-              src: `${IMG}/39.webp`,
-              alt: "Branding sheet: a grid of 30 filled purple icons, large purple and navy buttons, medium and small buttons, and inactive versus active button states.",
-              caption: "Purple for everyday actions, navy for premium.",
-            },
-            {
-              src: `${IMG}/41.webp`,
-              alt: "Component sheet: illustrated speciality tiles, three dropdowns for state, country and city, an August 2024 calendar, a Previous Webinar list, the bottom navigation bar, a Coming Up Webinar card and two profile cards.",
-              caption: "The component sheet: tiles, dropdowns, calendar, cards and navigation.",
-            },
-          ],
-        },
-        {
-          type: "text",
-          heading: "Typography and colour",
-          body: [
-            "Poppins in Regular, Medium and Bold, from 36px headings down to 10px caps. The core palette is light purple #F0E5FA, purple #8F49CD and dark purple #63328D, with a blue set (#D3E3F5, #7F99B2, #003466) reserved for premium.",
-          ],
-        },
-        {
-          type: "image",
-          size: "wide",
-          image: {
-            src: `${IMG}/43.webp`,
-            alt: "CLAB business model canvas in pastel blocks: key partners, activities, resources, value propositions, customer relationships, channels, customer segments, cost structure and revenue streams.",
-            caption: "Revenue comes from subscriptions, competition hosting, ads, and partnerships with companies and universities.",
-          },
         },
       ],
     },
     {
       id: "testing",
-      label: "Validation",
-      title: "20 people, four asks",
+      stage: "testing",
+      title: "20 people, one prototype",
       blocks: [
         {
-          type: "testing",
-          heading: "User testing",
-          summary:
-            "We put the high-fidelity prototype in the hands of 20 people, 10 working professionals and 10 students.",
-        },
-        {
-          type: "image",
-          size: "wide",
-          image: {
-            src: `${IMG}/44.webp`,
-            alt: "Left: a diagram splitting 20 user tests into 10 working professionals and 10 students. Right: six photos of hands using the CLAB prototype on phones, showing the Verification form, a home feed and other screens.",
-          },
-        },
-        {
-          type: "text",
-          heading: "What testers asked for",
-          body: [
-            "Drag and drop for organising tasks, files and project elements, to make things easier and faster.",
-            "A way to collaborate on portfolios, or get feedback from peers before finalising one.",
-            "A count of how many times a portfolio has been viewed or downloaded.",
-            "A step-by-step guide for first-time users of the portfolio feature.",
+          type: "testOverview",
+          heading: "Testing solutions",
+          rating: { value: 4, max: 5, label: "User testing rating" },
+          total: { value: "20", label: "User tests" },
+          groups: [
+            { label: "Working professionals", value: 10, unit: "people", icon: "work" },
+            { label: "Students", value: 10, unit: "people", icon: "students" },
           ],
-        },
-        {
-          type: "needed",
-          items: [
-            "Which tasks testers were given, and how they performed (success rates, time, issues)",
-            "What changed in the design after testing (the process lists 'Refinement' but doesn't show it)",
+          worked: [
+            "The workspace was clean, intuitive and easy to navigate.",
+            "Auto-generated portfolios looked polished and professional.",
+            "Onboarding tutorials were helpful, though testers wanted more advanced guidance.",
           ],
         },
       ],
     },
     {
-      id: "reflection",
-      label: "Reflection",
-      title: "What I'd do next",
+      id: "future",
+      stage: "future",
+      title: "Where Clab goes next",
       blocks: [
         {
-          type: "needed",
+          type: "list",
           items: [
-            "Asmi's reflection: what she learned, what she'd change, and next steps (for example, the four testing suggestions)",
+            "Direct export and sharing to LinkedIn and personal sites.",
+            "Better file management, with version control, tags and easy sharing.",
+            "Visual cues like colour labels and progress bars for tracking status.",
+            "In-app feedback for reporting issues and suggesting features.",
+          ],
+        },
+        {
+          type: "businessModel",
+          heading: "Business model",
+          partners: ["Legal team", "Marketing partners", "Payment gateway", "Companies and universities"],
+          activities: ["Mentorship programmes", "User engagement through events, webinars and courses", "Portfolio creation"],
+          resources: [
+            "Legal team",
+            "Web developers",
+            "Design team",
+            "Marketing team",
+            "Technical infrastructure",
+            "Partnerships with educational institutions, companies and industry experts",
+          ],
+          value: [
+            "A platform for seamless collaboration among students, professionals and companies",
+            "Webinars, projects, courses and mentorship in one place",
+          ],
+          relationships: ["Company – working professionals", "Student – company", "Student – working professionals"],
+          channels: [
+            "Social media",
+            "Events",
+            "Ads",
+            "Competitions in colleges",
+            "Word of mouth",
+            "Blogs and vlogs",
+            "Company and university recommendations",
+          ],
+          segments: ["Working professionals", "Students", "Companies"],
+          revenue: ["Subscription", "Competition hosting", "Advertisements", "Partnerships with companies and universities"],
+          costs: [
+            "App development and maintenance",
+            "Legal retainer fee",
+            "Marketing team",
+            "Design team",
+            "Software subscriptions",
+            "Content creation (blogs, videos)",
+            "Events and promotions",
+            "Infrastructure (servers, cloud services)",
+          ],
+        },
+      ],
+    },
+    {
+      id: "takeaways",
+      stage: "takeaways",
+      title: "What I took away",
+      blocks: [
+        {
+          type: "list",
+          items: [
+            "Balancing creativity with brand consistency while redesigning an established platform.",
+            "Why user-centred design depends on continuous feedback and usability testing.",
+            "Turning user pain points into actionable design solutions.",
+            "Stronger skills in visual hierarchy, content organisation and responsive design.",
+            "How small interaction and navigation improvements can make a big difference to user satisfaction.",
           ],
         },
       ],
     },
   ],
   contribution: {
-    mine: ["User research", "Interviews and synthesis", "UX design", "Material design", "Prototyping"],
-    team: needed("Adele P.'s contribution and how the work was split"),
+    mine: [
+      "User research, interviews and synthesis",
+      "UX design and material design",
+      "Prototyping",
+      "The complete high-fidelity screen design and execution in Figma, translating the research and concepts into the final visual experience",
+    ],
+    team: ["Adele P. created the project video and presentation deck, and wrote the research paper."],
   },
   links: { behance: "https://www.behance.net/gallery/234333025/Clab-Connecting-Creative-Minds" },
   seo: {
     title: "Clab: a collaboration platform for creatives · Asmi Shaikh",
     description:
-      "A mobile app that connects companies, professionals and students to collaborate, mentor and compete. Built from 30 interviews and tested with 20 users.",
+      "A mobile app that connects companies, professionals and students to collaborate, mentor and compete, tested with 20 users.",
   },
 };
 

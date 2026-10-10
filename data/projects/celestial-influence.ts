@@ -42,7 +42,7 @@ const project: Project = {
   chapters: [
     {
       id: "question",
-      label: "Question",
+      stage: "overview",
       title: "Why are the stars on the morning news?",
       blocks: [
         {
@@ -69,7 +69,7 @@ const project: Project = {
     },
     {
       id: "method",
-      label: "Method",
+      stage: "research",
       title: "Watching, asking, counting adjectives",
       blocks: [
         {
@@ -95,7 +95,7 @@ const project: Project = {
     },
     {
       id: "findings",
-      label: "Findings",
+      stage: "research",
       title: "Believers, enthusiasts, sceptics",
       blocks: [
         {
@@ -125,7 +125,7 @@ const project: Project = {
     },
     {
       id: "meaning",
-      label: "Meaning",
+      stage: "takeaways",
       title: "Less prophecy, more language",
       blocks: [
         {

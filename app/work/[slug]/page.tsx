@@ -6,11 +6,13 @@ import { CaseHero } from "@/components/case/CaseHero";
 import { ChapterNav } from "@/components/case/ChapterNav";
 import { Contribution } from "@/components/case/Contribution";
 import { NextProject } from "@/components/case/NextProject";
-import { QuickRead } from "@/components/case/QuickRead";
+import { FullProject } from "@/components/case/FullProject";
+import { Tudum } from "@/components/case/Tudum";
 import { AskAbout } from "@/components/chat/AskAbout";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { readableOn } from "@/lib/color";
 import { getProject, nextProject, pagedProjects } from "@/lib/projects";
+import { STAGES } from "@/lib/types";
 import { breadcrumbJsonLd, projectJsonLd } from "@/lib/seo";
 
 export function generateStaticParams() {
@@ -37,8 +39,6 @@ export async function generateMetadata({ params }: PageProps<"/work/[slug]">): P
   };
 }
 
-const SOLUTION_IDS = ["reveal", "solution", "redesign"];
-
 /**
  * Reading `params` happens inside <Suspense> (Next 16 + Cache Components). Every
  * slug is prerendered by generateStaticParams, so visitors get the full page
@@ -59,7 +59,8 @@ async function CaseStudy({ params }: { params: Promise<{ slug: string }> }) {
   // Externally hosted projects (e.g. the Medium study): send old links straight there.
   if (p.externalOnly && p.links?.external) redirect(p.links.external.href);
   const next = nextProject(p.slug);
-  const solution = p.chapters.find((c) => SOLUTION_IDS.includes(c.id))?.id;
+  // The shared flow: one section per stage that has material, in stage order.
+  const sections = STAGES.map((s) => ({ ...s, chapters: p.chapters.filter((c) => c.stage === s.key) })).filter((s) => s.chapters.length);
 
   return (
     <article
@@ -67,42 +68,48 @@ async function CaseStudy({ params }: { params: Promise<{ slug: string }> }) {
         {
           "--accent": p.accent,
           "--accent-ink": readableOn(p.accent, "#fbf9f4"),
+          ...(p.pageBg ? { background: p.pageBg, "--page-bg": p.pageBg } : {}),
         } as React.CSSProperties
       }
     >
       <CaseHero p={p} />
-      <QuickRead p={p} solutionChapter={solution} />
+      {p.slug === "netflix-mobile" && <Tudum />}
 
       <div className="container-page mt-20 grid gap-10 md:mt-28 lg:grid-cols-12">
         <aside className="lg:col-span-3">
-          <ChapterNav items={p.chapters.map((c) => ({ id: c.id, label: c.label }))} />
+          <ChapterNav items={sections.map((s) => ({ id: s.key, label: s.label }))} />
         </aside>
         <div className="min-w-0 lg:col-span-9">
-          {p.chapters.map((c, i) => (
-            <section key={c.id} id={c.id} aria-labelledby={`${c.id}-title`} className="scroll-mt-28 border-t border-line pb-20 pt-12 first:border-t-0 first:pt-0 md:pb-28">
+          {sections.map((s, i) => (
+            <section key={s.key} id={s.key} aria-labelledby={`${s.key}-title`} className="scroll-mt-28 border-t border-line pb-20 pt-12 first:border-t-0 first:pt-0 md:pb-28">
               <p className="meta flex items-center gap-3 text-ink-mute">
                 <span className="tabular-nums" style={{ color: "var(--accent-ink)" }}>
                   {String(i + 1).padStart(2, "0")}
                 </span>
-                {c.label}
+                {s.label}
               </p>
-              <h2 id={`${c.id}-title`} className="mt-3 max-w-[22ch] font-display-soft text-h1">
-                {c.title}
-              </h2>
-              {c.intro && <p className="mt-6 max-w-[52ch] text-lede text-ink-soft">{c.intro}</p>}
-              <div className="mt-12 space-y-14">
-                {c.blocks.map((b, j) => (
-                  <BlockView key={j} block={b} />
-                ))}
-              </div>
+              {s.chapters.map((c, ci) => (
+                <div key={c.id} className={ci > 0 ? "mt-20 md:mt-24" : ""}>
+                  <h2 id={ci === 0 ? `${s.key}-title` : undefined} className={`${ci === 0 ? "mt-3" : ""} font-display-soft text-h2`}>
+                    {c.title}
+                  </h2>
+                  {c.intro && <p className="mt-5 max-w-[60ch] text-intro text-ink-soft">{c.intro}</p>}
+                  <div className="mt-12 space-y-14">
+                    {c.blocks.map((b, j) => (
+                      <BlockView key={j} block={b} />
+                    ))}
+                  </div>
+                </div>
+              ))}
             </section>
           ))}
           <Contribution p={p} />
           <AskAbout title={p.title} slug={p.slug} />
+          <FullProject p={p} />
         </div>
       </div>
 
-      <NextProject next={next} behance={p.links?.behance} external={p.links?.external} />
+      <NextProject next={next} />
       <div className="h-24" />
 
       <JsonLd data={projectJsonLd(p)} />

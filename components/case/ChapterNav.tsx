@@ -57,9 +57,16 @@ export function ChapterNav({ items }: { items: Item[] }) {
         </ol>
       </nav>
 
-      {/* Mobile progress + chapter menu */}
-      <div className="fixed inset-x-0 top-16 z-30 lg:hidden">
-        <motion.div aria-hidden className="h-0.5 origin-left" style={{ scaleX: progress, background: "var(--accent)" }} />
+      {/* Mobile reading progress: pinned to the screen's top edge, above the
+          header, so it never cuts across the text when the header hides */}
+      <motion.div
+        aria-hidden
+        className="fixed inset-x-0 top-0 z-[60] h-[3px] origin-left lg:hidden"
+        style={{ scaleX: progress, background: "var(--accent)" }}
+      />
+
+      {/* Mobile chapter menu */}
+      <div className="pointer-events-none fixed inset-x-0 top-16 z-30 lg:hidden [&_button]:pointer-events-auto [&_ol]:pointer-events-auto">
         <div className="flex justify-end px-3 pt-2">
           <button
             type="button"

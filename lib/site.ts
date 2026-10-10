@@ -14,6 +14,5 @@ export const nav = [
   { href: "/resume", label: "Resume" },
 ] as const;
 
-/** Show `needed()` placeholders? On in dev; set SHOW_CONTENT_NEEDED=1 to preview in prod. */
-export const showNeeded =
-  process.env.NODE_ENV !== "production" || process.env.SHOW_CONTENT_NEEDED === "1";
+/** Show `needed()` placeholders? Off everywhere; set SHOW_CONTENT_NEEDED=1 to see them while filling gaps. */
+export const showNeeded = process.env.SHOW_CONTENT_NEEDED === "1";

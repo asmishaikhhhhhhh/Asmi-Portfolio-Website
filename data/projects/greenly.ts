@@ -1,6 +1,5 @@
 import { needed, type Project } from "@/lib/types";
 
-const img = (n: string) => `/images/projects/greenly/${n}.webp`;
 
 const project: Project = {
   slug: "greenly",
@@ -12,20 +11,20 @@ const project: Project = {
   order: 4,
   kind: "Service ecosystem · Hydroponics",
   year: needed("Year the project was done (Behance publish date Sept 2025 is not the project year)"),
-  duration: needed("Project duration"),
-  role: needed("Asmi's role on Greenly"),
-  team: { solo: false, note: "Slides refer to 'we'; collaborators not credited" },
+  duration: "8 weeks",
+  role: "Research, UX/UI, storyboarding, 3D modelling",
+  team: { solo: false, collaborators: ["Abhishree C.", "Tridib S.", "Tvisha S."] },
   disciplines: ["systems", "ux-ui", "research", "physical-brand"],
   thinking: ["systems", "technology", "research", "people", "business"],
-  tags: ["Hydroponics", "IoT", "Service design", "Dashboards", "Mobile app", "3D product"],
+  tags: ["Internet of Things", "Ecosystem design", "Branding", "UX/UI", "Hydroponics", "3D product"],
   tools: ["Figma", "Photoshop", "Illustrator", "Blender 3D"],
   accent: "#4E904C",
   cover: {
     type: "motion",
     composition: "greenly",
     poster: {
-      src: img("38"),
-      alt: "Greenly farmer dashboard for the demo farm Fresh Roots, showing farm environment readings, orders, scheduled deliveries, crop cycles, low stocks and order tracking",
+      src: "/images/projects/greenly/pdf/cover.webp",
+      alt: "A phone showing the Greenly splash screen, a laptop with the Fresh Roots farm management dashboard, the Fresh Wheels food truck and a potted basil plant",
     },
   },
   proofPoint: "4 stakeholder apps, each usability tested",
@@ -40,44 +39,31 @@ const project: Project = {
   },
   chapters: [
     {
-      id: "context",
-      label: "Context",
-      title: "Soil not included",
+      id: "overview",
+      stage: "overview",
+      title: "A greener way to grow",
       intro:
-        "Hydroponics grows plants without soil, in nutrient-rich water. It gives precise control over growing conditions and suits cities where space is tight.",
+        "Greenly is a digital platform designed to make sustainable agriculture work: it connects hydroponic farmers with reliable marketplaces and equips them with smart tools to boost productivity.",
       blocks: [
-        {
-          type: "stats",
-          heading: "A small slice of a growing market",
-          items: [
-            {
-              value: "₹1,377.8 bn",
-              label: "Projected market size by 2027",
-              note: "Up from ₹671.7 bn in 2022, a 13.5% CAGR",
-            },
-            { value: "Up to 90%", label: "Less water than traditional farming" },
-            { value: "1%", label: "Share of global agriculture using hydroponics" },
-          ],
-          source: needed(
-            "Sources for the market size, 90% water and 1% figures, and whether the market figure is for India or global",
-          ),
-        },
         {
           type: "text",
           body: [
-            "The method is efficient and the demand is there. Yet hydroponic produce is still hard to find, and small farms struggle to stay open.",
-            "So we mapped everyone around a hydroponic farm, from raw-material providers and consumers to policy makers and investors.",
+            "Our goal was to address the major pain points: limited market access, low consumer awareness and high operational costs. The answer is an ecosystem that benefits farmers, consumers, suppliers and logistics partners alike.",
           ],
         },
         {
-          type: "image",
-          size: "wide",
-          image: {
-            src: img("03"),
-            alt: "Stakeholder map: rings for core, intermediary and ancillary stakeholders around a centre labelled HFS, with nodes such as hydroponic farmers, logistics, raw material providers, consumers, revenue models, investors and policy makers",
-            caption:
-              "Fourteen stakeholder groups across production and distribution, planning and promoting, and investment and regulation.",
-          },
+          type: "stakeholderRings",
+          heading: "Target audience",
+          centre: "HFS",
+          rings: [
+            { name: "Core", members: ["Hydroponic farmers", "Raw material providers", "Logistics", "Consumers", "Revenue models"] },
+            { name: "Intermediary", members: ["Farming consultants and trainers", "Contractors and middlemen", "Tech providers"] },
+            {
+              name: "Ancillary",
+              members: ["Media and influencers", "Architectural firms", "Municipal corporations", "Policy makers", "Environmental organisations", "Investors"],
+            },
+          ],
+          caption: "Stakeholders span three zones: production and distribution, planning and promoting, and investment and regulation.",
         },
         {
           type: "callout",
@@ -87,11 +73,60 @@ const project: Project = {
       ],
     },
     {
+      id: "process",
+      stage: "process",
+      title: "A user-centred double diamond",
+      intro: "We followed a user-centred design approach: from not knowing (A) to knowing (B), in four moves.",
+      blocks: [
+        {
+          type: "doubleDiamond",
+          from: "Don't know",
+          to: "Do know",
+          phases: [
+            { name: "Discover", mode: "Research", steps: ["Finalise the topic", "Fix the brief", "Conduct primary research", "Conduct secondary research"] },
+            { name: "Define", mode: "Synthesis", steps: ["Affinity mapping", "Covert observations", "Drawing insights", "Making HMWs"] },
+            { name: "Develop", mode: "Ideation", steps: ["Ideate for each HMW", "Evaluate and sequence the ideas"] },
+            { name: "Deliver", mode: "Implement", steps: ["Scenario planning", "Service blueprint", "Prototype"] },
+          ],
+        },
+        {
+          type: "process",
+          heading: "System architecture",
+          steps: [
+            {
+              title: "1 · Scenarios",
+              body: "A day for each stakeholder: a farmer whose sensors flag issues and recommend crops, a supplier accepting orders and restocking, a logistics manager tracking delayed deliveries and managing routes, and a customer on a free trial watching live farm streams.",
+            },
+            {
+              title: "2 · Task flows",
+              body: "Each scenario as steps. For the farmer: check demand and select crops, assess space, order raw materials, monitor crop health, respond to alerts, and partner with a food truck to boost sales.",
+            },
+            {
+              title: "3 · Data points",
+              body: "What each person needs to know before, during and after production: temperature, humidity, light, water pH and EC, nutrient levels, harvest status, freshness, price, transport cost and storage conditions.",
+            },
+            {
+              title: "4 · Tech plan",
+              body: "How the data moves: sensors on the modular unit report through a NodeMCU over WiFi, a plant-health scanner runs on a trained AI model, and orders flow between farmer, supplier, customer and logistics.",
+            },
+            {
+              title: "5 · Data flow",
+              body: "The 'Farm Connect' platform mapped page by page for suppliers, logistics and farmers, plus the e-commerce app, an agronomy app with a plant scanner, a driver app and the truck's own sensors.",
+            },
+            {
+              title: "6 · Artefacts",
+              body: "Two digital artefacts (Farm Connect and the e-commerce app) and two physical ones (the hydroponic unit and the food truck), each with rules for skeuomorphism, signifiers and metaphor.",
+            },
+          ],
+        },
+      ],
+    },
+    {
       id: "research",
-      label: "Research",
-      title: "Four perspectives, one leaky chain",
+      stage: "research",
+      title: "Three gaps, three insights",
       intro:
-        "We followed a double diamond: discover, define, develop, deliver. Discovery meant looking at the farm from every side of the transaction.",
+        "Secondary research showed where hydroponic farming struggles. Primary research, from the farmer's, consumer's, supplier's and logistics side, showed why.",
       blocks: [
         {
           type: "researchMethods",
@@ -107,88 +142,43 @@ const project: Project = {
           ],
         },
         {
-          type: "needed",
-          items: [
-            "Research sample sizes (how many farmers, consumers, suppliers and logistics people), locations and dates",
-            "How primary research was run (interviews, surveys, field visits) and what the covert observations involved",
+          type: "surfaceRoots",
+          heading: "What we saw, and what's underneath",
+          gaps: [
+            { title: "Knowledge", body: "A **lack of knowledge** leads to **misconceptions** about hydroponic farming." },
+            { title: "Marketing", body: "**Poor marketing strategies** result in **low sales** and a **lack of reach** to the right audience." },
+            { title: "Productivity", body: "Hydroponic farms struggle with productivity because of **limited market insights** and **restricted growing space**." },
           ],
-        },
-        {
-          type: "insightChain",
-          heading: "What each side told us",
-          items: [
+          roots: [
             {
+              title: "Cost and closure",
               observation:
                 "Farmers struggle to find affordable, reliable equipment, seeds and nutrients. Banks barely understand hydroponics, so loans are hard to get and subsidies are limited.",
               insight:
                 "Many farms start as a hobby without proper knowledge. Running costs are high, market access is thin, and the result is closure.",
-              opportunity:
-                "Lower the risk of closure by raising profitability and reach, not just yield.",
+              opportunity: "Lower the risk of closure by raising profitability and reach, not just yield.",
             },
             {
+              title: "Awareness",
               observation:
                 "Hydroponic produce is shelved next to organic, seen as super-premium, and hard to find consistently in local markets.",
-              insight:
-                "Premium stores and establishments know little about it, and weak positioning keeps market penetration low.",
-              opportunity:
-                "Build awareness directly: educational content, farm tours and a food truck that lets people taste the produce.",
+              insight: "Premium stores and establishments know little about it, and weak positioning keeps market penetration low.",
+              opportunity: "Build awareness directly: educational content, farm tours and a food truck that lets people taste the produce.",
             },
             {
+              title: "Distribution",
               observation:
                 "Equipment is largely imported and not made for Indian conditions. Produce needs trained handlers, and shipments outside local markets face delays and quality issues.",
-              insight:
-                "Distribution is inefficient because logistics infrastructure doesn't fit the sector's needs and relies on manual labour.",
-              opportunity:
-                "Connect farmers with suppliers and logistics partners digitally, so delivery is timely and visible.",
+              insight: "Distribution is inefficient because logistics infrastructure doesn't fit the sector's needs and relies on manual labour.",
+              opportunity: "Connect farmers with suppliers and logistics partners digitally, so delivery is timely and visible.",
             },
           ],
         },
-      ],
-    },
-    {
-      id: "insights",
-      label: "Insights",
-      title: "The gap is disconnection",
-      intro:
-        "Six gaps surfaced in our analysis. Underneath them sat one main reason farms and markets don't meet.",
-      blocks: [
         {
-          type: "features",
-          heading: "Six gaps",
+          type: "needed",
           items: [
-            {
-              title: "Little local manufacturing",
-              body: "Affordable, India-specific equipment for small and mid-sized farms is scarce; most products are designed for global markets.",
-            },
-            {
-              title: "Awareness and education",
-              body: "Much of the population doesn't know the benefits of hydroponic produce, which limits adoption and positioning.",
-            },
-            {
-              title: "Costly vertical farming",
-              body: "Current vertical solutions are expensive and give inconsistent yield, making it hard for small farmers to scale on limited land.",
-            },
-            {
-              title: "No single sensor interface",
-              body: "Each sensor has its own app, so monitoring means more manual labour and higher production cost.",
-            },
-            {
-              title: "No network",
-              body: "Farmers lack a way to find reliable suppliers and interested B2B and D2C customers.",
-            },
-            {
-              title: "Untrained workers",
-              body: "Few workers know hydroponics, and the ones who do are expensive to hire.",
-            },
-          ],
-        },
-        {
-          type: "text",
-          heading: "The main gap",
-          body: [
-            "Lack of knowledge breeds misconceptions about hydroponic farming.",
-            "Poor marketing means low sales and the wrong audience.",
-            "And limited market insight plus restricted growing space keeps productivity down.",
+            "Research sample sizes (how many farmers, consumers, suppliers and logistics people), locations and dates",
+            "How primary research was run (interviews, surveys, field visits) and what the covert observations involved",
           ],
         },
         {
@@ -257,89 +247,120 @@ const project: Project = {
             },
           ],
         },
+      ],
+    },
+    {
+      id: "problem",
+      stage: "problem",
+      title: "One question for the whole chain",
+      blocks: [
         {
           type: "hmw",
-          label: "Initial problem statement",
+          label: "Problem statement",
           statement:
-            "How might we empower small-scale hydroponic farmers to access affordable and sustainable raw materials, leverage everyday resources, and connect with profitable markets through innovative and simple technologies, ensuring long-term viability and growth?",
+            "How might we empower small-scale hydroponic farmers to **access affordable** and **sustainable raw materials**, **leverage everyday resources**, and **connect with profitable markets** through innovative and simple technologies, **ensuring long-term viability and growth**?",
+        },
+        {
+          type: "valueMap",
+          heading: "Value mapping",
+          edges: [
+            { from: "customer", to: "supplier", values: ["sustainability"] },
+            { from: "farmer", to: "supplier", values: ["sustainability"] },
+            { from: "logistics", to: "supplier", values: ["reliability"] },
+            { from: "supplier", to: "logistics", values: ["networking"] },
+            { from: "farmer", to: "customer", values: ["sustainability", "transparency"] },
+            { from: "customer", to: "farmer", values: ["transparency"] },
+            { from: "logistics", to: "customer", values: ["efficiency"] },
+            { from: "logistics", to: "farmer", values: ["reliability", "efficiency"] },
+            { from: "farmer", to: "logistics", values: ["networking"] },
+          ],
+          caption: "What each relationship has to deliver. Core values: reliability, transparency, in-time efficiency, networking and sustainability.",
         },
       ],
     },
     {
-      id: "system",
-      label: "System",
-      title: "Six layers deep",
+      id: "ideation",
+      stage: "ideation",
+      title: "Many ideas, one MVP",
       intro:
-        "We built the system up in six layers: scenarios, task flows, data points, tech plan, data flow and artefacts.",
+        "During ideation we explored many ways, and products, that could deliver unique value to each stakeholder, which led us to our MVP.",
       blocks: [
         {
-          type: "process",
-          heading: "System architecture",
-          steps: [
+          type: "image",
+          size: "wide",
+          image: {
+            src: "/images/projects/greenly/pdf/ideation-wall.webp",
+            mono: true,
+            alt: "Collage of the ideation stage: a whiteboard of primary and secondary research notes joined by criss-crossing lines, walls of handwritten sticky notes, a digital affinity map, a grey 3D model of a van with roof solar panels, and a paper unit sketch",
+          },
+        },
+        {
+          type: "techPlan",
+          heading: "Tech plan: how data moves",
+          lanes: ["Modular unit", "Farmer", "Supplier", "Logistics", "Customer"],
+          flows: [
             {
-              title: "1 · Scenarios",
-              body: "A day for each stakeholder: a farmer whose sensors flag issues and recommend crops, a supplier accepting orders and restocking, a logistics manager tracking delayed deliveries and managing routes, and a customer on a free trial watching live farm streams.",
+              name: "Sensors to dashboard",
+              body: "Sensors on the modular unit read the growing conditions and report through a NodeMCU over WiFi into the farmer's farm status.",
+              steps: [
+                { lane: 0, label: "DHT22 · GY-302 · pH sensor" },
+                { lane: 0, label: "Temperature, humidity, light, pH" },
+                { lane: 0, label: "NodeMCU", via: "WiFi" },
+                { lane: 1, label: "Farm status" },
+                { lane: 1, label: "Environment check-up" },
+              ],
             },
             {
-              title: "2 · Task flows",
-              body: "Each scenario as steps. For the farmer: check demand and select crops, assess space, order raw materials, monitor crop health, respond to alerts, and partner with a food truck to boost sales.",
+              name: "Plant health scan",
+              body: "The farmer scans a plant, a trained AI model reads the image, and the result updates the farm's plant health and growth status.",
+              steps: [
+                { lane: 1, label: "Plant health and growth scanner" },
+                { lane: 1, label: "Trained AI model" },
+                { lane: 1, label: "Plant health and growth status" },
+              ],
             },
             {
-              title: "3 · Data points",
-              body: "What each person needs to know before, during and after production: temperature, humidity, light, water pH and EC, nutrient levels, harvest status, freshness, price, transport cost and storage conditions.",
+              name: "Restocking supplies",
+              body: "The supplier's stock appears in the farmer's shop. The farmer puts an order, it lands with the supplier, and logistics' vehicle and driver details feed the order status.",
+              steps: [
+                { lane: 2, label: "Amount of supplies" },
+                { lane: 1, label: "Farmer shop: supply list" },
+                { lane: 1, label: "Put order" },
+                { lane: 2, label: "Incoming orders" },
+                { lane: 2, label: "In-transit orders" },
+                { lane: 3, label: "Vehicle and driver details" },
+                { lane: 2, label: "Order status" },
+              ],
             },
             {
-              title: "4 · Tech plan",
-              body: "How the data moves: sensors on the modular unit report through a NodeMCU over WiFi, a plant-health scanner runs on a trained AI model, and orders flow between farmer, supplier, customer and logistics.",
-              image: {
-                src: img("16"),
-                alt: "Tech plan diagram linking farmer, supplier, customer and logistics nodes; the modular hydroponic unit's DHT22, GY-302, analog pH and NodeMCU sensors feed farm status over WiFi, with cloud icons on the links",
-              },
+              name: "Running low",
+              body: "The farmer's inventory tracks raw materials. A shortage feeds straight into the supplier's demand forecasting.",
+              steps: [
+                { lane: 1, label: "Inventory management" },
+                { lane: 1, label: "Amount of raw materials" },
+                { lane: 1, label: "Inventory shortage" },
+                { lane: 2, label: "Demand forecasting" },
+              ],
             },
             {
-              title: "5 · Data flow",
-              body: "The 'Farm Connect' platform mapped page by page for suppliers, logistics and farmers, plus the e-commerce app, an agronomy app with a plant scanner, a driver app and the truck's own sensors.",
-            },
-            {
-              title: "6 · Artefacts",
-              body: "Two digital artefacts (Farm Connect and the e-commerce app) and two physical ones (the hydroponic unit and the food truck), each with rules for skeuomorphism, signifiers and metaphor.",
+              name: "Produce to customer",
+              body: "The farm's plant list becomes the customer's produce list. Orders come back to the farmer as B2B and B2C orders, and logistics picks them up and reports the status.",
+              steps: [
+                { lane: 1, label: "Plant list" },
+                { lane: 4, label: "Produce list" },
+                { lane: 4, label: "Put order" },
+                { lane: 1, label: "Incoming orders" },
+                { lane: 3, label: "Order management" },
+                { lane: 1, label: "In-transit orders" },
+                { lane: 1, label: "Order status" },
+              ],
             },
           ],
-        },
-        {
-          type: "image",
-          size: "inset",
           image: {
-            src: img("21"),
-            alt: "Value map connecting supplier, customer, farmer and logistics with arrows tagged by five core-value icons: reliability, transparency, in-time efficiency, networking and sustainability",
-            caption: "Value mapping: what each relationship in the system has to deliver.",
+            src: "/images/projects/greenly/pdf/tech-plan.webp",
+            alt: "Tech plan diagram linking farmer, supplier, customer and logistics; the modular hydroponic unit's DHT22, GY-302, analog pH and NodeMCU sensors report temperature, humidity, light and pH over WiFi into farm status, inventory and order flows",
           },
         },
-        {
-          type: "hmw",
-          label: "We finalised",
-          statement:
-            "How might we design an eco-system that lowers the risk of farm closures by increasing the profitability of hydroponic farmers while also expanding market reach, increasing crop yield through reduced manual intervention?",
-        },
-        {
-          type: "image",
-          size: "full",
-          image: {
-            src: img("23"),
-            alt: "Wide site map rooted in Farm Connect, branching into supplier, logistics, farmer and consumer sections, with hydroponic unit and demand forecast trees below and icons marking increased profitability, reduced manual intervention and expanded market reach",
-            caption:
-              "Site map. Nodes are tagged by which goal they serve: profitability, less manual work or market reach.",
-          },
-        },
-      ],
-    },
-    {
-      id: "exploration",
-      label: "Exploration",
-      title: "Honeycombs and zig-zags",
-      intro:
-        "The physical unit started on paper, with two goals from the sketches: give every plant equal light, and save space.",
-      blocks: [
         {
           type: "conceptFunnel",
           heading: "From sketch to unit",
@@ -353,49 +374,23 @@ const project: Project = {
               verdict: "dropped",
               reason:
                 "Expensive to produce, since the edges aren't 90°, and the interlocking mechanism is prone to leakage.",
-              image: {
-                src: img("24"),
-                alt: "Pencil sketch sheet of hexagonal, honeycomb-inspired grow modules, a stacked rack and an attachable box module, with handwritten notes like 'lets plants get equal light' and 'easily attachable & scalable'",
-              },
             },
             {
               name: "Zig-zag rectangular units",
               verdict: "kept",
               reason:
                 "Rectangular units attached at steps give even light. The paper model's edges were too sharp and its holes too close together.",
-              image: {
-                src: img("25"),
-                alt: "Two photos of a white card mock-up: rectangular modules joined in a stepped zig-zag line, with circular holes for plants",
-              },
             },
           ],
         },
         {
-          type: "gallery",
-          heading: "Mid-fidelity screens",
-          layout: "grid",
-          columns: 2,
-          images: [
-            {
-              src: img("26"),
-              alt: "Four greyscale desktop wireframes for farmers: home dashboard, farm status with temperature, humidity, light and pH controls, demand with a Fresh Wheels map, and analytics with crop demand charts",
-              caption: "Farmer dashboard wireframes",
-            },
-            {
-              src: img("27"),
-              alt: "Row of about eleven greyscale mobile wireframes for customers: Fresh Pass, orders, profile, home with deal of the hour and Fresh Wheels, categories, product page, recipes and basket",
-              caption: "Consumer app wireframes (B2C)",
-            },
-          ],
-        },
-        {
-          type: "testing",
+          type: "iconCards",
           heading: "What mid-fi feedback flagged",
-          negatives: [
-            "The hexagonal unit would be too expensive to produce because its edges aren't 90°.",
-            "The consumer site felt like any e-commerce site, with nothing special enough to choose hydroponic produce.",
-            "Logistics screens were confusing: the main task only opened from a different screen.",
-            "The supplier home page felt like an e-commerce app.",
+          items: [
+            { title: "Hexagonal unit", icon: "price", body: "Too expensive to produce, because its edges aren't 90°." },
+            { title: "Consumer site", icon: "trust", body: "Felt like any e-commerce site, with nothing special enough to choose hydroponic produce." },
+            { title: "Logistics screens", icon: "branch", body: "Confusing: the main task only opened from a different screen." },
+            { title: "Supplier home", icon: "home", body: "Felt like an e-commerce app." },
           ],
         },
         {
@@ -405,29 +400,68 @@ const project: Project = {
       ],
     },
     {
-      id: "hardware",
-      label: "Hardware",
-      title: "A farm that reports in",
+      id: "unit",
+      stage: "solution",
+      title: "Unit redesign",
       intro:
-        "The MVP brief: a smart hydroponic unit that maximises crop yield by integrating multiple sensors for real-time monitoring.",
+        "A smart hydroponic unit that maximises crop yield by integrating multiple sensors for real-time monitoring. It gives farmers the data that matters, pH, nutrient concentration, temperature and humidity, so they can control growing conditions precisely.",
       blocks: [
         {
-          type: "features",
+          type: "showcase",
           items: [
             {
               title: "The modular zig-zag channel",
-              body: "Each module snaps to the next in a stepped line, 3 ft 6 in long and 9 in tall, with a 7 in pitch. Water comes in one end and leaves the other.",
+              body: "Each module snaps to the next in a stepped line, so the channel climbs as it grows. Water comes in at one end and leaves at the other.",
+              chips: ["3 ft 6 in long", "9 in tall", "7 in modules"],
+              span: 4,
               image: {
-                src: img("35"),
-                alt: "3D render of a white zig-zag hydroponic channel with plants, a dimensioned drawing (3 ft 6 in long, 9 in tall, 7 in modules) and an exploded single module with a four-hole lid and inflow and outflow pipes",
+                src: "/images/projects/greenly/pdf/unit/channel.webp",
+                cutout: true,
+                alt: "3D render of the white stepped zig-zag channel with a basil plant in every module",
+              },
+            },
+            {
+              title: "Measured out",
+              body: "Six 7 in modules across 3 ft 6 in, stepping down in 3 in levels within a 9 in height.",
+              chips: ["3 in steps"],
+              span: 2,
+              image: {
+                src: "/images/projects/greenly/pdf/unit/dimensions.webp",
+                cutout: true,
+                alt: "Dimensioned drawing of the channel: 3 ft 6 in long, 9 in tall, six 7 in modules and 3 in steps",
+              },
+            },
+            {
+              title: "One module",
+              body: "Planting holes in the lid, with an inflow at one end and an outflow at the other.",
+              chips: ["Inflow", "Outflow"],
+              span: 2,
+              image: {
+                src: "/images/projects/greenly/pdf/unit/module.webp",
+                cutout: true,
+                alt: "A single white module with four round planting holes in its lid, an inflow pipe at one end and an outflow pipe at the other",
               },
             },
             {
               title: "Racked and recirculating",
-              body: "In the redesign the channels sit on a four-tier rack over a reservoir, with inflow and outflow piping. The system reports pH, nutrient concentration, temperature and humidity for precise control.",
+              body: "The channels sit on a four-tier rack over a reservoir, with water flowing in at the top and back down.",
+              chips: ["4 tiers", "Reservoir"],
+              span: 2,
               image: {
-                src: img("36"),
-                alt: "3D renders of a four-tier black metal rack holding rows of zig-zag channels over a black reservoir tank, with blue arrows showing inflow and outflow, plus a front elevation",
+                src: "/images/projects/greenly/pdf/unit/rack.webp",
+                cutout: true,
+                alt: "A four-tier black metal rack of channels over a black reservoir tank, with blue arrows showing the inflow and outflow",
+              },
+            },
+            {
+              title: "Fresh Wheels",
+              body: "A food truck Greenly provides to farmers, for their customers: “Fresh salads on wheels, harvested through hydroponics, served fresh on the spot.”",
+              chips: ["Solar roof", "Scan for app"],
+              span: 2,
+              image: {
+                src: "/images/projects/greenly/pdf/unit/truck.webp",
+                cutout: true,
+                alt: "The dark green Fresh Wheels food truck with solar panels on the roof, a photo of hydroponic lettuce rows on its side and a 'Scan for app' QR code",
               },
             },
           ],
@@ -456,244 +490,254 @@ const project: Project = {
             "Whether the IoT unit was physically built and tested, or exists as renders and the paper mock-up",
           ],
         },
-        {
-          type: "image",
-          size: "wide",
-          image: {
-            src: img("37"),
-            alt: "Grey 3D renders of a van with three tilted roof solar panels, and a branded dark-green version wrapped in a photo of hydroponic lettuce rows, with the slogan 'Fresh salads on wheels' and a 'Scan for app' QR code",
-            caption:
-              "Fresh Wheels: a solar food truck Greenly provides to farmers, so customers can try the produce in person.",
-          },
-        },
       ],
     },
     {
-      id: "solution",
-      label: "Solution",
-      title: "One farm, four front doors",
-      intro:
-        "Each stakeholder gets a view built around their job. They all read from the same system.",
+      id: "stakeholders",
+      stage: "solution",
+      title: "UX/UI for every stakeholder",
+      intro: "Each stakeholder gets screens built around their job. They all read from the same system.",
       blocks: [
+        {
+          type: "text",
+          heading: "Customer screens",
+          body: ["Explore fresh hydroponic produce, learn about its benefits, and order directly from local farms."],
+        },
         {
           type: "image",
           size: "full",
           image: {
-            src: img("38"),
-            alt: "Hi-fi farmer dashboard titled Farm Management for the demo farm Fresh Roots: farm environment controls, bulk and spot orders with accept buttons, schedule delivery with request vehicle, crop cycles, low stocks and order tracking",
-            caption: "Farmer home: the farm, its orders and its supplies on one screen.",
+            src: "/images/projects/greenly/pdf/customer-onboarding.webp",
+            cutout: true,
+            alt: "Four onboarding phone screens: Explore hydroponics easily, Consumes 90% less water, Higher nutritional value, and Pesticide and herbicide free",
+          },
+        },
+        {
+          type: "image",
+          size: "full",
+          image: {
+            src: "/images/projects/greenly/pdf/customer-screens.webp",
+            cutout: true,
+            alt: "Four customer app screens with callouts: previous customer testimonials, the Fresh Wheels location for in-person trials, a live view of the farm with recipe suggestions, and a delivery-delayed message with the reason",
           },
         },
         {
           type: "features",
-          heading: "For farmers",
-          items: [
-            {
-              title: "Alerts that don't go away",
-              body: "When pH drifts out of range, the farmer gets an emergency alert with next steps. Close it, and the reading stays flagged red in the environment card.",
-              image: {
-                src: img("40"),
-                alt: "Farmer dashboard with the farm environment card outlined in red, a row highlighted in the rack schematic, a 'Stop inflow' button and the pH level shown in red, beside a note that pH stays flagged after the main notification is closed",
-              },
-            },
-            {
-              title: "Farm status and plant health",
-              body: "Farm layout, pump and light timings, crop cycles by row, and an AI plant-health checker that scores a scanned image.",
-              image: {
-                src: img("48"),
-                alt: "Farm Status screen: environment controls, a farm layout with rows, columns, brackets and water tanks, pump and light timings, crop cycles by row, and an AI plant health checker gauge reading 660",
-              },
-            },
-            {
-              title: "Demand in one place",
-              body: "Consumer orders, bulk orders, spot requests and farm-visit requests, each with a quick accept or schedule action.",
-              image: {
-                src: img("49"),
-                alt: "Demand screen listing consumer orders with schedule delivery buttons, bulk orders and spot requests with accept and decline, and farm visit requests",
-              },
-            },
-          ],
-        },
-        {
-          type: "features",
-          heading: "For suppliers and logistics",
-          items: [
-            {
-              title: "Supplier home",
-              body: "New and ongoing orders, an inventory summary with critical and low stock, and payments with one-tap reminders for overdue invoices.",
-              image: {
-                src: img("51"),
-                alt: "Supplier dashboard for Patel Suppliers: orders overview with accept and decline, inventory summary bar of full, low and critical stock, and payment details with overdue invoices and send reminder buttons",
-              },
-            },
-            {
-              title: "Allocation and alerts",
-              body: "Unallocated orders can be auto-assigned a vehicle. On-route problems, like a breakdown, show on a map with the impacted orders.",
-              image: {
-                src: img("58"),
-                alt: "Supplier logistics screen: an allocation table of orders from Khar W to Bandra W with allocate buttons, an alert map with vehicle breakdown and pickup delay cards, and logistics cost insights",
-              },
-            },
-            {
-              title: "Logistics command",
-              body: "Delivery summary, priority orders, route management with diversions, emergency deliveries and fleet status, so a delayed order gets resolved, not just reported.",
-              image: {
-                src: img("65"),
-                alt: "Logistics Schedule Delivery dashboard with a delay banner, deliveries donut, priority orders with resolve and track buttons, a Mumbai route map with a red diverted segment, emergency delivery and fleet status",
-              },
-            },
-          ],
-        },
-        {
-          type: "features",
-          heading: "For customers",
           items: [
             {
               title: "Onboarding that teaches",
               body: "The first screens explain why hydroponics: 90% less water, higher nutritional value, pesticide-free.",
-              image: {
-                src: img("71"),
-                alt: "Four phone screens: a green Greenly splash screen and three illustrated onboarding screens reading 'Explore hydroponics easily', 'Consumes 90% less water' and 'Higher nutritional value'",
-              },
             },
             {
               title: "Trust you can see",
               body: "Testimonials, a Fresh Wheels map for in-person trials, and live views of the farms alongside recipe suggestions.",
-              image: {
-                src: img("73"),
-                alt: "Three phone screens with callouts: home with testimonials, a Fresh Wheels section with a map, and a categories screen with a live view of two farms and recipes",
-              },
             },
             {
               title: "Honest delivery",
               body: "Product pages show expiry and pesticide-free status, the basket shows a 'best till' date, and delays come with a reason.",
+            },
+          ],
+        },
+        {
+          type: "screenTour",
+          heading: "Farmer, supplier and logistics dashboards",
+          screens: [
+            {
+              name: "Farmer",
+              lede: "Monitor crops, manage inventory, and connect directly with buyers through an easy-to-use dashboard.",
               image: {
-                src: img("74"),
-                alt: "Four phone screens: a spinach product page, the basket delivering in 30 minutes, an order-placed confirmation, and a red 'Delivery delayed' message citing engine failure",
+                src: "/images/projects/greenly/pdf/farmer-screens.webp",
+                width: 2285,
+                height: 602,
+                alt: "Farmer dashboards on a laptop and two full screens: Farm Management for Fresh Roots with farm environment, orders, schedule delivery, crop cycles, low stocks and tracking; an emergency pH alert with next steps; and the pH reading flagged red after the alert is closed",
               },
+              spots: [
+                { x: 12.5, y: 58, title: "Farm environment", body: "Live readings for temperature, humidity, CO₂, daylight cycle and pH, each adjustable from the dashboard." },
+                { x: 23, y: 36, title: "Demand in one place", body: "Consumer orders, bulk orders, spot requests and farm-visit requests, each with a quick accept or schedule action." },
+                { x: 35, y: 36, title: "Schedule delivery", body: "Orders ready to go out, each with a request-vehicle action." },
+                { x: 21, y: 72, title: "Crop cycles", body: "Crops by stage, from germination to vegetation to ready for harvest, row by row." },
+                { x: 29, y: 72, title: "Low stocks", body: "Seeds, cocopeat and nutrient solution running low, with an order-now button for each." },
+                { x: 57, y: 40, title: "Emergency alert", body: "When pH drifts out of range, the farmer gets an emergency alert with the unit's location and next steps: drain the unit, then resume inflow." },
+                { x: 80, y: 58, title: "Alerts that don't go away", body: "Close the alert, and the pH reading stays flagged red in the environment card." },
+              ],
+            },
+            {
+              name: "Supplier",
+              lede: "List raw materials, track orders, and fulfil farmer requirements efficiently.",
+              image: {
+                src: "/images/projects/greenly/pdf/supplier-screens.webp",
+                width: 2285,
+                height: 680,
+                alt: "Supplier dashboards on a laptop and three screens: orders overview, inventory summary and payments; payment summary with inventory insight; an alert map with insights; and an orders table",
+              },
+              spots: [
+                { x: 11, y: 45, title: "Orders overview", body: "New and ongoing orders on the home screen, each with accept and decline." },
+                { x: 22, y: 35, title: "Inventory summary", body: "Full, low and out-of-stock items at a glance, with a re-order action." },
+                { x: 42, y: 55, title: "Payments", body: "Receivable and payable payments, with one-tap reminders for overdue invoices." },
+                { x: 52, y: 45, title: "Inventory insight", body: "Stock health by turnover, with priority recommendations to recalibrate excess or inadequate stock." },
+                { x: 66, y: 28, title: "Alerts on a map", body: "On-route problems, like a breakdown, show on a map with the impacted orders." },
+                { x: 66, y: 62, title: "Logistics insight", body: "Logistics cost for the month and delivery cost against revenue per order, over the last six months." },
+                { x: 85, y: 50, title: "Every order", body: "All orders in one table with availability and accept or decline. Unallocated orders can be auto-assigned a vehicle." },
+              ],
+            },
+            {
+              name: "Logistics",
+              lede: "Coordinate deliveries, optimise routes, and get produce from farm to market on time.",
+              image: {
+                src: "/images/projects/greenly/pdf/logistics-screens.webp",
+                width: 2285,
+                height: 626,
+                alt: "Logistics dashboards on a laptop and screens: schedule delivery with priority orders, route management and emergency delivery; cancelled deliveries; order management with order types, schedule deliveries and notifications; and driver details",
+              },
+              spots: [
+                { x: 11, y: 32, title: "Orders summary", body: "Delayed, in-transit and delivered orders at a glance." },
+                { x: 11, y: 58, title: "Priority orders", body: "Emergency and delayed orders surface first, each with resolve or track." },
+                { x: 24, y: 48, title: "Route management", body: "Routes on a map, with diversions and emergency deliveries, so a delayed order gets resolved, not just reported." },
+                { x: 34, y: 32, title: "Fleet and drivers", body: "Fleet status (in maintenance, idle, active) and priority vehicles to assign." },
+                { x: 47, y: 32, title: "Cancelled deliveries", body: "Cancelled deliveries by route, with a reassign-route action, and destinations added to a route with timings." },
+                { x: 62, y: 35, title: "Order management", body: "Order types by status, an order list, and a calendar to schedule deliveries." },
+                { x: 78, y: 65, title: "Delivery notifications", body: "Almost-done, cancelled and pending deliveries, with notify, reschedule, optimise-route and assign actions." },
+                { x: 92, y: 28, title: "Drivers and idle vehicles", body: "Driver details with a call button, and idle vehicles ready to be assigned." },
+              ],
             },
           ],
-        },
-        {
-          type: "image",
-          size: "inset",
-          image: {
-            src: img("33"),
-            alt: "Design system components: inactive outline and active green filled icons, 'Add to cart' buttons in outline, green, yellow and red, and orange, green, red and blue notification banners",
-            caption:
-              "Colour carries status everywhere: green for healthy and confirmed, yellow for caution and in transit, red for critical and delayed.",
-          },
         },
       ],
     },
     {
-      id: "validation",
-      label: "Validation",
+      id: "testing",
+      stage: "testing",
       title: "Four rounds of testing",
-      intro: "The hi-fi designs went through a usability test for each stakeholder: farmer, supplier, logistics and consumer.",
+      intro: "We tested the hi-fi designs with every stakeholder: farmer, supplier, logistics and consumer.",
       blocks: [
         {
-          type: "testing",
-          summary: "One usability round per stakeholder: farmer, supplier, logistics and consumer.",
-          positives: [
-            "Farmer: the unit and sensors work well for a large farm.",
-            "Supplier: the screen is easy on the eyes, with key actions highlighted on the home screen.",
-            "Logistics: delivery tracking is smooth, and real-time updates help managers stay on top of shipments.",
-            "Consumer: the 2-hour farm-to-table freshness is unique and attractive.",
-            "Consumer: the 'best till' date in the basket is unique and helpful.",
+          type: "testRack",
+          heading: "What each stakeholder told us",
+          tiers: [
+            {
+              title: "Farmer",
+              notes: [
+                { tone: "learned", text: "pH readings don't differ much between rows of the unit, so per-row sensors mainly add cost; monitoring at the outflow works." },
+                { tone: "learned", text: "Space optimisation only matters when demand exceeds supply. Right now it's the opposite." },
+                { tone: "learned", text: "Most crop loss happens when action isn't taken despite knowing what's wrong, or when there's no knowledge at all." },
+                { tone: "learned", text: "The unit and sensors work well for a large farm. On a smaller farm, sensor-specific indication becomes expensive." },
+              ],
+            },
+            {
+              title: "Supplier",
+              notes: [
+                { tone: "worked", text: "The screen is easy on the eyes, with the key actions highlighted on the home screen." },
+                { tone: "fix", text: "Logistics allocation isn't highlighted on the home screen, which makes allocating vehicles harder." },
+                { tone: "fix", text: "The average credit period (receivable and payable), a key variable for managing cash flow, is missing." },
+              ],
+            },
+            {
+              title: "Logistics",
+              notes: [
+                { tone: "fix", text: "Tracking small orders in real time is hard without more granular data." },
+                { tone: "fix", text: "The route optimisation system isn't developed enough in the interface to be useful." },
+                { tone: "worked", text: "Delivery tracking is smooth, and real-time updates help logistics managers stay on top of shipments." },
+                { tone: "fix", text: "Supplier-to-farmer B2B deliveries look the same as last-mile B2B and B2C deliveries, which confuses." },
+              ],
+            },
+            {
+              title: "Consumer",
+              notes: [
+                { tone: "worked", text: "The 2-hour freshness, farm to table, is unique and attractive." },
+                { tone: "fix", text: "The number in the top-left corner of 'buy again' items is ambiguous." },
+                { tone: "fix", text: "In the trial section, it isn't clear that products are free trials, not discounts." },
+                { tone: "fix", text: "Product pages lack details like nutritional information, which quick-commerce apps like Zepto have started to add." },
+                { tone: "worked", text: "The 'best till' date in the basket is unique and helpful." },
+              ],
+            },
           ],
-          negatives: [
-            "Farmer: pH readings don't differ much between rows of the unit, so per-row sensors would mainly increase cost.",
-            "Farmer: on a smaller farm, sensor-specific indication becomes expensive.",
-            "Supplier: logistics allocation isn't prominent on the home screen, which makes assigning vehicles harder.",
-            "Supplier: the average credit period (receivable and payable), key for cash flow, is missing.",
-            "Logistics: small orders are hard to track without more granular data, and route optimisation isn't developed enough to be useful.",
-            "Logistics: supplier-to-farmer B2B deliveries look the same as last-mile B2B and B2C deliveries, which confuses.",
-            "Consumer: the number on 'buy again' items is ambiguous, free trials read as discounts, and product pages lack nutritional details.",
-          ],
-        },
-        {
-          type: "callout",
-          label: "From the farmer test",
-          body: "Most crop loss happens when action isn't taken despite knowing what's wrong, or when there's no knowledge at all.",
         },
         {
           type: "needed",
-          items: [
-            "How usability testing was run: method, tasks and number of participants per stakeholder",
+          items: ["How usability testing was run: method, tasks and number of participants per stakeholder"],
+        },
+      ],
+    },
+    {
+      id: "future",
+      stage: "future",
+      title: "Where Greenly grows next",
+      intro:
+        "Greenly can grow through community-driven farming networks, blockchain for supply-chain transparency, and vertical integration through packaging and branding support. Urban farming hubs can meet rising local demand while cutting logistics costs, and educational programmes can help more farmers adopt sustainable hydroponics.",
+      blocks: [
+        {
+          type: "businessModel",
+          heading: "Business model",
+          partners: [
+            "Hydroponic equipment suppliers",
+            "IoT sensor manufacturers (pH and nutrient monitoring)",
+            "Logistics partners (local delivery services, transport companies)",
+            "High-end cafes, restaurants and airlines",
+            "Local farmer cooperatives and communities",
+            "Marketing agencies (awareness and promotions)",
+          ],
+          activities: [
+            "Build hydroponic units",
+            "Monitor farms with IoT",
+            "Manage logistics and distribution",
+            "Operate the e-commerce platform",
+            "Customer education and support",
+          ],
+          resources: ["Hydroponic expertise", "IoT and tech infrastructure", "Logistics network", "Financial backing", "Retail partnerships"],
+          value: [
+            "Fresh, local, pesticide-free produce",
+            "Cost-effective hydroponic systems",
+            "Reduced transport costs and emissions",
+            "Real-time farm monitoring",
+            "Farm-to-table solutions",
+          ],
+          relationships: ["Support for farmers", "Education for consumers", "Loyalty programmes", "Community engagement"],
+          channels: ["E-commerce platform", "Partner stores and cafes", "Food trucks", "Social media and marketing"],
+          segments: ["Hydroponic farmers", "Health-conscious consumers", "Cafes, restaurants and airlines", "Urban eco-friendly shoppers"],
+          revenue: [
+            "Hydroponic unit sales",
+            "Produce delivery subscriptions",
+            "B2B partnerships",
+            "Workshops and education",
+            "Data insights sales",
+          ],
+          costs: [
+            { label: "Hydroponic unit production", min: 7000, max: 75000, per: "unit", note: "Manual systems" },
+            { label: "Tech development and maintenance", min: 200000, max: 700000, note: "Basic app and affordable sensors" },
+            { label: "Logistics and operations", min: 50000, max: 150000, per: "month", note: "Local deliveries, smaller vehicles" },
+            { label: "Warehouse and storage", min: 30000, max: 100000, per: "month", note: "Shared or low-cost spaces" },
+            { label: "Marketing", min: 20000, max: 100000, per: "month", note: "Focus on organic social media growth" },
           ],
         },
       ],
     },
     {
-      id: "reflection",
-      label: "Reflection",
-      title: "Making it pay",
-      intro: "An ecosystem only lasts if it earns. We closed with a business model and where Greenly could go next.",
+      id: "takeaways",
+      stage: "takeaways",
+      title: "What I took away",
       blocks: [
         {
-          type: "features",
-          heading: "Business model",
+          type: "list",
           items: [
-            {
-              title: "Value",
-              body: "Fresh, local, pesticide-free produce; cost-effective hydroponic systems; lower transport costs and emissions; real-time farm monitoring; farm-to-table delivery.",
-            },
-            {
-              title: "Customers",
-              body: "Hydroponic farmers, health-conscious consumers, cafes, restaurants and airlines, and urban eco-friendly shoppers.",
-            },
-            {
-              title: "Revenue",
-              body: "Hydroponic unit sales, produce delivery subscriptions, B2B partnerships, workshops and education, and data insights.",
-            },
-            {
-              title: "Channels",
-              body: "The e-commerce platform, partner stores and cafes, food trucks, and social media.",
-            },
+            "Practical experience in user research and problem-solving for real-world agricultural challenges.",
+            "Designing simple, accessible UI for people who aren't tech-savvy, like small-scale farmers.",
+            "Stronger skills in Figma, Miro and other UX tools.",
+            "Why market positioning and logistics matter in sustainable systems.",
+            "Working well in a team, and adapting designs based on user feedback.",
+            "How design can drive impact through education, community and sustainability.",
           ],
-        },
-        {
-          type: "stats",
-          heading: "Cost structure",
-          items: [
-            { value: "₹7,000–75,000", label: "Per hydroponic unit (manual systems)" },
-            { value: "₹2,00,000–7,00,000", label: "Tech development and maintenance (basic app, affordable sensors)" },
-            { value: "₹50,000–1,50,000", label: "Logistics and operations per month" },
-          ],
-        },
-        {
-          type: "features",
-          heading: "Future scope",
-          items: [
-            {
-              title: "Medicinal plants",
-              body: "Better nutritional value could open the medicinal industry, where people pay more for it.",
-            },
-            {
-              title: "Long journeys",
-              body: "Airlines and cruises could serve hydroponic produce, which stays fresh longer.",
-            },
-            {
-              title: "Niche markets",
-              body: "Nutritionists and gyms could adopt hydroponic farming and target people who want more nutrition from their food.",
-            },
-            {
-              title: "Bigger farms",
-              body: "Scaling up lowers the cost per plant, lowers prices, widens reach, and turns into a positive loop.",
-            },
-          ],
-        },
-        {
-          type: "needed",
-          items: ["Asmi's reflection: what she learned on Greenly and what she'd do differently"],
         },
       ],
     },
   ],
   contribution: {
-    mine: needed("Asmi's personal contribution on this team project (3–5 bullets)"),
-    team: needed("Who else worked on Greenly and what they did (slides say 'we'; Behance credits only Asmi)"),
+    mine: [
+      "Research, including interviews",
+      "Synthesis of the research into insights",
+      "UX/UI for the stakeholders",
+      "Storyboarding",
+      "3D modelling",
+    ],
   },
   links: {
     behance: "https://www.behance.net/gallery/234272909/Greenly-Connecting-small-scaled-farmers-to-the-market",

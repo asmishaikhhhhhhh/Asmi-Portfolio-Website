@@ -39,6 +39,9 @@
   --text-h3--line-height: 1.2;
   --text-lede: clamp(1.25rem, 1.1rem + 0.7vw, 1.75rem);
   --text-lede--line-height: 1.35;
+  /* Case studies: one-liners, chapter intros. One size across every project. */
+  --text-intro: clamp(1.0625rem, 1rem + 0.35vw, 1.25rem);
+  --text-intro--line-height: 1.6;
   --text-body: clamp(1.0625rem, 1.03rem + 0.15vw, 1.1875rem);
   --text-body--line-height: 1.6;
 
@@ -992,4 +995,107 @@ html[data-custom-cursor="on"] textarea {
 @keyframes cw-twinkle {
   0%, 100% { opacity: 0.15; }
   50% { opacity: 1; }
+}
+
+/* ── Greenly diagrams ── */
+.gv-draw {
+  stroke-dashoffset: 1;
+  animation: gv-draw 1.2s var(--ease-out-soft) forwards;
+}
+@keyframes gv-draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+.gv-flow {
+  animation: gv-flow 1.1s linear infinite;
+}
+@keyframes gv-flow {
+  to {
+    stroke-dashoffset: -17;
+  }
+}
+.gv-rise {
+  animation: gv-rise 0.5s var(--ease-out-soft) both;
+}
+@keyframes gv-rise {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+}
+.gv-pop {
+  animation: gv-pop 0.4s var(--ease-out-soft) both;
+}
+@keyframes gv-pop {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+}
+.gv-grow {
+  animation: gv-grow 0.7s var(--ease-out-soft) both;
+}
+@keyframes gv-grow {
+  from {
+    opacity: 0;
+    transform: scaleY(0.2);
+  }
+}
+.gv-plant:hover:not(:disabled) svg {
+  animation: gv-sway 1.4s ease-in-out infinite;
+  transform-origin: 50% 100%;
+}
+@keyframes gv-sway {
+  0%,
+  100% {
+    rotate: 0deg;
+  }
+  25% {
+    rotate: -5deg;
+  }
+  75% {
+    rotate: 5deg;
+  }
+}
+.gv-water {
+  animation: gv-water 2.4s linear infinite;
+  background-size: 22px 2px;
+}
+@keyframes gv-water {
+  to {
+    background-position: 22px 0;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .gv-draw {
+    animation: none;
+    stroke-dashoffset: 0;
+  }
+  .gv-flow,
+  .gv-water,
+  .gv-rise,
+  .gv-pop,
+  .gv-grow,
+  .gv-plant:hover:not(:disabled) svg {
+    animation: none;
+  }
+}
+.gv-ping {
+  animation: gv-ping 2.2s var(--ease-out-soft) infinite;
+  box-shadow: 0 0 0 0 var(--accent);
+}
+@keyframes gv-ping {
+  0% {
+    box-shadow: 0 0 0 0 color-mix(in oklab, var(--accent) 60%, transparent);
+  }
+  70%,
+  100% {
+    box-shadow: 0 0 0 10px transparent;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .gv-ping {
+    animation: none;
+  }
 }

@@ -58,7 +58,7 @@ const project: Project = {
     /* 1 ─────────────────────────────────────────────── */
     {
       id: "context",
-      label: "Context",
+      stage: "overview",
       title: "A startup building smarter defences",
       intro:
         "AiStrike is a startup cybersecurity company working on intelligent, adaptive digital defence systems, with a growing focus on AI-powered security.",
@@ -71,37 +71,34 @@ const project: Project = {
           ],
         },
         {
-          type: "features",
-          heading: "What I worked on",
+          type: "roleCard",
+          title: "UI/UX Designer Intern",
           items: [
-            { title: "Dashboards", body: "In both light mode and dark mode." },
-            {
-              title: "Core modules",
-              body: "Alert systems, the case center and vulnerability modules.",
-            },
-            {
-              title: "Design system and prototypes",
-              body: "Reusable foundations and interactive prototypes.",
-            },
-            { title: "LinkedIn creatives", body: "Marketing posts for the company page." },
+            "Worked on dashboards in light mode and dark mode",
+            "Designed alert systems, the case center and vulnerability modules",
+            "Built design systems and interactive prototypes",
+            "Created marketing creatives for LinkedIn",
           ],
+          tools: ["photoshop", "illustrator", "figma", "jira"],
+          skills: ["Figma (UI design & prototyping)", "Design systems", "UX research & analysis", "Interaction design", "Data visualisation"],
         },
         {
-          type: "process",
-          heading: "How the work moved",
-          steps: [
-            {
-              title: "Discovery",
-              body: "Exploration, requirement gathering, competitive analysis and problem understanding.",
-            },
-            {
-              title: "Analysis",
-              body: "User and technical analysis, feature prioritisation, iterations and feedback.",
-            },
-            {
-              title: "Design",
-              body: "UX and UI design, design system creation, interaction design, prototyping and a component library.",
-            },
+          type: "vennProcess",
+          heading: "Process",
+          phases: ["Discovery", "Analysis", "Design"],
+          items: [
+            { label: "Exploration", phases: [0], x: 20, y: 32.3 },
+            { label: "Requirement gathering", phases: [0], x: 14.3, y: 57 },
+            { label: "Competitive analysis", phases: [0], x: 19.8, y: 75.7 },
+            { label: "Problem understanding", phases: [0, 1], x: 35, y: 43.8 },
+            { label: "User + technical analysis", phases: [1], x: 50, y: 64.5 },
+            { label: "Feature prioritisation", phases: [1], x: 50.3, y: 82.5 },
+            { label: "Iterations & feedback", phases: [1, 2], x: 66.6, y: 32.3 },
+            { label: "UX & UI design", phases: [2], x: 88.3, y: 33.8 },
+            { label: "Design system creation", phases: [2], x: 74.7, y: 48 },
+            { label: "Prototyping", phases: [2], x: 90.9, y: 59.1 },
+            { label: "Interaction design", phases: [2], x: 74, y: 64.9 },
+            { label: "Component library", phases: [2], x: 81.7, y: 81.6 },
           ],
         },
       ],
@@ -110,7 +107,7 @@ const project: Project = {
     /* 2 ─────────────────────────────────────────────── */
     {
       id: "problem",
-      label: "Problem",
+      stage: "problem",
       title: "Too much data, not enough hierarchy",
       intro:
         "Analysts need to monitor, prioritise and investigate threats fast. The interfaces were working against them.",
@@ -147,7 +144,7 @@ const project: Project = {
     /* 3 ─────────────────────────────────────────────── */
     {
       id: "research",
-      label: "Research",
+      stage: "research",
       title: "Learning the language first",
       intro:
         "Before designing anything, I had to understand the domain: the terms, the workflows and how much complexity sits behind each alert.",
@@ -185,104 +182,148 @@ const project: Project = {
     /* 4 ─────────────────────────────────────────────── */
     {
       id: "solution",
-      label: "Solution",
+      stage: "solution",
       title: "From alert to resolution",
       intro:
         "Four connected modules, each designed to take an analyst from spotting a threat to closing it out.",
       blocks: [
         {
-          type: "text",
-          heading: "01 · Alert dashboard",
-          body: [
-            "A centralised interface to monitor, prioritise and investigate alerts in real time. It combines AI-driven insights, severity indicators and structured data visualisation.",
-            "I designed it with severity-based colour coding, worked through multiple layout iterations for better hierarchy, added collapsible panels to manage data density, and improved table readability with spacing, tags and filters.",
+          type: "moduleStory",
+          modules: [
+            {
+              num: "01",
+              name: "Alert dashboard",
+              kicker: "Security alerts & monitoring",
+              headline: "Security insights that drive faster threat response.",
+              body: "A centralised security interface that lets analysts monitor, prioritise and investigate alerts in real time. AI-driven insights, severity indicators and structured data visualisation simplify complex threat data and support faster, more accurate decisions.",
+              shots: [
+                {
+                  label: "Dashboard",
+                  image: {
+                    src: `${IMG}/01.webp`,
+                    alt: "A tablet in tent mode showing the dark AI Alert Dashboard: an Alerts Triage bubble diagram, an alerts overview bar chart by severity, filters and an alerts table with priority tags.",
+                  },
+                },
+                {
+                  label: "Alert detail",
+                  views: ["Timeline", "Attack path", "AI overview", "Investigation", "Remediation"],
+                  image: {
+                    src: `${IMG}/02.webp`,
+                    alt: "Collage of five dark alert detail screens around a laptop: Timeline, Attack path, AI Overview, Investigation and Remediation tabs for one alert, with an AiStrike Verdict panel and prioritisation factors. Identifying details are blurred.",
+                  },
+                },
+              ],
+              challenge: [
+                "Complex, data-heavy security alerts were difficult to scan quickly",
+                "No clear prioritisation between critical and low threats",
+                "Poor readability in dense dashboard layouts",
+              ],
+              approach: [
+                "Designed a structured dashboard with severity-based colour coding",
+                "Created multiple layout iterations for better hierarchy",
+                "Introduced collapsible panels to manage data density",
+                "Improved table readability with spacing, tags and filters",
+              ],
+              impact: ["Improved quick scanning and decision-making", "Reduced visual clutter in the dashboard", "Built a scalable layout used across modules"],
+            },
+            {
+              num: "02",
+              name: "Vulnerability overview",
+              kicker: "Risk identification & remediation",
+              headline: "Proactive vulnerability management for a stronger security posture.",
+              body: "A structured vulnerability management interface that helps teams identify, assess and remediate security risks across systems. Severity indicators, asset-level insights and actionable remediation steps enable faster prioritisation and reduce exposure to critical threats.",
+              chips: ["Vulnerability view", "Host view", "Container view"],
+              shots: [
+                {
+                  label: "Dashboard",
+                  image: {
+                    src: `${IMG}/03.webp`,
+                    alt: "A tablet showing the dark Vulnerabilities Dashboard: group-by toggles for Vulnerability, Host and Container, a stacked bar chart of 50 vulnerabilities by severity, and a cases table.",
+                  },
+                },
+                {
+                  label: "Detail pages",
+                  views: ["Dashboard", "Incident detail", "AI overview", "Remediation", "Attack path"],
+                  image: {
+                    src: `${IMG}/04.webp`,
+                    alt: "Collage of dark vulnerability screens around a laptop: the dashboard, an incident detail table, a CVE AI overview with key findings, a code-to-cloud remediation flow and an attack path graph. Identifying details are blurred.",
+                  },
+                },
+              ],
+              challenge: ["No structured view for risk and remediation", "Managing vulnerabilities across hosts and containers was complex"],
+              approach: [
+                "Designed vulnerability, host and container views",
+                "Created detailed pages with risk indicators, remediation steps and an attack path",
+              ],
+              impact: ["Simplified vulnerability tracking", "Improved clarity of risk and actions"],
+            },
+            {
+              num: "03",
+              name: "Case center",
+              kicker: "Incident management & workflow",
+              headline: "Streamlining security operations from detection to resolution.",
+              body: "A centralised case management system for investigating, tracking and resolving security incidents. AI-driven insights, task management, timelines and real-time collaboration streamline complex workflows for faster, better-informed incident response.",
+              shots: [
+                {
+                  label: "Dashboard",
+                  image: {
+                    src: `${IMG}/05.webp`,
+                    alt: "A laptop showing the dark Case Center dashboard: a Dashboard Categories sidebar, a New Dashboard button, case count cards, three ring charts for status, severity and priority, and pie charts by tag, stage and product.",
+                  },
+                },
+                {
+                  label: "Tasks & timeline",
+                  views: ["Widget", "Timeline", "Case center dashboard", "Selected task", "Task"],
+                  image: {
+                    src: `${IMG}/06.webp`,
+                    alt: "Collage of dark Case Center screens around a laptop: a widget added to a dashboard, an event timeline, the case dashboard, a selected task's details and a task table, each with a green success toast. Names and identifiers are blurred.",
+                  },
+                },
+              ],
+              challenge: [
+                "Complex workflows across tasks, timeline and dashboard",
+                "No centralised system to manage cases efficiently",
+                "A need for both manual and AI-assisted flows",
+              ],
+              approach: [
+                "Designed the Case Center dashboard and table views",
+                "Built user flows for creating dashboards and widgets",
+                "Created a task system (manual and AI), a timeline view and case insights",
+              ],
+              impact: ["Structured the case management workflow", "Improved efficiency for analysts", "Enabled better tracking and collaboration"],
+            },
+            {
+              num: "04",
+              name: "AI integration",
+              kicker: "Insights, automation & assistance",
+              headline: "AI-powered intelligence for smarter security decisions.",
+              body: "An AI layer integrated across the platform to support decisions and cut analysis time. Using models from OpenAI, it generates contextual insights, summaries and actionable recommendations, so analysts understand complex security data quickly. Every creation panel offers two paths: build it yourself, or ask the assistant.",
+              shots: [
+                {
+                  label: "Ask for a dashboard",
+                  image: {
+                    src: `${IMG}/07.webp`,
+                    alt: "A dark Create Dashboard panel with the AI tab selected. The user asks for an alert workload trend for the last 30 days; the assistant replies with three dashboard options, Threat Intelligence View, Health & Attack Matrix View and SOC Operational Overview, and asks which to create.",
+                  },
+                },
+                {
+                  label: "Assistant flows",
+                  views: ["Create events", "Create a dashboard", "Assistant home", "Create a task", "Create a widget"],
+                  image: {
+                    src: `${IMG}/08.webp`,
+                    alt: "Collage of AI assistant flows around a laptop showing the assistant home, 'How can I help you Today?', with suggestions for Alert Details, Investigation, Remediation and Attack Path; around it, chat panels to create events, a dashboard, a task and a widget.",
+                  },
+                },
+              ],
+              challenge: ["Integrating AI without overwhelming users", "AI outputs were complex and hard to understand"],
+              approach: [
+                "Iterated multiple versions for clarity",
+                "Created a clean UI for AI explanations",
+                "Designed AI summaries, insights, recommendations and AI-assisted flows",
+              ],
+              impact: ["Reduced decision-making time", "Made AI outputs actionable and understandable", "Improved user trust in the AI system"],
+            },
           ],
-        },
-        {
-          type: "image",
-          image: {
-            src: `${IMG}/02.webp`,
-            alt: "Collage of five dark alert detail screens around a laptop: Timeline, Attack path, AI Overview, Investigation and Remediation tabs for one alert, with an AiStrike Verdict panel and prioritisation factors. Identifying details are blurred.",
-            caption: "One alert, five views: timeline, attack path, AI overview, investigation and remediation.",
-          },
-          size: "full",
-        },
-        {
-          type: "text",
-          heading: "02 · Vulnerability overview",
-          body: [
-            "A structured interface to identify, assess and remediate security risks across systems, with severity indicators, asset-level insights and actionable remediation steps.",
-            "I designed vulnerability, host and container views, and detail pages with risk indicators, remediation steps and an attack path.",
-          ],
-        },
-        {
-          type: "image",
-          image: {
-            src: `${IMG}/03.webp`,
-            alt: "A tablet showing the dark Vulnerabilities Dashboard: group-by toggles for Vulnerability, Host and Container, a stacked bar chart of 50 vulnerabilities by severity, and a cases table.",
-          },
-          size: "wide",
-        },
-        {
-          type: "image",
-          image: {
-            src: `${IMG}/04.webp`,
-            alt: "Collage of dark vulnerability screens around a laptop: the dashboard, an incident detail table, a CVE AI overview with key findings, a code-to-cloud remediation flow and an attack path graph. Identifying details are blurred.",
-            caption: "Dashboard, incident detail, AI overview, remediation and attack path.",
-          },
-          size: "full",
-        },
-        {
-          type: "text",
-          heading: "03 · Case center",
-          body: [
-            "A centralised case management system to investigate, track and resolve incidents, combining AI-driven insights, task management, timelines and real-time collaboration.",
-            "I designed the Case Center dashboard and table views, built user flows for creating dashboards and widgets, and created a task system with manual and AI options, a timeline view and case insights.",
-          ],
-        },
-        {
-          type: "image",
-          image: {
-            src: `${IMG}/05.webp`,
-            alt: "A laptop showing the dark Case Center dashboard: a Dashboard Categories sidebar, a New Dashboard button, case count cards, three ring charts for status, severity and priority, and pie charts by tag, stage and product.",
-          },
-          size: "wide",
-        },
-        {
-          type: "image",
-          image: {
-            src: `${IMG}/06.webp`,
-            alt: "Collage of dark Case Center screens around a laptop: a widget added to a dashboard, an event timeline, the case dashboard, a selected task's details and a task table, each with a green success toast. Names and identifiers are blurred.",
-            caption: "Widgets, timeline, dashboard, task detail and task list.",
-          },
-          size: "full",
-        },
-        {
-          type: "text",
-          heading: "04 · AI integration",
-          body: [
-            "An AI layer across the platform, built on models from OpenAI, that generates contextual insights, summaries and actionable recommendations so analysts can understand complex data faster.",
-            "I iterated multiple versions for clarity and created a clean UI for AI explanations. I designed AI summaries, insights, recommendations and AI-assisted flows.",
-            "Every creation panel offers two paths side by side: build it yourself in Custom, or ask the assistant.",
-          ],
-        },
-        {
-          type: "image",
-          image: {
-            src: `${IMG}/07.webp`,
-            alt: "A dark Create Dashboard panel with the AI tab selected. The user asks for an alert workload trend for the last 30 days; the assistant replies with three dashboard options, Threat Intelligence View, Health & Attack Matrix View and SOC Operational Overview, and asks which to create.",
-            caption: "Asking the assistant for a dashboard instead of building one.",
-          },
-          size: "wide",
-        },
-        {
-          type: "image",
-          image: {
-            src: `${IMG}/08.webp`,
-            alt: "Collage of AI assistant flows around a laptop showing the assistant home, 'How can I help you Today?', with suggestions for Alert Details, Investigation, Remediation and Attack Path; around it, chat panels to create events, a dashboard, a task and a widget.",
-            caption: "The same assistant creates events, dashboards, tasks and widgets.",
-          },
-          size: "full",
         },
       ],
     },
@@ -290,43 +331,65 @@ const project: Project = {
     /* 5 ─────────────────────────────────────────────── */
     {
       id: "system",
-      label: "System",
+      stage: "solution",
       title: "One system for data-heavy screens",
       intro:
         "Across this many screens, the UI was drifting and there were no reusable components. So I built the foundations.",
       blocks: [
         {
-          type: "features",
-          items: [
-            { title: "Typography", body: "Inter, with a scale from Header 1 to body and input styles." },
+          type: "moduleStory",
+          modules: [
             {
-              title: "Colour",
-              body: "A dark-mode system of base neutrals plus brand and severity colours: critical, high, medium and low.",
-            },
-            { title: "Spacing", body: "A 4–8 px scale, from 4 px to 40 px." },
-            {
-              title: "Components",
-              body: "A library of buttons, tabs, cards, accordions, sidebar states and icons.",
+              num: "05",
+              name: "Design system & components",
+              kicker: "Scalable UI foundations",
+              headline: "Consistency at scale through a structured design system.",
+              body: "Typography, colour tokens, spacing and reusable components that keep the platform consistent, speed up iteration and make collaboration easier. The system supports complex, data-heavy interfaces while keeping clarity and visual hierarchy.",
+              chips: ["Typography", "Colour (dark mode)", "Spacing", "Buttons, tabs, cards"],
+              shots: [
+                {
+                  label: "Components & colour",
+                  image: {
+                    src: `${IMG}/09.webp`,
+                    alt: "Design system board: accordion components, ten sidebar navigation states, active and inactive icon sets, New Case buttons, and rows of base neutral and base brand colour swatches with hex codes.",
+                  },
+                },
+                {
+                  label: "Type & spacing",
+                  image: {
+                    src: `${IMG}/10.webp`,
+                    alt: "Typography and spacing board: an Inter character specimen, the Inter type scale from Header 1 to input field, accordion default, hover and clicked states, and a spacing ladder from 4 px to 40 px.",
+                  },
+                },
+              ],
+              challenge: ["Inconsistent UI across multiple screens", "A lack of reusable components"],
+              approach: [
+                "Iterated multiple versions for clarity",
+                "Built reusable, scalable components",
+                "Created a typography system, a dark-mode colour system and a component library of buttons, tabs and cards",
+              ],
+              impact: ["Improved design consistency", "A faster design workflow"],
             },
           ],
         },
         {
-          type: "image",
-          image: {
-            src: `${IMG}/09.webp`,
-            alt: "Design system board: accordion components, ten sidebar navigation states, active and inactive icon sets, New Case buttons, and rows of base neutral and base brand colour swatches with hex codes.",
-            caption: "Components and colour tokens.",
-          },
-          size: "full",
-        },
-        {
-          type: "image",
-          image: {
-            src: `${IMG}/10.webp`,
-            alt: "Typography and spacing board: an Inter character specimen, the Inter type scale from Header 1 to input field, accordion default, hover and clicked states, and a spacing ladder from 4 px to 40 px.",
-            caption: "Inter type scale and spacing conventions.",
-          },
-          size: "wide",
+          type: "systemSpecimen",
+          family: "Inter",
+          tracking: "-2%",
+          scale: [
+            { name: "Header 1", size: 48, line: 64, weight: 500 },
+            { name: "Header 2", size: 32, line: 40, weight: 500 },
+            { name: "Header 3", size: 24, line: 32, weight: 400 },
+            { name: "Header 4", size: 20, line: 28, weight: 400 },
+            { name: "Header 5", size: 16, line: 24, weight: 400 },
+            { name: "Header 6", size: 14, line: 20, weight: 500 },
+            { name: "Body lg", size: 20, line: 28, weight: 400 },
+            { name: "Body md", size: 16, line: 24, weight: 400 },
+            { name: "Body sm", size: 14, line: 20, weight: 400 },
+            { name: "Body xs", size: 12, line: 16, weight: 400 },
+            { name: "Input field", size: 14, line: 24, weight: 300, italic: true },
+          ],
+          spacing: [4, 8, 12, 16, 20, 24, 28, 32, 40],
         },
       ],
     },
@@ -334,25 +397,39 @@ const project: Project = {
     /* 6 ─────────────────────────────────────────────── */
     {
       id: "prototyping",
-      label: "Prototyping",
+      stage: "ideation",
       title: "Two to four tries per screen",
       intro:
         "Early designs lacked usability clarity, and complex flows needed testing before they could be trusted.",
       blocks: [
         {
-          type: "text",
-          body: [
-            "I created 2–4 iterations per screen and developed interactive prototypes, with flows for the Case Center, dashboards, widgets, alert security and vulnerabilities.",
+          type: "moduleStory",
+          modules: [
+            {
+              num: "06",
+              name: "Iterations & prototyping",
+              kicker: "Exploration & interaction design",
+              headline: "Two to four iterations per screen, then wired into prototypes.",
+              chips: ["Case Center", "Dashboard", "Widgets", "Alert security", "Vulnerability"],
+              shots: [
+                {
+                  label: "Prototype map",
+                  views: ["Dashboard (Case Centre)", "Widget", "Table", "AI overview", "Timeline"],
+                  image: {
+                    src: `${IMG}/11.webp`,
+                    alt: "A laptop showing a Figma prototype map: rows of frames labelled Dashboard, Widget, Table, AI Overview and Timeline, joined by dense blue connector wires.",
+                  },
+                },
+              ],
+              challenge: ["Initial designs lacked usability clarity", "Complex flows required testing"],
+              approach: [
+                "Created 2–4 iterations per screen",
+                "Developed interactive prototypes",
+                "Built flows for the Case Center, dashboards, widgets, alert security and vulnerabilities",
+              ],
+              impact: ["Improved usability through iteration", "Clearer user flows"],
+            },
           ],
-        },
-        {
-          type: "image",
-          image: {
-            src: `${IMG}/11.webp`,
-            alt: "A laptop showing a Figma prototype map: rows of frames labelled Dashboard, Widget, Table, AI Overview and Timeline, joined by dense blue connector wires.",
-            caption: "Prototype wiring across dashboard, widget, table, AI overview and timeline flows.",
-          },
-          size: "wide",
         },
       ],
     },
@@ -360,45 +437,71 @@ const project: Project = {
     /* 7 ─────────────────────────────────────────────── */
     {
       id: "light-mode",
-      label: "Exploration",
+      stage: "ideation",
       title: "15 ways to turn the lights on",
       intro:
         "The platform was dark. Moving it to light mode meant keeping readability and contrast intact.",
       blocks: [
         {
-          type: "text",
-          body: [
-            "I tested different colour palettes and created 15 light-mode options, researching how UI behaves in light mode and what it takes to keep accessibility and contrast.",
+          type: "moduleStory",
+          modules: [
+            {
+              num: "07",
+              name: "Light mode exploration",
+              kicker: "Exploration & interaction design",
+              headline: "Moving a dark platform into light, without losing contrast.",
+              chips: ["15 light-mode options"],
+              shots: [
+                {
+                  label: "Light",
+                  image: {
+                    src: `${IMG}/12.webp`,
+                    alt: "A laptop showing the light-mode AI Alert Dashboard: a pale blue header, an Alerts Triage bubble diagram, a stacked bar chart with severity counts, filters, and an alerts table with red, amber and green priority tags.",
+                  },
+                },
+                {
+                  label: "Dark",
+                  image: {
+                    src: `${IMG}/01.webp`,
+                    alt: "The same AI Alert Dashboard in dark mode, on a tablet in tent mode.",
+                  },
+                },
+              ],
+              challenge: ["Transitioning from dark mode to light mode", "Maintaining readability and contrast"],
+              approach: [
+                "Tested different colour palettes",
+                "Created 15 light-mode options",
+                "Researched UI behaviour in light mode, and accessibility and contrast",
+              ],
+              impact: ["Provided multiple design directions", "Improved readability strategies", "Expanded the system's design capability"],
+            },
           ],
-        },
-        {
-          type: "image",
-          image: {
-            src: `${IMG}/12.webp`,
-            alt: "A laptop showing the light-mode AI Alert Dashboard: a pale blue header, an Alerts Triage bubble diagram, a stacked bar chart with severity counts, filters, and an alerts table with red, amber and green priority tags.",
-            caption: "The alert dashboard in light mode.",
-          },
-          size: "wide",
         },
         {
           type: "needed",
           items: ["Which light-mode direction was chosen, and why"],
         },
         {
-          type: "text",
-          heading: "Beyond the product",
-          body: [
-            "I also designed LinkedIn posts for AiStrike, aligned with the brand: New Year, Christmas, Republic Day and welcome posts, which went through 8+ iterations.",
+          type: "moduleStory",
+          modules: [
+            {
+              num: "08",
+              name: "LinkedIn creative posts",
+              kicker: "Branding & visual communication",
+              headline: "Creative communication aligned with the brand identity.",
+              body: "Posts for AiStrike's company page, designed to the brand.",
+              chips: ["New Year", "Christmas", "Republic Day", "Welcome posts (8+ iterations)"],
+              shots: [
+                {
+                  label: "Festive posts",
+                  image: {
+                    src: `${IMG}/14.webp`,
+                    alt: "Four AiStrike LinkedIn posts: a Merry Christmas octopus in a Santa hat, a Happy New Year 2026 card with fireworks, and two Republic Day posts with the Indian flag.",
+                  },
+                },
+              ],
+            },
           ],
-        },
-        {
-          type: "image",
-          image: {
-            src: `${IMG}/14.webp`,
-            alt: "Four AiStrike LinkedIn posts: a Merry Christmas octopus in a Santa hat, a Happy New Year 2026 card with fireworks, and two Republic Day posts with the Indian flag.",
-            caption: "Festive posts for the company page.",
-          },
-          size: "inset",
         },
       ],
     },
@@ -406,7 +509,7 @@ const project: Project = {
     /* 8 ─────────────────────────────────────────────── */
     {
       id: "reflection",
-      label: "Reflection",
+      stage: "takeaways",
       title: "Clarity is power",
       blocks: [
         {
@@ -416,26 +519,38 @@ const project: Project = {
           attribution: "Asmi, on the internship",
         },
         {
-          type: "features",
+          type: "learnings",
           items: [
             {
               title: "Clarity is power",
-              body: "Design is not about adding, it's about removing. I distil complexity into clear, intuitive, usable experiences.",
+              lead: "Design is not about adding, it's about removing.",
+              points: [
+                "In complex systems, users struggle because there's too much.",
+                "I distil complexity into clear, intuitive and usable experiences.",
+                "Clarity isn't just good design, it's a competitive advantage.",
+              ],
             },
             {
               title: "Systems over screens",
-              body: "If the system breaks, no individual screen can save it. That's where real impact lies.",
+              lead: "Great design doesn't live in isolated screens; it lives in systems.",
+              points: ["If the system breaks, no individual screen can save it.", "That's where real impact lies."],
             },
             {
               title: "Empathy",
-              body: "What is stressing them right now? What can I remove to make their job easier? How can this design give them confidence, not confusion?",
+              lead: "Good design doesn't just serve users, it supports them.",
+              points: [
+                "What is stressing them right now?",
+                "What can I remove to make their job easier?",
+                "How can this design give them confidence, not confusion?",
+              ],
             },
           ],
         },
         {
           type: "image",
           image: {
-            src: `${IMG}/15.webp`,
+            src: `${IMG}/15-cut.webp`,
+            cutout: true,
             alt: "Hand-drawn learnings sheet: 'Clarity is Power' with a cluttered screen becoming a simple one, 'System > Individual apps' with linked phone, laptop and tablet, and 'Empathy' with a stressed figure becoming a calm one.",
             caption: "My learnings, sketched.",
           },

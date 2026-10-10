@@ -5,15 +5,15 @@ const P = "/images/projects/fiama";
 const project: Project = {
   slug: "fiama",
   title: "Fiama Packaging Redesign",
-  subtitle: "Teaching a soap box to explain itself",
+  subtitle: "Redefining Fiama's packaging through modern appeal",
   oneLiner:
     "A research-led redesign of ITC Fiama's Blackcurrant & Bearberry gel bar carton, built to fix its hierarchy and legibility and to explain the product properly.",
   tier: "focused",
   order: 2,
   kind: "Packaging · Research-led redesign",
-  year: needed("Project year (the Behance post is dated Aug 2025; the slides don't say)"),
-  duration: needed("How long the project took"),
-  role: needed("Asmi's role on the project, and how it was split with Sarah Anil"),
+  year: "2023",
+  duration: "78 hours",
+  role: "Research, analysis, redesign",
   team: { solo: false, collaborators: ["Sarah Anil"] },
   disciplines: ["research", "physical-brand"],
   thinking: ["research", "people", "visuals"],
@@ -41,18 +41,19 @@ const project: Project = {
   chapters: [
     {
       id: "context",
-      label: "Context",
+      stage: "overview",
       title: "Easy to spot, hard to read",
       intro:
         "Fiama's gel bars come in five variants. We picked Blackcurrant & Bearberry and audited its carton panel by panel.",
       blocks: [
         {
           type: "stats",
+          layout: "row",
           items: [
-            { value: "₹95", label: "MRP for one bar" },
-            { value: "125g", label: "Net weight" },
-            { value: "5", label: "Variants in the gel bar range" },
-            { value: "18–45", label: "Target age range", note: "Marketed as unisex, skewed towards women" },
+            { value: "₹95", label: "MRP for one bar", icon: "price" },
+            { value: "125g", label: "Net weight", icon: "weight" },
+            { value: "5", label: "Variants in the gel bar range", icon: "variants" },
+            { value: "18–45", label: "Target age range", note: "Marketed as unisex, skewed towards women", icon: "people" },
           ],
         },
         {
@@ -63,7 +64,8 @@ const project: Project = {
               title: "Front: fun, but vague",
               body: "The colours make it easy to identify and the names spark curiosity. But the hierarchy is muddled, the benefits get lost, and “radiant glow” has no context.",
               image: {
-                src: `${P}/06.webp`,
+                src: `${P}/06-v2.webp`,
+                cutout: true,
                 alt: "A hand holding the existing purple Fiama gel bar box, with pink and green callouts annotating its front",
               },
             },
@@ -71,7 +73,8 @@ const project: Project = {
               title: "Back: charming copy, tiny type",
               body: "The rhyming description is fun to read, if you can read it. There's a picture of the soap printed on the soap box, and no instructions on how to use it.",
               image: {
-                src: `${P}/07.webp`,
+                src: `${P}/07-v2.webp`,
+                cutout: true,
                 alt: "A hand holding the back of the existing box: rhyming copy, a product photo, a barcode and a dermatologist-tested seal, with callouts",
               },
             },
@@ -79,7 +82,8 @@ const project: Project = {
               title: "Details: too many typefaces",
               body: "The flaps mix several typefaces and alignments. “Laboratoire Naturel” appears with no explanation of what it is.",
               image: {
-                src: `${P}/08.webp`,
+                src: `${P}/08-v2.webp`,
+                cutout: true,
                 alt: "Close-ups of the old box's front, top flap and price panel, annotated with notes on alignment and typefaces",
               },
             },
@@ -87,7 +91,8 @@ const project: Project = {
               title: "Fine print: a wall of caps",
               body: "Ingredients, contact details and manufacturing info run together in small capitals with little contrast against the purple. The print quality doesn't help.",
               image: {
-                src: `${P}/09.webp`,
+                src: `${P}/09-v2.webp`,
+                cutout: true,
                 alt: "The old box's side panel, densely printed in small white capitals on purple, with callouts about contrast and readability",
               },
             },
@@ -97,7 +102,7 @@ const project: Project = {
     },
     {
       id: "research",
-      label: "Research",
+      stage: "research",
       title: "Thirteen ways of looking at a soap",
       intro:
         "Before redrawing anything, we tried to understand why people pick a soap and where the box helps or gets in the way.",
@@ -110,7 +115,6 @@ const project: Project = {
             { name: "Competitor analysis", detail: "Dove, Pears, Cinthol, Lux and Dettol" },
             { name: "Discourse analysis" },
             { name: "Personal interviews" },
-            { name: "Detailed packaging analysis" },
             { name: "Brand positioning and perceptual mapping" },
             { name: "Personas, journey and experience maps" },
             { name: "Emotional and motivational drivers" },
@@ -120,7 +124,8 @@ const project: Project = {
           type: "image",
           size: "wide",
           image: {
-            src: `${P}/13.webp`,
+            src: `${P}/13-v2.webp`,
+            cutout: true,
             alt: "Positioning map with pricing on the vertical axis and packaging quality on the horizontal; Fiama sits on the bad-packaging side, while Pears, Dove, Lux and Cinthol sit on the good side",
             caption: "On price against packaging, Fiama landed on the wrong side of the line.",
           },
@@ -153,36 +158,30 @@ const project: Project = {
           type: "image",
           size: "wide",
           image: {
-            src: `${P}/20.webp`,
+            src: `${P}/20-v2.webp`,
+            cutout: true,
             alt: "Customer journey table for the novice persona, from pre-purchase to post-purchase, with actions, thoughts, a feelings curve, pain points and opportunities",
             caption: "The feelings curve drops at purchase and stays low through unboxing, where the packaging is hard to remove.",
           },
-        },
-        {
-          type: "needed",
-          items: [
-            "Survey and questionnaire sample size and key results",
-            "How many people were interviewed, and who",
-          ],
         },
       ],
     },
     {
       id: "insight",
-      label: "Insights",
+      stage: "research",
       title: "The soap was fine, the box wasn't",
       blocks: [
         {
-          type: "stats",
+          type: "ratings",
           heading: "Expectations met, out of 5",
           items: [
-            { value: "5/5", label: "Functionality", note: "Lathers well, feels good on the skin" },
-            { value: "4/5", label: "Gratification", note: "Spa-like feel, fragrance, lather" },
-            { value: "3/5", label: "Creativity", note: "Vibrant colours, long-lasting fragrance" },
-            { value: "2/5", label: "Usability", note: "Includes user-friendly packaging" },
-            { value: "1/5", label: "Reliability", note: "Dermatologist tested, natural, all skin types" },
+            { label: "Functionality", value: 5, max: 5, note: "Lathers well, feels good on the skin" },
+            { label: "Gratification", value: 4, max: 5, note: "Spa-like feel, fragrance, lather" },
+            { label: "Creativity", value: 3, max: 5, note: "Vibrant colours, long-lasting fragrance" },
+            { label: "Usability", value: 2, max: 5, note: "Includes user-friendly packaging" },
+            { label: "Reliability", value: 1, max: 5, note: "Dermatologist tested, natural, all skin types" },
           ],
-          source: "Our pre-purchase expectations vs expectations-met ratings",
+          source: "Source: our pre-purchase expectations vs expectations-met ratings.",
         },
         {
           type: "text",
@@ -195,7 +194,7 @@ const project: Project = {
     },
     {
       id: "redesign",
-      label: "Solution",
+      stage: "solution",
       title: "Same box, clearer story",
       intro: "Drag to compare the old panels with the new ones.",
       blocks: [
@@ -259,40 +258,62 @@ const project: Project = {
         {
           type: "image",
           size: "full",
+          heading: "Mockups",
           image: {
-            src: `${P}/40.webp`,
+            src: `${P}/40-v3.webp`,
+            cutout: true,
             alt: "Two 3D-rendered mockups of the redesigned carton over a dark marbled surface: the front on the left, the back with How to use on the right",
           },
         },
         {
-          type: "image",
-          size: "wide",
-          image: {
-            src: `${P}/41.webp`,
-            alt: "Six-panel illustrated storyboard: a woman in a red dress walks a supermarket aisle, notices the new Fiama box and reads its front, benefits and ingredients",
-            caption: "A storyboard of the shopper's path with the new pack. It's a scenario, not a test.",
-          },
-        },
-      ],
-    },
-    {
-      id: "reflection",
-      label: "Reflection",
-      title: "What's next",
-      blocks: [
-        {
-          type: "needed",
-          items: [
-            "Was the redesign tested or reviewed? Any feedback?",
-            "What Asmi learned, or would do differently (e.g. the hard-to-open pack and the inner plastic wrap were flagged but not redesigned)",
+          type: "gallery",
+          heading: "Storyboard",
+          layout: "grid",
+          columns: 2,
+          images: [
+            {
+              src: `${P}/storyboard-1-v2.webp`,
+              cutout: true,
+              alt: "Storyboard frame 1: Grishmi heads to the grocery store to buy soap.",
+            },
+            {
+              src: `${P}/storyboard-2-v2.webp`,
+              cutout: true,
+              alt: "Storyboard frame 2: At the store, she spots the Fiama soap display.",
+            },
+            {
+              src: `${P}/storyboard-3-v2.webp`,
+              cutout: true,
+              alt: "Storyboard frame 3: The eye-catching packaging of Fiama soap grabs her attention.",
+            },
+            {
+              src: `${P}/storyboard-4-v2.webp`,
+              cutout: true,
+              alt: "Storyboard frame 4: Grishmi notices the statement on the soap: “Radiant Glow for Skin.”",
+            },
+            {
+              src: `${P}/storyboard-5-v2.webp`,
+              cutout: true,
+              alt: "Storyboard frame 5: She reads about the skin benefits of bearberry and blackcurrant, piquing her interest.",
+            },
+            {
+              src: `${P}/storyboard-6-v2.webp`,
+              cutout: true,
+              alt: "Storyboard frame 6: Grishmi checks the soap's ingredients for allergens and is impressed by their clarity and legibility.",
+            },
           ],
         },
       ],
     },
   ],
   contribution: {
-    mine: needed("What Asmi personally did on Fiama (research, illustration, layout, 3D mockups?)"),
-    team: needed("What Sarah Anil led, so the split is clear"),
+    mine: [
+      "Research and analysis of the existing packaging and how people choose a soap.",
+      "Led the packaging design exploration, visual direction and execution, focusing on an engaging design that aligns with Fiama's brand identity.",
+    ],
+    team: [
+      "Collaborated on concept development, research, brainstorming and feedback to refine the overall packaging direction and deliver a cohesive design outcome.",
+    ],
   },
   links: { behance: "https://www.behance.net/gallery/233068557/Fiama-Packaging-Redesign" },
   seo: {

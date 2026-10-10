@@ -59,7 +59,7 @@ const project: Project = {
     /* 1 ─────────────────────────────────────────────── */
     {
       id: "context",
-      label: "Context",
+      stage: "overview",
       title: "One NGO, many kinds of design",
       intro:
         "An NGO internship with Child Help Foundation, with work ranging from a product prototype to the foundation's printed materials and event photography.",
@@ -83,7 +83,7 @@ const project: Project = {
     /* 2 ─────────────────────────────────────────────── */
     {
       id: "event-tracker",
-      label: "Prototyping",
+      stage: "solution",
       title: "An event tracker for the people running events",
       intro:
         "A high-fidelity prototype to streamline event management, volunteer coordination and engagement, designed for mobile and desktop.",
@@ -165,7 +165,7 @@ const project: Project = {
     /* 3 ─────────────────────────────────────────────── */
     {
       id: "print",
-      label: "System",
+      stage: "solution",
       title: "One voice from report to letterhead",
       intro:
         "I collaborated with Child Help Foundation to design an annual report and other visual materials, strengthening their branding and communication while reflecting their mission and values.",
@@ -264,7 +264,7 @@ const project: Project = {
     /* 4 ─────────────────────────────────────────────── */
     {
       id: "reflection",
-      label: "Reflection",
+      stage: "takeaways",
       title: "Design as a tool for social impact",
       intro:
         "I also documented the foundation's International Parent's Day celebration, capturing joy, unity and the essence of family bonds.",
