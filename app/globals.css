@@ -1117,3 +1117,152 @@ html[data-custom-cursor="on"] textarea {
   }
 }
 
+
+/* ── Flip book ── */
+.fb-turn-fwd {
+  animation: fb-fwd 0.9s cubic-bezier(0.45, 0.05, 0.3, 1) forwards;
+}
+.fb-turn-back {
+  animation: fb-back 0.9s cubic-bezier(0.45, 0.05, 0.3, 1) forwards;
+}
+@keyframes fb-fwd {
+  to {
+    transform: rotateY(-180deg);
+  }
+}
+@keyframes fb-back {
+  to {
+    transform: rotateY(180deg);
+  }
+}
+.fb-shade {
+  animation: fb-shade 0.9s ease-in-out forwards;
+}
+@keyframes fb-shade {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.4;
+  }
+}
+/* the corner lifts now and then until the first turn */
+.fb-curl {
+  animation: fb-curl 2.8s ease-in-out infinite;
+}
+@keyframes fb-curl {
+  0%,
+  60%,
+  100% {
+    transform: scale(1);
+  }
+  75% {
+    transform: scale(1.7);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .fb-curl,
+  .fb-shade {
+    animation: none;
+  }
+}
+
+/* dashed circles in the design-thinking lens drift slowly */
+.dl-drift {
+  animation: dl-drift 24s linear infinite;
+}
+@keyframes dl-drift {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .dl-drift {
+    animation: none;
+  }
+}
+
+/* ── Leapsters deck visualisations ── */
+.lv-ping {
+  animation: lv-ping 2.6s cubic-bezier(0, 0, 0.2, 1) infinite;
+  box-shadow: 0 0 0 0 currentColor;
+  color: rgb(226 114 114 / 0.55);
+}
+@keyframes lv-ping {
+  0% {
+    box-shadow: 0 0 0 0 rgb(226 114 114 / 0.55);
+  }
+  70%,
+  100% {
+    box-shadow: 0 0 0 12px rgb(226 114 114 / 0);
+  }
+}
+.lv-float {
+  animation: lv-float 8s ease-in-out infinite;
+}
+@keyframes lv-float {
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(6px, -14px);
+  }
+}
+.lv-bob {
+  animation: lv-bob 2.4s ease-in-out infinite;
+}
+@keyframes lv-bob {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+.lv-hop {
+  animation: lv-hop 0.7s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+@keyframes lv-hop {
+  0% {
+    transform: translateY(0) rotate(0);
+  }
+  40% {
+    transform: translateY(-16%) rotate(-6deg);
+  }
+  70% {
+    transform: translateY(0) rotate(4deg);
+  }
+  100% {
+    transform: none;
+  }
+}
+.lv-shout {
+  animation: lv-shout 1.6s ease-in-out infinite;
+  transform-origin: 30% 80%;
+}
+@keyframes lv-shout {
+  0%,
+  100% {
+    transform: rotate(0);
+  }
+  20% {
+    transform: rotate(-4deg) scale(1.03);
+  }
+  40% {
+    transform: rotate(2deg);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .lv-ping,
+  .lv-float,
+  .lv-bob,
+  .lv-hop,
+  .lv-shout {
+    animation: none;
+  }
+}

@@ -88,6 +88,66 @@ function blockText(b: Block): string {
       return `${b.heading ?? "Posts"}: ${b.slides.map((x) => `${x.kind}: ${x.title}`).join("; ")}`;
     case "appCoverflow":
       return `${b.heading ?? "App screens"}: ${b.screens.map((x) => `${x.title}${x.tag ? ` (${x.tag})` : ""}: ${x.body}`).join(" | ")}`;
+    case "mindMap":
+      return `${b.heading ?? "Mind map"}: ${b.regions.map((r) => r.label).join(", ")}`;
+    case "sketchWall":
+      return `${b.heading ?? "Concept sketches"}: ${b.concepts.length} concepts${b.picks ? `; shortlisted: ${b.picks.map((n) => `Concept ${n}`).join(", ")}` : ""}`;
+    case "sourcePills":
+      return `${b.heading ?? "Sources"}: ${b.items.map((x) => `${x.name}: ${x.body}`).join(" | ")}`;
+    case "factorSpectrum":
+      return `${b.heading ?? "Factors"}: ${b.external.title}: ${b.external.body} ${b.internal.title}: ${b.internal.body} In between: ${b.factors.join(", ")}`;
+    case "gapCards":
+      return `${b.heading ?? "Gaps"}: ${b.items.map((x) => x.body.replace(/\*\*/g, "")).join(" | ")}`;
+    case "researchOrbit":
+      return `${b.heading ?? "Research"}: ${b.objective.replace(/\*\*/g, "")} Participants: ${b.groups.map((g) => `${g.label} ${g.value}${g.parts ? ` (${g.parts.map((x) => `${x.value} ${x.label}`).join(", ")})` : ""}`).join(", ")}. Looked for: ${b.actions.join(", ")}`;
+    case "cameraStudy":
+      return `${b.heading ?? "Camera study"}: ${b.shots.filter((s) => s.label).map((s) => s.label).join(", ")}`;
+    case "keyInsights":
+      return `${b.heading ?? "Key insights"}: ${b.items.map((x) => x.body.replace(/\*\*/g, "")).join(" | ")}`;
+    case "affinityBoard":
+      return `${b.heading ?? "Affinity map"}: ${b.clusters.map((c) => `${c.name}: ${c.notes.map((n) => n.text).join("; ")}`).join(" | ")}`;
+    case "empathyMap":
+      return `${b.heading ?? "Empathy map"}: ${b.quadrants.map((q) => `${q.name}: ${q.notes.join("; ")}`).join(" | ")}. Pains: ${b.pains.join("; ")}. Gains: ${b.gains.join("; ")}`;
+    case "opportunityCircles":
+      return `${b.heading ?? "Opportunity areas"}: ${b.items.map((x) => `${x.title}: ${x.body}`).join(" | ")}`;
+    case "ideaVisual":
+      return `${b.heading ?? "Idea"}: ${b.statement.replace(/\*\*/g, "")} Focus: ${b.focus.join("; ")}. ${b.pillars.join(", ")}: ${b.promises.map((p) => p.text).join(" ")}`;
+    case "frameworkNest":
+      return `${b.heading ?? "Design framework"}: ${b.layers.map((l) => `${l.name}: ${l.note}`).join(" | ")}`;
+    case "criteriaArrow":
+      return `${b.heading ?? "Selection criteria"}: ${b.criteria.map((c) => `${c.name}: ${c.body}`).join(" | ")}`;
+    case "conceptScore":
+      return `${b.heading ?? "Shortlisted concepts"}: ${b.cards.map((c) => `${c.name} (${b.criteria.map((k, i) => `${k} ${c.scores[i] >= 75 ? "high" : c.scores[i] >= 55 ? "medium" : "low"}`).join(", ")}): ${c.parts.map((p) => `${p.title}: ${p.lines.join(" ")}`).join(" ")}`).join(" | ")}`;
+    case "boardKit":
+      return `${b.heading ?? "In the box"}: ${b.parts.map((p) => `${p.name}: ${p.body}`).join(" | ")}`;
+    case "howToPlay":
+      return `${b.heading ?? "How to play"}: ${b.steps.map((s) => `${s.title}: ${s.body}`).join(" | ")}. ${b.bonus.title} ${b.bonus.lines.join(" ")} ${b.bonus.rewards.join("; ")}. ${b.bonus.note}`;
+    case "mobileFirst":
+      return `${b.heading ?? "Mobile first"}${b.intro ? `: ${b.intro}` : ""}`;
+    case "styleSheet":
+      return `${b.heading ?? "Style"}: fonts ${b.fonts.map((f) => `${f.name} (${f.role}, ${f.weights})`).join(", ")}; type sizes ${b.ramp.map((r) => `${r.label} ${r.px}px`).join(", ")}; colours ${b.colors.map((c) => `${c.name} ${c.hex}`).join(", ")}`;
+    case "iaTree":
+      return `${b.heading ?? "Information architecture"}: ${b.root} → ${b.branches.map((x) => `${x.name} (${x.items.join(", ")})`).join("; ")}`;
+    case "taskFlow":
+      return `${b.heading ?? "Task flow"}: ${b.columns.map((c) => c.join(" + ")).join(" → ")}`;
+    case "testingCollage":
+      return `${b.heading ?? "Testing"}: ${b.count} ${b.label}`;
+    case "designLens":
+      return `${b.heading ?? "Design process"}: ${b.stages.map((x) => `${x.name}: ${x.body}`).join(" | ")}. ${b.lens}: ${b.questions.join(" ")}`;
+    case "puzzleQuotes":
+      return `${b.heading ?? "What children said"}: ${b.quotes.map((q) => `"${q}"`).join(" ")}`;
+    case "compareMatrix":
+      return `${b.heading ?? "Comparison"}: ${b.rows.map((r) => `${r.name}: ${b.columns.map((c, i) => `${c} ${r.values[i] ? "yes" : "no"}`).join(", ")}`).join(" | ")}`;
+    case "matPlay":
+      return `${b.heading ?? "How to play"}: skill decks ${b.decks.map((d) => `${d.name} (${d.body}; example challenges: ${d.cards.slice(0, 3).map((c) => `${c.title}: ${c.prompt}`).join("; ")})`).join(" | ")}. Bonus rewards: ${b.rewards.join("; ")}`;
+    case "octalysis":
+      return `${b.heading ?? "Octalysis"}: ${b.versions.map((v) => `${v.name}: ${v.notes.join(" ")}`).join(" | ")}`;
+    case "phaseTimeline":
+      return `${b.heading ?? "Timeline"}: ${b.phases.map((p) => `${p.name} (steps ${p.from}–${p.to} of ${b.steps}): ${p.body}`).join(" | ")}`;
+    case "versusTable":
+      return `${b.heading ?? "Comparison"} (${b.them} vs ${b.us}): ${b.rows.map((r) => `${r.label}: ${b.them} ${r.them}; ${b.us} ${r.us}`).join(" | ")}`;
+    case "flipBook":
+      return `${b.heading ?? b.title}: a ${b.pages.length}-page ${b.title}, shown as a flip book.`;
     case "learnings":
       return `Learnings: ${b.items.map((l) => `${l.title}: ${l.lead} ${l.points.join(" ")}`).join(" | ")}`;
     case "systemLayers":

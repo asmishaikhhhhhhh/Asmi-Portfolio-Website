@@ -223,10 +223,12 @@ export type Block =
       type: "valueMap";
       heading?: string;
       caption?: string;
+      /** Whose map: Greenly's four actors (default) or Leapsters'. */
+      cast?: "greenly" | "leapsters";
       edges: {
-        from: "supplier" | "customer" | "farmer" | "logistics";
-        to: "supplier" | "customer" | "farmer" | "logistics";
-        values: ("reliability" | "transparency" | "efficiency" | "networking" | "sustainability")[];
+        from: "supplier" | "customer" | "farmer" | "logistics" | "teachers" | "counsellor" | "kids" | "parents";
+        to: "supplier" | "customer" | "farmer" | "logistics" | "teachers" | "counsellor" | "kids" | "parents";
+        values: ("reliability" | "transparency" | "efficiency" | "networking" | "sustainability" | "trust" | "adaptivity" | "wellbeing" | "clarity")[];
       }[];
     }
   /** A tech plan as swimlanes; each flow traces steps across lanes (lane = index into lanes). */
@@ -294,7 +296,7 @@ export type Block =
   /** Phone screenshots in an iPhone frame, swipeable. */
   | { type: "phoneCarousel"; heading?: string; intro?: string; slides: { kind: string; title: string; image: Img }[] }
   /** App screens as a coverflow of phones with the journey on top. tag: the screen's own label. */
-  | { type: "appCoverflow"; heading?: string; intro?: string; screens: { title: string; tag?: string; body: string; image: Img }[] }
+  | { type: "appCoverflow"; heading?: string; intro?: string; ink?: string; highlight?: string; screens: { title: string; tag?: string; body: string; image: Img }[] }
   /** A system as a stack of six layers (scenarios → artefacts), each opening its own view. */
   | {
       type: "systemLayers";
@@ -315,6 +317,83 @@ export type Block =
         codes?: { label: string; swatches: { color: string; meaning: string }[] }[];
       }[];
     }
+  /** Quotes as four puzzle pieces that snap together. */
+  | { type: "puzzleQuotes"; heading?: string; quotes: string[]; stage?: string }
+  /** Platforms against criteria (ticks and crosses), with a blind-spot reveal. */
+  | { type: "compareMatrix"; heading?: string; intro?: string; columns: string[]; rows: { name: string; values: boolean[] }[] }
+  /** A playable mini board game mat. */
+  | {
+      type: "matPlay";
+      heading?: string;
+      intro?: string;
+      /** edge: the printed card's border/ink colour; front: the illustrated deck card; back: the dotted card back. */
+      decks: { name: string; color: string; ink: string; edge: string; body: string; front: Img; back: Img; cards: { title: string; prompt: string }[] }[];
+      players: { name: string; color: string }[];
+      rewards: string[];
+      logo: Img;
+    }
+  /** Octalysis core drives, one note per drive for each version (8 notes, clockwise from Epic Meaning). */
+  | { type: "octalysis"; heading?: string; intro?: string; versions: { name: string; notes: string[] }[] }
+  /** Overlapping project phases on a numbered scale. */
+  | { type: "phaseTimeline"; heading?: string; steps: number; phases: { name: string; from: number; to: number; body: string; color: string }[] }
+  /** Two products compared row by row. */
+  | { type: "versusTable"; heading?: string; intro?: string; them: string; us: string; rows: { label: string; them: string; us: string }[] }
+  /** A document as a page-turning book; pages in reading order, the first is the cover. */
+  | { type: "flipBook"; heading?: string; intro?: string; title: string; pages: Img[] }
+  /** A process as stages, the later ones inside a design-thinking lens ringed by questions. */
+  | { type: "designLens"; heading?: string; lens: string; questions: string[]; stages: { name: string; color: string; ink: string; body: string }[] }
+  /* ── Leapsters deck slides, rebuilt interactive (components/blocks/LeapstersDeck.tsx) ── */
+  /** A dense image to fly around; spots are % of the image. */
+  | { type: "mindMap"; heading?: string; intro?: string; image: Img; ratio: number; regions: { label: string; x: number; y: number }[] }
+  /** Concept sketch wall; concepts labelled "Concept N" at % positions; picks: shortlisted concept numbers. */
+  | { type: "sketchWall"; heading?: string; intro?: string; image: Img; ratio: number; concepts: { label: string; x: number; y: number; box?: [number, number, number, number] }[]; picks?: number[]; pickLabel?: string; allLabel?: string }
+  /** Research sources as overlapping capsules. */
+  | { type: "sourcePills"; heading?: string; items: { name: string; body: string; color: string; ink: string }[] }
+  /** Factors on a spectrum from external to internal. */
+  | { type: "factorSpectrum"; heading?: string; external: { title: string; body: string }; internal: { title: string; body: string }; factors: string[] }
+  /** Gaps as layered cards with icons. */
+  | { type: "gapCards"; heading?: string; items: { body: string; icon: "hourglass" | "language" | "device" | "calendar"; fill: string; line: string; ink: string }[] }
+  /** Objective → participants → action through dashed orbits. */
+  | { type: "researchOrbit"; heading?: string; objective: string; groups: { label: string; value: number; parts?: { label: string; value: number }[] }[]; actions: string[] }
+  /** Photo collage in reading order (rows of 3, 3, 2); the label captions the photo. */
+  | { type: "cameraStudy"; heading?: string; intro?: string; shots: { image: Img; label?: string }[] }
+  | { type: "keyInsights"; heading?: string; items: { icon: Img; tone: string; body: string }[] }
+  /** Sticky notes by theme; tone: grey | blue | green | yellow | pink. */
+  | { type: "affinityBoard"; heading?: string; intro?: string; clusters: { name: string; notes: { text: string; tone: string }[] }[] }
+  /** Quadrants in order: think & feel, hear, see, say & do. */
+  | {
+      type: "empathyMap";
+      heading?: string;
+      avatar: Img;
+      quadrants: [{ name: string; tone: string; notes: string[] }, { name: string; tone: string; notes: string[] }, { name: string; tone: string; notes: string[] }, { name: string; tone: string; notes: string[] }];
+      pains: string[];
+      gains: string[];
+    }
+  /** r: relative radius; place: where the label sits. */
+  | { type: "opportunityCircles"; heading?: string; items: { title: string; body: string; r: number; place: "inside" | "above" | "below" }[] }
+  /** promises: captions spanning pillars (indexes). */
+  | { type: "ideaVisual"; heading?: string; statement: string; focus: string[]; pillars: string[]; promises: { pillars: number[]; text: string }[] }
+  | { type: "frameworkNest"; heading?: string; layers: { id: "outcome" | "context" | "focus" | "game" | "app"; name: string; note: string }[] }
+  | { type: "criteriaArrow"; heading?: string; criteria: { name: string; body: string }[] }
+  /** scores: 0–100 per criterion, read off the deck's Low → High bars. */
+  | { type: "conceptScore"; heading?: string; criteria: string[]; cards: { name: string; image: Img; parts: { title: string; lines: string[] }[]; scores: number[] }[] }
+  /** parts at % positions of the kit image; r: spotlight radius in %. */
+  | { type: "boardKit"; heading?: string; intro?: string; image: Img; ratio: number; logo: Img; parts: { name: string; body: string; x: number; y: number; r: number }[] }
+  | { type: "howToPlay"; heading?: string; steps: { title: string; body: string; fill: string; line: string }[]; bonus: { title: string; lines: string[]; rewards: string[]; note: string }; mascot: Img }
+  | { type: "mobileFirst"; heading?: string; intro?: string; phone: Img; koko: Img; logo: Img }
+  | {
+      type: "styleSheet";
+      heading?: string;
+      logo: Img;
+      fonts: { role: string; name: "Fredoka" | "Poppins"; weights: string }[];
+      ramp: { label: string; px: number; weight: number }[];
+      colors: { hex: string; name: string }[];
+      tabs: { label: string; icon: "home" | "phrasebook" | "cards" | "insights" | "account" }[];
+    }
+  | { type: "iaTree"; heading?: string; root: string; branches: { name: string; items: string[] }[] }
+  /** columns: steps that happen together, left to right. */
+  | { type: "taskFlow"; heading?: string; subtitle?: string; columns: string[][] }
+  | { type: "testingCollage"; heading?: string; count: number; label: string; ratio: number; photos: { image: Img; x: number; y: number; w: number; h: number }[] }
   /** Usability feedback as plants on a rack: one tier per stakeholder. */
   | { type: "testRack"; heading?: string; tiers: { title: string; notes: { tone: "worked" | "fix" | "learned"; text: string }[] }[] }
   /** CLAB's material design as a live component sheet (Clab case study only). */

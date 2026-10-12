@@ -42,3 +42,7 @@ next-env.d.ts
 
 # Source decks (large; kept locally, not committed)
 /*.pdf
+
+# raw photos dropped in the project root while working
+/*.JPG
+/*.jpg

@@ -16,6 +16,9 @@ import { FigmaEmbed } from "./FigmaEmbed";
 import { ImageTabs } from "./ImageTabs";
 import { ScrollStrip } from "./ScrollStrip";
 import { AppCoverflow } from "./ChfViz";
+import { FlipBook } from "./FlipBook";
+import { CompareMatrix, DesignLens, FactorSpectrum, GapCards, MatPlay, Octalysis, PhaseTimeline, PuzzleQuotes, ResearchOrbit, SourcePills, VersusTable } from "./LeapstersViz";
+import { AffinityBoard, BoardKit, CameraStudy, ConceptScore, CriteriaArrow, EmpathyMap, FrameworkNest, HowToPlay, IaTree, IdeaVisual, KeyInsights, MindMap, MobileFirst, OpportunityCircles, SketchWall, StyleSheet, TaskFlow, TestingCollage } from "./LeapstersDeck";
 import { ResearchExplorer } from "./ResearchExplorer";
 import { ClabDemo } from "@/components/clab/ClabDemo";
 import { MaterialDesign } from "@/components/clab/MaterialDesign";
@@ -806,7 +809,7 @@ export function BlockView({ block }: { block: Block }) {
       return <SurfaceRoots heading={block.heading} gaps={block.gaps} roots={block.roots} />;
 
     case "valueMap":
-      return <ValueMap heading={block.heading} edges={block.edges} caption={block.caption} />;
+      return <ValueMap heading={block.heading} edges={block.edges} caption={block.caption} cast={block.cast} />;
 
     case "techPlan":
       return <TechPlan heading={block.heading} lanes={block.lanes} flows={block.flows} image={block.image} />;
@@ -861,10 +864,93 @@ export function BlockView({ block }: { block: Block }) {
         <AppCoverflow
           heading={block.heading}
           intro={block.intro}
+          ink={block.ink}
+          highlight={block.highlight}
           screens={block.screens.map(({ title, tag, body }) => ({ title, tag, body }))}
           media={block.screens.map((x) => <Picture key={x.image.src} img={x.image} size="phone" contain rounded={false} className="!bg-transparent" />)}
         />
       );
+
+    case "mindMap":
+      return <MindMap {...block} />;
+    case "sketchWall":
+      return <SketchWall {...block} />;
+    case "sourcePills":
+      return <SourcePills heading={block.heading} items={block.items} />;
+    case "factorSpectrum":
+      return <FactorSpectrum heading={block.heading} external={block.external} internal={block.internal} factors={block.factors} />;
+    case "gapCards":
+      return <GapCards heading={block.heading} items={block.items} />;
+    case "researchOrbit":
+      return <ResearchOrbit heading={block.heading} objective={block.objective} groups={block.groups} actions={block.actions} />;
+    case "cameraStudy":
+      return <CameraStudy {...block} />;
+    case "keyInsights":
+      return <KeyInsights {...block} />;
+    case "affinityBoard":
+      return <AffinityBoard {...block} />;
+    case "empathyMap":
+      return <EmpathyMap {...block} />;
+    case "opportunityCircles":
+      return <OpportunityCircles {...block} />;
+    case "ideaVisual":
+      return <IdeaVisual {...block} />;
+    case "frameworkNest":
+      return <FrameworkNest {...block} />;
+    case "criteriaArrow":
+      return <CriteriaArrow {...block} />;
+    case "conceptScore":
+      return <ConceptScore {...block} />;
+    case "boardKit":
+      return <BoardKit {...block} />;
+    case "howToPlay":
+      return <HowToPlay {...block} />;
+    case "mobileFirst":
+      return <MobileFirst {...block} />;
+    case "styleSheet":
+      return <StyleSheet {...block} />;
+    case "iaTree":
+      return <IaTree {...block} />;
+    case "taskFlow":
+      return <TaskFlow {...block} />;
+    case "testingCollage":
+      return <TestingCollage {...block} />;
+
+    case "designLens":
+      return <DesignLens heading={block.heading} lens={block.lens} questions={block.questions} stages={block.stages} />;
+
+    case "puzzleQuotes":
+      return <PuzzleQuotes heading={block.heading} quotes={block.quotes} stage={block.stage} />;
+
+    case "compareMatrix":
+      return <CompareMatrix heading={block.heading} intro={block.intro} columns={block.columns} rows={block.rows} />;
+
+    case "matPlay":
+      return <MatPlay heading={block.heading} intro={block.intro} decks={block.decks} players={block.players} rewards={block.rewards} logo={block.logo} />;
+
+    case "octalysis":
+      return <Octalysis heading={block.heading} intro={block.intro} versions={block.versions} />;
+
+    case "phaseTimeline":
+      return <PhaseTimeline heading={block.heading} steps={block.steps} phases={block.phases} />;
+
+    case "versusTable":
+      return <VersusTable heading={block.heading} intro={block.intro} them={block.them} us={block.us} rows={block.rows} />;
+
+    case "flipBook": {
+      const d = (manifest as Record<string, { w: number; h: number }>)[block.pages[0]?.src];
+      return (
+        <div>
+          {block.heading && <H>{block.heading}</H>}
+          {block.intro && <p className={`${prose} -mt-2 mb-6 text-ink-soft`}>{block.intro}</p>}
+          <FlipBook
+            title={block.title}
+            ratio={d ? d.w / d.h : 0.707}
+            pages={block.pages.map((pg) => <Picture key={pg.src} img={pg} size="half" rounded={false} className="!bg-transparent h-full w-full object-cover" />)}
+          />
+        </div>
+      );
+    }
 
     case "learnings":
       return <Learnings items={block.items} />;
@@ -1170,7 +1256,8 @@ export function BlockView({ block }: { block: Block }) {
             </div>
           )}
           {(block.positives?.length || block.negatives?.length) && (
-            <div className="grid gap-4 md:grid-cols-2">
+            // one list spans the full width; two sit side by side
+            <div className={`grid gap-4 ${block.positives?.length && block.negatives?.length ? "md:grid-cols-2" : ""}`}>
               {block.positives && block.positives.length > 0 && (
                 <div className="rounded-media border border-line bg-card p-6">
                   <p className="meta mb-4 text-forest">What worked</p>

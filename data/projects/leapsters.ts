@@ -1,137 +1,157 @@
 import { needed, type Project } from "@/lib/types";
 
+// Source: Asmi's capstone deck ("17TH Presentation.pdf", 41 slides), its visual
+// edition ("Asmi (3).pdf", 28 slides: the visualisations rebuilt below), the card
+// print file ("capstone fina.pdf"), and the Leapsters instruction manual
+// ("Asmi (2).pdf", 11 pages). Real-life photos shared by Asmi.
 const IMG = "/images/projects/leapsters";
+const DECK = `${IMG}/deck`;
+const PDF = `${IMG}/pdf`;
+const CARDS = `${IMG}/cards`;
 
 const project: Project = {
   slug: "leapsters",
   title: "Leapsters",
   subtitle: "Nurturing confidence through play",
   oneLiner:
-    "A board game and companion app that help children aged 5–12 build English skills and the confidence to use them.",
+    "A board game and companion app that help children aged 5–12 build English skills, and the confidence to use them.",
   tier: "flagship",
   order: 1,
   kind: "Capstone · Learning ecosystem",
   year: needed("Year the Leapsters capstone was completed"),
   duration: "6 months", // confirmed by Asmi (2026-10-08)
   role: needed("Asmi's role title on Leapsters"),
-  team: {
-    solo: true,
-  },
+  team: { solo: true },
   disciplines: ["research", "ux-ui", "systems", "physical-brand"],
   thinking: ["people", "research", "play", "systems"],
-  tags: [
-    "EdTech",
-    "Children 5–12",
-    "English literacy",
-    "Board game",
-    "Mobile app",
-    "Play-based learning",
-  ],
+  tags: ["EdTech", "Children 5–12", "English literacy", "Board game", "Mobile app", "Play-based learning"],
   tools: [],
   accent: "#E27274",
   cover: {
     type: "motion",
     composition: "leapsters",
     poster: {
-      src: `${IMG}/27.webp`,
-      alt: "The Leapsters board game laid out on white: a polka-dot play mat with an orange border, four challenge card decks, an instruction manual, three coloured tokens and a green sand timer.",
-      focus: "60% 50%",
+      src: `${DECK}/components.webp`,
+      alt: "The Leapsters board game: a polka-dot 2 ft mat with an orange border, four challenge card decks, three tokens in navy, purple and green, and a green sand timer.",
     },
   },
   proofPoint: "63 research participants · 122 user tests",
+  links: { behance: "https://www.behance.net/gallery/248075551/Leapsters-Nurturing-Confidence-Through-Play" },
   quickRead: {
     problem:
-      "Many children in India struggle with basic English, and the gap chips away at their confidence. None of the existing platforms reviewed addressed children's emotional and behavioural needs.",
+      "In India, over 70% of Grade 3 students cannot read a simple Grade 2-level English text, and the gap chips away at their confidence. None of the platforms I reviewed addressed children's emotional and behavioural needs.",
     insight:
-      "Children often know the answer but are scared to say it. What they need isn't perfect guidance; it's presence, play and a pace that fits them.",
+      "The child doesn't need perfect guidance; they need presence. Children often know the answer but are scared to say it in English.",
     solution:
-      "Leapsters: a mat-based board game where children win skill zones by completing speaking, listening, writing and creative-thinking challenges, plus a mobile app with Koko the mascot for daily, self-paced practice.",
+      "Leapsters: a mat-based board game where children win skill zones by completing speaking, listening, writing and creative-thinking challenges, with a mobile app and Koko the mascot for daily, self-paced practice.",
     result:
-      "122 user tests. An overall feedback score of 3.6/5: the visuals and the learn-through-play idea landed; game length and the XP system did not.",
+      "122 user tests and an overall feedback score of 4/5: the visuals and learning through play landed; game length and the XP system did not.",
   },
   chapters: [
     /* 1 ─────────────────────────────────────────────── */
     {
-      id: "quiet-kid",
+      id: "context",
       stage: "overview",
-      title: "The answer is in there",
-      intro:
-        "Every class has one: the child who knows more than they let on and says less than they know.",
+      title: "Bridging foundational learning for future generations",
+      intro: "In India, millions of children attend school every year. However, millions of children still struggle with basic English.",
       blocks: [
         {
           type: "pullQuote",
-          quote: "I know the answer in my head… but I can't say it in English.",
-          attribution: "A child's perspective, from the research",
+          quote: "Over 70% of Grade 3 students cannot read a simple Grade 2-level English text, and this gap impacts their confidence.",
+        },
+        {
+          type: "needed",
+          items: ["Source for the 70% Grade 3 reading statistic"],
         },
         {
           type: "text",
-          body: [
-            "I didn't start with a missing skill. I started with a feeling. Children told us reading feels scary, that they get shy to read aloud, that they know the word but can't say it fast.",
-            "What they hear doesn't help: \"Don't ask silly questions in class.\" \"Other kids do it, why can't you?\" \"You're not trying hard enough.\"",
-            "So they adapt. They go silent to avoid being questioned, fake understanding to avoid embarrassment, and quietly decide that studying is not for them.",
+          body: ["So I didn't start with a missing skill; I started with how it feels to be the child who can't keep up."],
+        },
+        {
+          type: "puzzleQuotes",
+          heading: "Piecing together the kid's perspective",
+          quotes: [
+            "I know the word but can't say it fast.",
+            "I know the answer in my head… but I can't say it in English.",
+            "I like English songs, but reading feels scary.",
+            "Sometimes I get shy to read aloud.",
           ],
         },
         {
-          type: "image",
-          image: {
-            src: `${IMG}/19.webp`,
-            alt: "Four pastel jigsaw pieces on an orange background, each holding a child's quote about English, beside three smiling geometric characters: a triangle, a circle and a square.",
-            caption: "Piecing together the kid's perspective.",
-          },
-          size: "wide",
+          type: "designLens",
+          heading: "Design process",
+          lens: "Design Thinking Lens",
+          questions: ["Should we do this?", "Do they want this?", "Can we do this?"],
+          stages: [
+            { name: "Discovery & Define", color: "#C5D9F7", ink: "#3E5262", body: "User research: interviews, a review of secondary data, insights, the problem statement and “How might we” questions." },
+            { name: "Ideate", color: "#E9B8C3", ink: "#3E5262", body: "Brainstorming solutions, sketching early concepts, consulting experts (therapists, caregivers, educators) and co-creating initial ideas with users." },
+            { name: "Design", color: "#E38F3E", ink: "#ffffff", body: "Building low-, mid- and high-fidelity prototypes of the board game and the app." },
+            { name: "Test", color: "#E5E9B4", ink: "#3E5262", body: "Gathering iterative feedback, refining through usability testing, then piloting the refined prototypes and capturing outcomes." },
+          ],
         },
       ],
     },
 
     /* 2 ─────────────────────────────────────────────── */
     {
-      id: "gap",
+      id: "secondary",
       stage: "research",
-      title: "Showing up isn't the same as learning",
+      title: "What the research already knew",
+      intro: "I mapped the problem first, then read across four kinds of sources.",
       blocks: [
         {
-          type: "stats",
-          items: [
-            {
-              value: "70%+",
-              label: "of Grade 3 students in India cannot read a simple Grade 2-level English text",
-            },
+          type: "mindMap",
+          heading: "Mapping the problem",
+          intro: "One board for everything I knew going in. Pick a region to zoom into it.",
+          image: { src: `${PDF}/mind-map.webp`, alt: "A dense digital mind map of colour-coded notes and nodes branching from 'Learning gap in children': existing solutions with pros and cons, problems, impact, target audience, types of learning gaps, and grids of sticky notes on challenges and impact." },
+          ratio: 1554 / 867,
+          regions: [
+            { label: "Current solutions and their drawbacks", x: 40, y: 44 },
+            { label: "Problems faced by existing solutions", x: 12, y: 46 },
+            { label: "Impact created by existing solutions", x: 42, y: 70 },
+            { label: "Target audience", x: 60, y: 28 },
+            { label: "Types of kids with a learning gap", x: 59, y: 49 },
+            { label: "Challenges faced", x: 82, y: 55 },
+            { label: "Impact and the need to fix the problem", x: 68, y: 85 },
+            { label: "Impact on children's life", x: 85, y: 32 },
           ],
-          source: needed("Source for the 70% Grade 3 reading statistic"),
         },
         {
-          type: "text",
-          body: [
-            "Millions of children attend school every year and still struggle with basic English. That gap doesn't stay academic for long; it shows up as lost confidence.",
-            "The research pointed to two kinds of causes. External: uniform teaching methods, language mismatch, outdated pedagogy, overcrowded classrooms. Internal: low confidence, learning anxiety, performance pressure, less interaction in class.",
-            "The gap is widest from senior KG to Class 1 and from Class 3 to Class 5. Class 3 is often the turning point, when foundational gaps start to seriously hold a child back.",
+          type: "sourcePills",
+          heading: "Literature review & secondary research",
+          items: [
+            { name: "Academic research papers", body: "Studies exploring learning gaps in foundational literacy and numeracy, engagement, and play-based learning methods.", color: "#BBD3EA", ink: "#2F4C66" },
+            { name: "Articles & media reports", body: "Post-pandemic learning loss, the digital divide, teacher gaps, and blended learning success.", color: "#E8C3C8", ink: "#6A3A44" },
+            { name: "Government & policy documents", body: "NEP 2020, NCERT, UNICEF and UNESCO reports on inclusive and digital learning.", color: "#F2F0B8", ink: "#5E5A17" },
+            { name: "Product & competitor analysis", body: "A review of BYJU'S, Khan Academy and DIKSHA for engagement and accessibility.", color: "#F0A35E", ink: "#3D2208" },
           ],
         },
         {
-          type: "callout",
-          label: "Blind spots in existing platforms",
-          body: "I compared P&G Shiksha + Mindspark, iDream iPrep PAL, DIKSHA & ePathshala and Amrita Learning on accessibility, infrastructure, emotional and behavioural focus, scalability, teacher/parent involvement and innovation. None of the four addressed emotional and behavioural needs, and none involved teachers or parents.",
+          type: "factorSpectrum",
+          heading: "What holds children back",
+          external: { title: "External factors", body: "Uniform teaching methods, language mismatch, outdated pedagogy, overcrowded classrooms." },
+          internal: { title: "Internal factors", body: "Low confidence, learning anxiety, performance pressure, reduced classroom interaction." },
+          factors: ["Technology accessibility issues", "Peer environment", "Teacher overload & absenteeism", "Limited parental involvement", "Language & cultural barrier", "Learning style and pace"],
         },
         {
-          type: "features",
-          heading: "Gaps I found",
+          type: "compareMatrix",
+          heading: "Uncovering the blind spots in existing platforms",
+          columns: ["Accessibility", "Infrastructure requirement", "Emotional & behavioural focus", "Scalability", "Teacher / parent involvement", "Innovation"],
+          rows: [
+            { name: "P&G Shiksha + Mindspark", values: [true, false, false, false, false, true] },
+            { name: "iDream iPrep PAL", values: [true, false, false, true, false, true] },
+            { name: "DIKSHA & ePathshala", values: [true, true, false, false, false, false] },
+            { name: "Amrita Learning", values: [true, true, false, true, false, false] },
+          ],
+        },
+        {
+          type: "gapCards",
+          heading: "Gaps identified",
           items: [
-            {
-              title: "Slower isn't adaptive",
-              body: "Remedial tools slow content down instead of adapting it to how a child learns.",
-            },
-            {
-              title: "Urban-English centric",
-              body: "Content leaves out regional and diverse learners.",
-            },
-            {
-              title: "Assumes the basics",
-              body: "Most adaptive tools need stable devices, internet or digital literacy that many learners don't have.",
-            },
-            {
-              title: "The holiday slide",
-              body: "Children forget earlier concepts over vacations.",
-            },
+            { body: "**Remedial tools slow content** down, not adapt it to learning styles.", icon: "hourglass", fill: "#D6E6F7", line: "#4F7FA8", ink: "#2F4C66" },
+            { body: "**Content is urban-English centric**, which excludes regional & diverse learners.", icon: "language", fill: "#F9D9DA", line: "#B8656E", ink: "#7A3A42" },
+            { body: "Most adaptive tools **need stable devices, internet, or digital literacy**, which many learners lack.", icon: "device", fill: "#F8F0CF", line: "#C9A23A", ink: "#6E5612" },
+            { body: "**Post-vacation learning loss**: kids forget earlier concepts during vacations.", icon: "calendar", fill: "#F8D9BC", line: "#D9792A", ink: "#7A4210" },
           ],
         },
       ],
@@ -139,98 +159,50 @@ const project: Project = {
 
     /* 3 ─────────────────────────────────────────────── */
     {
-      id: "research",
+      id: "primary",
       stage: "research",
       title: "63 people, one child at the centre",
-      intro:
-        "The objective: understand children's learning challenges, engagement barriers and emotional responses in hybrid learning environments.",
+      intro: "The objective: to understand children's learning challenges, engagement barriers and emotional responses in hybrid learning environments.",
       blocks: [
         {
-          type: "researchMethods",
+          type: "stakeholderRings",
+          heading: "Stakeholders",
+          centre: "Target audience",
+          rings: [
+            { name: "Core", members: ["Students (5–12 yrs)", "Teachers", "Parents / guardians"] },
+            { name: "Intermediary", members: ["School principals", "Academic coordinators", "EdTech platform developers", "Child psychologists", "School counsellors"] },
+            { name: "Ancillary", members: ["Data privacy & security experts", "NGOs working in education equity", "Education department officials (state / national)", "ASER Centre / education think tanks"] },
+          ],
+        },
+        {
+          type: "researchOrbit",
+          heading: "Primary research approach",
+          objective: "To understand children's **learning challenges**, **engagement barriers**, and **emotional responses** in hybrid learning environments.",
           groups: [
-            { label: "Students", value: 17 },
-            { label: "Teachers", value: 14 },
-            { label: "Parents", value: 30 },
+            { label: "Students", value: 17, parts: [{ label: "smart learners", value: 12 }, { label: "weak learners", value: 5 }] },
+            { label: "Teachers", value: 14, parts: [{ label: "subject teachers", value: 12 }, { label: "class teachers", value: 2 }] },
+            { label: "Parents", value: 30, parts: [{ label: "working", value: 15 }, { label: "non-working", value: 15 }] },
             { label: "Counsellors", value: 2 },
           ],
-          methods: [
-            {
-              name: "Primary research",
-              detail:
-                "17 students (12 smart learners, 5 weak learners), 14 teachers (12 subject, 2 class), 30 parents (15 working, 15 non-working), 2 counsellors",
-            },
-            {
-              name: "Camera study",
-              detail: "Photographs of classrooms, annotated for behaviours such as teacher-led instruction, peer collaboration and distraction",
-            },
-            {
-              name: "Literature review",
-              detail: "Academic papers, media reports, and NEP 2020, NCERT, UNICEF and UNESCO documents",
-            },
-            {
-              name: "Competitor analysis",
-              detail: "BYJU'S, Khan Academy, DIKSHA, P&G Shiksha + Mindspark, iDream iPrep PAL, Amrita Learning",
-            },
-            { name: "Stakeholder mapping", detail: "Core, intermediary and ancillary rings" },
-            { name: "Mind mapping, affinity mapping, empathy and value mapping" },
-          ],
-          note: "Students aged 5–12, teachers and parents/guardians formed the core stakeholder ring; principals, coordinators, child psychologists, school counsellors and EdTech developers sat around them.",
+          actions: ["Insight snapshots", "Emotional patterns", "Visual cues", "Pain points"],
         },
         {
           type: "needed",
-          items: [
-            "Research method breakdown: which participants were interviewed vs surveyed vs observed",
-            "Where the research and camera study took place (schools / cities) and how participants were recruited",
-          ],
+          items: ["How the primary research was run (interviews, surveys, observation) and where (schools / cities)"],
         },
         {
-          type: "image",
-          image: {
-            src: `${IMG}/11.webp`,
-            alt: "Collage of eight black-and-white classroom photographs with orange handwritten labels: note taking, teacher-led instruction, vocal leadership, digital learning, distracted, peer collaboration and flexible seating.",
-            caption: "Camera study: what a school day actually looks like.",
-          },
-          size: "full",
-        },
-        {
-          type: "personas",
-          heading: "Two children I designed for",
-          items: [
-            {
-              name: "Abhay Shetty",
-              age: "6",
-              descriptor:
-                "A cheerful, curious first grader who loves drawing and cartoons, but struggles to keep up with reading and basic maths and feels left out when others finish faster.",
-              quote: "Main samajhta hoon, Par thode time mei bhul bhi jata hu",
-              needs: [
-                "Learn reading and maths at his own pace",
-                "Learn through play, stories and visual activities",
-                "Feel encouraged, not judged",
-              ],
-              frustrations: [
-                "Anxious when others learn faster",
-                "Doesn't like being corrected in front of others",
-                "Avoids subjects he finds tough",
-              ],
-            },
-            {
-              name: "Piyu Sharma",
-              age: "11",
-              descriptor:
-                "A sensitive, observant girl with autism who loves patterns, repetition and visual learning, and becomes anxious with noise or sudden change.",
-              quote:
-                "Teacher bolte hain samajh aa gaya? Par mai toh bas sir hila deti hoon... samajh toh aadha bhi nahi aata",
-              needs: [
-                "Understand lessons, not just memorise them",
-                "Read fluently in her own language",
-                "Enjoy learning through games or visuals",
-              ],
-              frustrations: [
-                "Can't keep up and forgets quickly",
-                "Finds textbooks boring and hard to understand",
-                "Too shy to ask for help",
-              ],
-            },
+          type: "cameraStudy",
+          heading: "Camera study",
+          intro: "What a school day actually looks like. Hover a photo, or a behaviour, to look closer.",
+          shots: [
+            { image: { src: `${PDF}/cam-note.webp`, alt: "Black-and-white photo: children working at shared tables in a classroom." }, label: "Note taking / independent work" },
+            { image: { src: `${PDF}/cam-teacher.webp`, alt: "Black-and-white photo: a teacher pointing to a board about shapes while young children sit at tables." }, label: "Teacher-led instruction" },
+            { image: { src: `${PDF}/cam-vocal.webp`, alt: "Black-and-white photo: a girl speaking at the front of the class beside her teacher, classmates watching." }, label: "Vocal leadership" },
+            { image: { src: `${PDF}/cam-digital.webp`, alt: "Black-and-white photo: older students at desks facing a digital screen at the front of the room." }, label: "Digital learning integration" },
+            { image: { src: `${PDF}/cam-class.webp`, alt: "Black-and-white photo: rows of small children at desks with a teacher walking between them." } },
+            { image: { src: `${PDF}/cam-distracted.webp`, alt: "Black-and-white photo: a busy classroom of young children, several looking away from the teacher." }, label: "Distracted" },
+            { image: { src: `${PDF}/cam-peer.webp`, alt: "Black-and-white photo: children sitting on a corridor floor sharing books." }, label: "Peer collaboration / shared resource use" },
+            { image: { src: `${PDF}/cam-seating.webp`, alt: "Black-and-white photo: boys sitting on the floor around a low table, reading picture books together." }, label: "Alternative learning spaces / flexibility in seating" },
           ],
         },
       ],
@@ -241,8 +213,6 @@ const project: Project = {
       id: "insights",
       stage: "research",
       title: "Presence over perfection",
-      intro:
-        "Affinity mapping sorted the notes into cognitive barriers, emotional support, home environment, school methods and the pull of screens. Five threads kept coming back.",
       blocks: [
         {
           type: "pullQuote",
@@ -250,52 +220,188 @@ const project: Project = {
           attribution: "A student, on what made learning feel better",
         },
         {
-          type: "text",
-          body: [
-            "Children lit up when they mentioned moments like \"Mummy sat with me\" or \"Sir asked if I was okay.\" One-on-one emotional attention, not just academic help, became a lifeline.",
+          type: "keyInsights",
+          heading: "Key insights",
+          items: [
+            { icon: { src: `${PDF}/insight-1.webp`, alt: "" }, tone: "#F3B8C2", body: "The learning age gap is most prominent from senior KG to Class 1 and from Class 3 to Class 5, with **Class 3 often being a turning point where foundational gaps** begin to seriously affect learning progression." },
+            { icon: { src: `${PDF}/insight-2.webp`, alt: "" }, tone: "#FFDA89", body: "When **schools assume parents will follow up**, and **parents assume the school has it covered**, the child slips through, thinking just showing up is enough." },
+            { icon: { src: `${PDF}/insight-3.webp`, alt: "" }, tone: "#BEDAFE", body: "The child doesn't need perfect guidance, they need presence. **Students often light up when mentioning moments like “Mummy sat with me” or “Sir asked if I was okay.”** One-on-one emotional attention, not just academic, becomes a lifeline in the chaos of learning." },
           ],
         },
         {
-          type: "insightChain",
+          type: "affinityBoard",
+          heading: "Affinity mapping",
+          intro: "Every note from the research, as it was clustered.",
+          clusters: [
+            {
+              name: "Cognitive barriers",
+              notes: [
+                { tone: "grey", text: "Confusion between similar concepts (e.g. addition vs. multiplication)" },
+                { tone: "blue", text: "Difficulty applying learned concepts in real-life or new situations" },
+                { tone: "grey", text: "Struggles with problem-solving or logical reasoning tasks" },
+                { tone: "blue", text: "Fear of asking questions due to not understanding the base topic" },
+                { tone: "grey", text: "Inability to follow multi-step instructions without frequent reminders" },
+                { tone: "green", text: "Slow reading or comprehension speed compared to peers" },
+                { tone: "green", text: "Difficulty in switching between languages (mother tongue at home vs. English at school)" },
+                { tone: "green", text: "Misunderstanding word problems in maths due to language confusion" },
+                { tone: "blue", text: "Forgetting what was taught soon after the class ends" },
+                { tone: "green", text: "Trouble organising thoughts while writing or expressing ideas" },
+                { tone: "blue", text: "Needs more time than others to finish work or understand lessons (basics not clear)" },
+                { tone: "blue", text: "Learning by heart without really understanding the topic" },
+                { tone: "blue", text: "Gaps in foundational knowledge" },
+                { tone: "blue", text: "Difficulty in recalling what was learned in the previous class" },
+                { tone: "blue", text: "Low attention span when the subject gets slightly complex" },
+              ],
+            },
+            {
+              name: "Lack of emotional support",
+              notes: [
+                { tone: "blue", text: "The child shows no interest or excitement in learning and avoids study time." },
+                { tone: "blue", text: "They are afraid of making mistakes, so they hesitate to even try." },
+                { tone: "blue", text: "Their mood changes suddenly while studying, affecting their learning flow." },
+                { tone: "blue", text: "Constant comparisons with others make the child feel less capable or left out." },
+                { tone: "blue", text: "The child gets angry or frustrated quickly when they don't understand something." },
+                { tone: "blue", text: "A lack of support or encouragement at home makes them feel alone in their learning." },
+                { tone: "blue", text: "Even small corrections hurt their feelings and lower their motivation." },
+                { tone: "blue", text: "Bullying or peer pressure affects their confidence and learning attitude." },
+                { tone: "grey", text: "They often avoid studying by making excuses or delaying tasks." },
+                { tone: "blue", text: "The child has low self-confidence and often doubts their own abilities." },
+                { tone: "blue", text: "They get distracted very easily and struggle to stay focused." },
+              ],
+            },
+            {
+              name: "Home environment & parental involvement",
+              notes: [
+                { tone: "green", text: "Parents are often too busy or tired to help with schoolwork regularly." },
+                { tone: "green", text: "Learning isn't encouraged at home, so the child doesn't see it as important." },
+                { tone: "green", text: "There are too many distractions like TV or mobile phones during study time." },
+                { tone: "blue", text: "The child doesn't have a quiet or dedicated space to study at home." },
+                { tone: "grey", text: "Parents feel unconfident or unable to guide their child's academics." },
+                { tone: "grey", text: "Inconsistent routines at home make it hard for the child to focus on studies." },
+                { tone: "grey", text: "Siblings or other responsibilities often take away the child's study time." },
+                { tone: "blue", text: "Parents don't know how their child is really performing unless results come." },
+                { tone: "green", text: "There's more focus on marks than understanding, creating pressure." },
+                { tone: "grey", text: "Some parents believe learning is the school's job only, not theirs." },
+                { tone: "grey", text: "The child avoids asking for help because they fear being scolded." },
+                { tone: "green", text: "Working parents feel guilty for not giving enough time but don't know how to help better." },
+              ],
+            },
+            {
+              name: "School & teaching methods",
+              notes: [
+                { tone: "green", text: "Teaching is often too fast-paced, leaving behind students who need more time." },
+                { tone: "blue", text: "Classes focus more on completing the syllabus than ensuring real understanding." },
+                { tone: "blue", text: "Teachers rarely have time for individual attention due to large class sizes." },
+                { tone: "green", text: "Outdated teaching methods fail to engage different types of learners." },
+                { tone: "green", text: "Assessments focus only on marks, not on skills or understanding." },
+                { tone: "blue", text: "There's little use of real-life examples or activities to make lessons relatable." },
+              ],
+            },
+            {
+              name: "Challenges caused by learning gaps",
+              notes: [
+                { tone: "yellow", text: "Struggles to keep up with new topics because basics are unclear." },
+                { tone: "grey", text: "Feels anxious or nervous before exams due to lack of preparation." },
+                { tone: "yellow", text: "Becomes silent in class to avoid being questioned." },
+                { tone: "yellow", text: "Gives up quickly when faced with difficult problems." },
+                { tone: "grey", text: "Relies heavily on peers or parents to complete homework." },
+                { tone: "yellow", text: "Develops low confidence in academic abilities." },
+                { tone: "blue", text: "Avoids subjects they find hard, even at home." },
+                { tone: "blue", text: "Shows signs of boredom or disinterest during lessons, or is usually zoned out." },
+                { tone: "green", text: "Gets labelled as a weak student, affecting self-image." },
+                { tone: "green", text: "Stops participating in group activities or discussions." },
+                { tone: "grey", text: "Becomes defensive or frustrated when corrected." },
+                { tone: "grey", text: "Fakes understanding to avoid embarrassment." },
+                { tone: "blue", text: "Experiences frequent drops in test scores." },
+                { tone: "grey", text: "Feels left out or isolated among smarter peers." },
+                { tone: "grey", text: "Shows emotional outbursts related to school stress." },
+                { tone: "green", text: "Begins skipping school or making excuses to avoid it." },
+                { tone: "blue", text: "Depends on tuitions as a crutch rather than support." },
+                { tone: "blue", text: "Struggles in transitioning to higher classes or complex concepts." },
+                { tone: "blue", text: "Loses interest in learning altogether." },
+                { tone: "blue", text: "Carries feelings of failure or inadequacy silently." },
+                { tone: "blue", text: "Shows inconsistent performance across subjects." },
+                { tone: "blue", text: "Tries to hide report cards or test results." },
+                { tone: "blue", text: "Feels that studying is “not for me” or “I'm not smart enough.”" },
+                { tone: "green", text: "Hesitates to speak up in any learning space." },
+                { tone: "blue", text: "Parents receive constant complaints from school." },
+                { tone: "yellow", text: "Difficulty completing classwork in the given time." },
+                { tone: "yellow", text: "Complains of physical symptoms like headaches before school." },
+                { tone: "blue", text: "Develops fear of certain teachers or subjects." },
+                { tone: "yellow", text: "Misbehaves to shift attention from poor performance." },
+                { tone: "yellow", text: "Constantly compares themselves negatively to others." },
+                { tone: "yellow", text: "Becomes overly dependent on memorisation strategies instead of thinking." },
+              ],
+            },
+            {
+              name: "Influence of technology & media",
+              notes: [
+                { tone: "pink", text: "Gets easily distracted by mobile games and YouTube, even during study hours." },
+                { tone: "blue", text: "Prefers watching short-form videos (like YouTube Shorts or Reels) over reading books." },
+                { tone: "blue", text: "Spends excessive screen time on games and entertainment instead of learning." },
+                { tone: "pink", text: "Skips schoolwork to spend time on Instagram or gaming apps." },
+                { tone: "blue", text: "Feels bored in class because digital content outside is more engaging." },
+                { tone: "blue", text: "Faces a reduced attention span due to rapid switching between apps and tabs." },
+                { tone: "pink", text: "Feels socially pressured to stay online to avoid missing out (FOMO)." },
+                { tone: "pink", text: "Lacks digital discipline, with no time limits set for educational vs. leisure use." },
+                { tone: "blue", text: "Develops unrealistic expectations of learning speed due to fast-paced online tutorials." },
+                { tone: "pink", text: "Mimics language or behaviour seen in online content, sometimes inappropriate." },
+              ],
+            },
+          ],
+        },
+        {
+          type: "personas",
+          heading: "Two children I designed for",
           items: [
             {
-              observation:
-                "Remedial tools slow content down; classes race to finish the syllabus.",
-              insight: "One pace fits almost nobody. Slower isn't the same as adapted.",
-              opportunity:
-                "Personalised learning journeys that grow with each child's pace and style.",
+              name: "Abhay Shetty",
+              age: "6",
+              descriptor: "Children facing problems in learning. A cheerful, curious first grader who enjoys drawing and watching cartoons. Imaginative and kind, he struggles to keep up in class, especially with reading and basic maths, and feels left out when others finish faster.",
+              quote: "Main samajhta hoon, par thode time mei bhul bhi jata hu",
+              needs: ["Become “smart like his classmates”", "Improve reading and maths at his own pace", "Be confident while answering in class", "Have more fun while learning", "Feel encouraged, not judged"],
+              frustrations: ["Feels anxious when others learn faster", "Doesn't like being corrected in front of others", "Gets easily distracted in class", "Avoids subjects he finds tough, especially maths", "Feels his parents don't fully understand what he's going through"],
             },
             {
-              observation:
-                "\"I like English songs, but reading feels scary.\" Children are afraid of making mistakes, so they hesitate to try.",
-              insight: "Fear blocks practice before ability does.",
-              opportunity: "Playful learning: game-based, sensory activities that make English feel natural.",
-            },
-            {
-              observation:
-                "Children switch between their mother tongue at home and English at school, and know answers they can't voice.",
-              insight: "The knowledge is often there; the words aren't.",
-              opportunity: "A visual and verbal blend of imagery, sound and motion to aid understanding.",
-            },
-            {
-              observation: "Lessons rarely use real-life examples or activities.",
-              insight: "English without context doesn't stick.",
-              opportunity: "Contextual spaces: story-led, real-world settings that give learning meaning.",
-            },
-            {
-              observation:
-                "Schools assume parents will follow up; parents assume the school has it covered.",
-              insight: "The child slips through, thinking just showing up is enough.",
-              opportunity:
-                "Guided support: tools that help teachers and parents track and nurture progress.",
+              name: "Piyu Sharma",
+              age: "11",
+              descriptor: "Children with learning disabilities. A sensitive, observant girl with autism who loves patterns, repetition and visual learning. She finds joy in familiar routines, becomes anxious with too much noise or sudden change, and deeply wants to understand and be understood.",
+              quote: "Teacher bolte hain samajh aa gaya? Par mai toh bas sir hila deti hoon… samajh toh aadha bhi nahi aata",
+              needs: ["Understand lessons clearly, not just memorise", "Read fluently in her own language", "Feel confident answering in class", "Enjoy learning through games or visuals"],
+              frustrations: ["Can't keep up with what's taught; forgets quickly", "Gets distracted easily and feels left out", "Finds textbooks boring and hard to understand", "Feels shy to ask for help or repeat questions"],
             },
           ],
         },
         {
-          type: "text",
-          heading: "What everyone needed from each other",
-          body: [
-            "Value mapping between kids, parents, teachers and counsellors surfaced five shared values: trust, transparency, adaptivity, well-being and clarity.",
+          type: "empathyMap",
+          heading: "Empathy mapping",
+          avatar: { src: `${PDF}/avatar.webp`, alt: "Illustrated portrait of a smiling girl with dark hair and a pink flower, on a mustard circle." },
+          quadrants: [
+            { name: "Think & Feel", tone: "#C7DEFC", notes: ["Why am I so slow?", "What's the point? Even if I try, I still don't get it", "School feels boring or confusing.", "Anxious before tests or class participation.", "Embarrassed when asked to read aloud or solve a sum.", "Frustrated when they forget what was just taught."] },
+            { name: "Hear", tone: "#D7EAD3", notes: ["“Your elder sibling is doing better.”", "“You just need to memorise it.”", "“I don't have all the time for you.”", "“Why do you always score low?”", "“Other kids do it, why can't you?”", "“Pay more attention!”", "“You have to improve or you'll fail.”", "“Don't ask silly questions in class.”", "“You're not trying hard enough.”"] },
+            { name: "See", tone: "#FBECC4", notes: ["Parents comparing them to others.", "Peers answering confidently in class.", "Teachers praising only top scorers.", "Classwork full of red marks or corrections."] },
+            { name: "Say & Do", tone: "#FAD6DD", notes: ["“I can't do that, I don't know.”", "“I'll do it later.”", "“I don't get this.”", "Avoid homework or delay starting.", "Keep asking peers for answers.", "Make excuses to skip school.", "Get distracted easily.", "Look lost during lessons.", "“I hate this subject.”", "“I don't like the teacher, she is very strict.”", "Copy answers without understanding.", "Stay silent in class even when confused.", "Watch videos instead of studying.", "Doodle or fidget during class."] },
+          ],
+          pains: ["Feels left behind when others understand faster.", "Fears being judged for asking questions or making mistakes.", "Struggles silently due to lack of help at home or school."],
+          gains: ["Feels confident when concepts are explained clearly and visually.", "Enjoys learning through games, activities, or relatable stories.", "Feels motivated when appreciated or when small progress is noticed."],
+        },
+        {
+          type: "valueMap",
+          heading: "Value mapping",
+          cast: "leapsters",
+          caption: "What kids, parents, teachers and counsellors need from each other: trust, transparency, adaptivity, well-being and clarity.",
+          edges: [
+            { from: "counsellor", to: "teachers", values: ["transparency"] },
+            { from: "parents", to: "teachers", values: ["trust", "transparency"] },
+            { from: "teachers", to: "parents", values: ["trust", "clarity", "transparency"] },
+            { from: "teachers", to: "kids", values: ["wellbeing", "adaptivity"] },
+            { from: "kids", to: "teachers", values: ["clarity", "trust", "transparency"] },
+            { from: "kids", to: "counsellor", values: ["clarity", "transparency", "adaptivity"] },
+            { from: "counsellor", to: "kids", values: ["wellbeing"] },
+            { from: "parents", to: "counsellor", values: ["trust", "transparency"] },
+            { from: "counsellor", to: "parents", values: ["clarity"] },
+            { from: "parents", to: "kids", values: ["adaptivity", "trust", "wellbeing"] },
+            { from: "kids", to: "parents", values: ["transparency", "clarity", "trust"] },
           ],
         },
       ],
@@ -309,22 +415,29 @@ const project: Project = {
       blocks: [
         {
           type: "hmw",
-          statement:
-            "How might we create a playful learning system that adapts to each child's pace, helping them learn joyfully and feel seen in the process?",
+          label: "Problem statement",
+          statement: "How might we create a playful **learning system that adapts to each child's pace**, helping them learn joyfully and feel seen in the process?",
         },
         {
-          type: "features",
-          heading: "Three words to design against",
+          type: "opportunityCircles",
+          heading: "Opportunity areas",
           items: [
-            { title: "Fun", body: "Engagement through play." },
-            { title: "Simple", body: "Clear communication pathways." },
-            { title: "Adaptive", body: "Personalised practice and emotional support." },
+            { title: "Personalised learning journeys", body: "Adaptive tools that grow with each child's pace and style.", r: 170, place: "inside" },
+            { title: "Playful learning", body: "Game-based, sensory activities that make English fun and natural.", r: 37, place: "above" },
+            { title: "Visual + verbal blend", body: "Combining imagery, sound, and motion to aid understanding.", r: 70, place: "below" },
+            { title: "Contextual spaces", body: "Story-led, real-world contexts that add meaning to learning.", r: 23, place: "above" },
+            { title: "Guided support", body: "Insightful tools that help teachers and parents track and nurture progress.", r: 100, place: "below" },
           ],
         },
         {
-          type: "text",
-          body: [
-            "The goal in one line: learning that adapts, supports and connects, without pressure.",
+          type: "ideaVisual",
+          heading: "Idea visualisation",
+          statement: "Learning that **adapts, supports, and connects** without pressure.",
+          focus: ["Learning gaps & emotional support", "Behavioural needs of children (low pressure, fun engagement, emotional presence)", "Stakeholder balance"],
+          pillars: ["Fun", "Simple", "Adaptive"],
+          promises: [
+            { pillars: [0, 1], text: "Engagement through play, clear communication pathways." },
+            { pillars: [2], text: "A personalised app & emotional support." },
           ],
         },
       ],
@@ -335,26 +448,32 @@ const project: Project = {
       id: "exploration",
       stage: "ideation",
       title: "30 ideas, 3 survivors",
-      intro:
-        "I sketched widely: focus pets, emotion dice, mood tiles, story blocks, counsellor dashboards, an AI study buddy, adaptive report cards.",
       blocks: [
         {
-          type: "image",
-          image: {
-            src: `${IMG}/25-cut.webp`,
-            cutout: true,
-            alt: "Grid of thirty numbered black-and-white concept sketches, including emotion dice, mood floor tiles, story blocks, a growth jar, a heatmap dashboard, a play-to-learn arcade and a collaboration hub.",
-            caption: "30+ concept sketches.",
-          },
-          size: "full",
+          type: "sketchWall",
+          heading: "30+ concept sketches",
+          intro: "The four sketches that made the shortlist are lit. Pick a number to zoom in, or show all 30+ concepts.",
+          image: { src: `${PDF}/sketch-wall.webp`, alt: "A wall of numbered black-and-white concept sketches: comic-strip panels of children with spinners, mood tiles, story blocks, timers, jars, dashboards, apps and collaboration hubs." },
+          ratio: 4000 / 1792,
+          concepts: [
+            { label: "Concept 1", x: 4.5, y: 28.5, box: [0, 2.7, 10.2, 25.4] }, { label: "Concept 2", x: 13.8, y: 6.3 }, { label: "Concept 3", x: 23.3, y: 28.1, box: [18.6, 3, 10.4, 25] }, { label: "Concept 4", x: 33.2, y: 5.6 }, { label: "Concept 5", x: 42.8, y: 30 },
+            { label: "Concept 6", x: 52.7, y: 7.6 }, { label: "Concept 7", x: 62.5, y: 30.3, box: [57.7, 3.8, 10.4, 25] }, { label: "Concept 8", x: 72, y: 6.3 }, { label: "Concept 9", x: 82.4, y: 31 }, { label: "Concept 10", x: 94, y: 6.2 },
+            { label: "Concept 11", x: 4.6, y: 63.3 }, { label: "Concept 12", x: 17.8, y: 64.5 }, { label: "Concept 14", x: 31.4, y: 36.2 }, { label: "Concept 15", x: 45, y: 62.8 }, { label: "Concept 16", x: 57, y: 37 },
+            { label: "Concept 17", x: 67.1, y: 60.9 }, { label: "Concept 18", x: 76.2, y: 37.4 }, { label: "Concept 19", x: 84.6, y: 59 }, { label: "Concept 20", x: 94.3, y: 39.8 }, { label: "Concept 21", x: 3.8, y: 74.4 },
+            { label: "Concept 22", x: 12.8, y: 92.9 }, { label: "Concept 23", x: 21.4, y: 76.1, box: [17, 74, 9.4, 19.4] }, { label: "Concept 24", x: 31.1, y: 96.5 }, { label: "Concept 25", x: 39.4, y: 74.7 }, { label: "Concept 26", x: 47.4, y: 95.5 },
+            { label: "Concept 27", x: 57.1, y: 73.3 }, { label: "Concept 28", x: 68.2, y: 94.9 }, { label: "Concept 29", x: 82.2, y: 71 }, { label: "Concept 30", x: 94.8, y: 97.5 },
+          ],
+          picks: [1, 7, 3, 23],
+          pickLabel: "Show the shortlist",
+          allLabel: "Show all 30+ concepts",
         },
         {
-          type: "features",
-          heading: "How I chose",
-          items: [
-            { title: "Engagement", body: "Builds curiosity and participation." },
-            { title: "Confidence", body: "Easy for all learners to use." },
-            { title: "Sustainability", body: "Simple and scalable to implement." },
+          type: "criteriaArrow",
+          heading: "Selection criteria",
+          criteria: [
+            { name: "Engagement", body: "Builds curiosity and participation." },
+            { name: "Confidence", body: "Easy for all learners to use." },
+            { name: "Sustainability", body: "Simple and scalable to implement." },
           ],
         },
         {
@@ -362,44 +481,51 @@ const project: Project = {
           stages: [
             { count: "30+", label: "concept sketches" },
             { count: "3", label: "shortlisted" },
-            { count: "1", label: "system, revealed next" },
+            { count: "1", label: "system: a board game with an app" },
           ],
           concepts: [
+            { name: "Challenge Spinner + Mood Tiles", verdict: "shortlisted", reason: "A spinner with Draw, Explain and Act prompts for flexible problem-solving and expression, revealing learning strengths across modes; floor tiles with emotions for mood expression and real-time emotional feedback." },
+            { name: "Story Blocks", verdict: "shortlisted", reason: "Interlocking story-prompt blocks for creativity and flexible thinking, adapting to different comprehension levels." },
+            { name: "Micro-Learning Bursts", verdict: "shortlisted", reason: "5-minute adaptive puzzles and tasks that prevent overload and keep engagement high. Rated lowest of the three." },
+          ],
+        },
+        {
+          type: "conceptScore",
+          heading: "Selected concepts",
+          criteria: ["Impactful", "Engaging", "Accessibility"],
+          cards: [
             {
               name: "Challenge Spinner + Mood Tiles",
-              verdict: "shortlisted",
-              reason:
-                "A spinner with Draw, Explain and Act prompts reveals strengths across modes; floor tiles with emotions give real-time emotional feedback. Rated highest of the three overall on impact, engagement and accessibility.",
+              image: { src: `${PDF}/concept-card-1.webp`, alt: "Pencil sketches: a boy spinning a prompt wheel (Draw it, Explain aloud, Act it out) beside floor tiles labelled Happy, Nervous, Tired and Excited." },
+              scores: [81, 74, 85],
+              parts: [
+                { title: "Challenge Spinner", lines: ["**Design:** a spinner with prompts (Draw, Explain, Act).", "**Behavioural target:** flexible problem-solving, expression.", "**Problem fit:** reveals learning strengths across modes."] },
+                { title: "Mood Tiles", lines: ["**Design:** floor tiles with emotions.", "**Behavioural target:** mood expression.", "**Problem fit:** gives real-time emotional feedback."] },
+              ],
             },
             {
               name: "Story Blocks",
-              verdict: "shortlisted",
-              reason:
-                "Interlocking story-prompt blocks for creativity and flexible thinking, adapting to different comprehension levels.",
+              image: { src: `${PDF}/concept-card-2.webp`, alt: "Pencil sketches: children building with interlocking story-prompt blocks, captioned New endings!, Your adventure! and Create & imagine!" },
+              scores: [70, 81, 86],
+              parts: [{ title: "Story Blocks", lines: ["**Design:** interlocking story-prompt blocks.", "**Behavioural target:** creativity, flexible thinking.", "**Problem fit:** adapts to different comprehension levels."] }],
             },
             {
               name: "Micro-Learning Bursts",
-              verdict: "shortlisted",
-              reason:
-                "Five-minute adaptive puzzles delivered daily to prevent overload. Rated lowest of the three on all criteria.",
+              image: { src: `${PDF}/concept-card-3.webp`, alt: "Pencil sketches: an alarm clock and a phone showing a quick maths puzzle, a 5-minute timer and a boy solving 3 × 4 + 7 on a phone." },
+              scores: [51, 62, 47],
+              parts: [{ title: "Micro-Learning Bursts", lines: ["**Design:** 5-minute adaptive puzzles & tasks.", "**Impact:** prevents overload, keeps engagement high."] }],
             },
           ],
         },
         {
-          type: "image",
-          image: {
-            src: `${IMG}/23-cut.webp`,
-            cutout: true,
-            alt: "Three cards of pencil concept sketches, each rated Low to High on Impactful, Engaging and Accessibility sliders: a challenge spinner with mood tiles, story blocks, and micro-learning bursts.",
-            caption: "The shortlist, scored on impact, engagement and accessibility.",
-          },
-          size: "wide",
-        },
-        {
-          type: "needed",
-          items: [
-            "Why the other ~27 concepts were dropped",
-            "Which shortlisted concept (or combination) led to the final design, and why",
+          type: "frameworkNest",
+          heading: "Design framework",
+          layers: [
+            { id: "outcome", name: "Outcome", note: "Boosts confidence. Eliminated learning gaps, stakeholder balance." },
+            { id: "context", name: "Context", note: "Children often feel disengaged, anxious, and unsupported." },
+            { id: "game", name: "Board Game", note: "A social environment for learning." },
+            { id: "app", name: "App", note: "Ensures the system continuously tracks progress." },
+            { id: "focus", name: "Design Focus", note: "A learning experience that bridges the language gap." },
           ],
         },
       ],
@@ -407,193 +533,314 @@ const project: Project = {
 
     /* 7 ─────────────────────────────────────────────── */
     {
-      id: "reveal",
+      id: "board-game",
       stage: "solution",
       title: "Meet Leapsters",
-      intro:
-        "A board game played on a mat, with an app inside it for everyday practice. The manual says it best: take small leaps with confidence.",
+      intro: "A board game played on a mat, with an app inside it for everyday practice. Take small leaps with confidence.",
       blocks: [
         {
-          type: "image",
-          image: {
-            src: `${IMG}/24.webp`,
-            alt: "Nested-circle diagram: an outer Outcome ring, a Context shape, a blue Design Focus shape, and at the core an orange Board Game circle containing a red App circle.",
-            caption:
-              "The framework: the board game at the core, the app inside it, aimed at boosting confidence.",
-          },
-          size: "inset",
-        },
-        {
-          type: "image",
-          image: {
-            src: `${IMG}/27.webp`,
-            alt: "Leapsters board game components on white: a polka-dot 2 ft mat, four illustrated challenge card decks, an instruction manual, three tokens in navy, purple and green, and a green sand timer.",
-          },
-          size: "full",
-        },
-        {
-          type: "features",
+          type: "boardKit",
           heading: "In the box",
-          items: [
-            {
-              title: "2 ft play mat",
-              body: "Coloured circles, each colour a skill zone.",
-            },
-            {
-              title: "4 challenge decks",
-              body: "Creative Thinking, Listening Skills, Writing Skills and Speaking Skills.",
-            },
-            { title: "3 magnetic tokens", body: "One colour per player, used to claim circles." },
-            { title: "Timer and manual", body: "A sand timer and an instruction manual." },
+          image: { src: `${PDF}/kit.webp`, alt: "The Leapsters board game: a white polka-dot mat with an orange border and the leapsters wordmark, four illustrated challenge cards, three tokens in navy, purple and green, and a green sand timer." },
+          ratio: 2440 / 2160,
+          logo: { src: `${PDF}/logo.webp`, alt: "leapsters." },
+          parts: [
+            { name: "2 ft mat", body: "Coloured circles, each colour a skill zone.", x: 72, y: 38, r: 30 },
+            { name: "4 decks of challenge cards", body: "Creative Thinking, Listening Skills, Writing Skills and Speaking Skills.", x: 31, y: 47, r: 25 },
+            { name: "3 tokens", body: "Magnetic, one colour per player, used to claim circles.", x: 20.5, y: 78, r: 8 },
+            { name: "Timer", body: "A sand timer for each challenge.", x: 40.6, y: 80, r: 9 },
           ],
         },
         {
-          type: "process",
+          type: "howToPlay",
           heading: "How to play",
+          mascot: { src: `${PDF}/mascot.webp`, alt: "An orange line-drawn mascot shouting through a megaphone and pointing." },
           steps: [
-            {
-              title: "Choose your colour",
-              body: "Each player picks a token colour that represents them for the game.",
-            },
-            {
-              title: "Spot the circles",
-              body: "The coloured circles on the mat are skill zones: creative thinking, listening, writing and speaking.",
-            },
-            {
-              title: "Draw a challenge card",
-              body: "Pick the circle you want, then draw a card in its colour. A pink circle means a Speaking Skills card.",
-            },
-            {
-              title: "Do it to win it",
-              body: "Speak, act, write or think creatively. Succeed, and your token claims the circle.",
-            },
-            {
-              title: "Keep conquering",
-              body: "Take turns claiming circles, blocking opponents or connecting circles into your own zones.",
-            },
+            { title: "Step 1: Choose your colour", body: "Each player selects one colour of magnetic tokens; this will represent them throughout the game.", fill: "#D6E6F8", line: "#6F94C8" },
+            { title: "Step 2: Spot the circles", body: "The coloured circles on the mat represent different skill zones: Creative Thinking, Listening Skills, Writing Skills and Speaking Skills.", fill: "#F8D3B2", line: "#E0904C" },
+            { title: "Step 3: Draw a challenge card", body: "On your turn, pick a challenge card that matches the colour of the circle you want to conquer. (For example, choose a pink circle and draw a Speaking Skills card.)", fill: "#F9D9DE", line: "#C8667A" },
+            { title: "Step 4: Do it to win it!", body: "Complete the task on your card: it could be speaking, acting, writing, or thinking creatively. If you succeed, place your magnetic token on that circle to mark your victory!", fill: "#FBF0C6", line: "#D2AE45" },
+            { title: "Step 5: Keep conquering", body: "Players take turns claiming new circles. You can strategically block other players or connect circles to form your own skill zones.", fill: "#D6E6F8", line: "#6F94C8" },
           ],
-        },
-        {
-          type: "callout",
-          label: "Bonus round",
-          body: "Form a square of four tokens and you unlock a bonus round: draw a card from any deck and complete it to choose one reward: 2 extra points, an extra token anywhere on the mat, or a swap with an opponent's token.",
-        },
-        {
-          type: "text",
-          heading: "Why it motivates",
-          body: [
-            "I checked the game against the Octalysis framework. It leans on accomplishment, social influence and creative empowerment, with avoidance kept deliberately low to reduce fear and pressure.",
-          ],
-        },
-        {
-          type: "image",
-          image: {
-            src: `${IMG}/30.webp`,
-            alt: "A phone on a coral background showing the app splash screen: a pink cube-shaped mascot above the leapsters wordmark.",
-            caption: "Koko says hello.",
+          bonus: {
+            title: "Bonus Round Alert!",
+            lines: ["If a player's tokens form a complete square (4 circles of any colour), they unlock a Bonus Round!", "In this round, the player draws one random challenge card from any skill deck of their choice.", "If they complete it successfully, they:"],
+            rewards: ["Earn 2 extra points", "Place an extra token anywhere on the mat", "Swap one opponent's token with theirs"],
+            note: "(The player must choose only one reward.)",
           },
-          size: "wide",
         },
         {
-          type: "text",
-          heading: "The app",
-          body: [
-            "The app is mobile first, because most children and parents rely on smartphones. That means access on the go and practice that carries on beyond the classroom.",
-            "Koko, the mascot, greets children on launch. Onboarding asks for a learning goal, English level, skills to improve, daily study time and a reminder time, then generates a learning plan.",
+          type: "matPlay",
+          heading: "Play a round",
+          intro: "Pick a circle, draw a card from that colour's deck, and do the challenge to claim it. These are real cards from the game. Form a square of four to unlock a bonus round.",
+          logo: { src: `${PDF}/logo.webp`, alt: "leapsters." },
+          decks: [
+            {
+              name: "Creative Thinking",
+              color: "#E3E8AE",
+              ink: "#6B701C",
+              edge: "#909011",
+              body: "Unleash imagination with fun challenges! From silly stories to quick doodles, kids explore ideas, invent solutions and think outside the box.",
+              front: { src: `${CARDS}/creative-front.webp`, alt: "Creative Thinking card: an olive line-drawn character thinking, on pale yellow." },
+              back: { src: `${CARDS}/creative-back.webp`, alt: "Card back: the leapsters wordmark over pastel dots, labelled Creative Thinking." },
+              cards: [
+                { title: "Build a Scene", prompt: "Describe a hidden garden using at least two adjectives and one verb." },
+                { title: "What Happens Next?", prompt: "Continue this story: ‘The wind whispered something strange in the night…’" },
+                { title: "Feelings Board", prompt: "Imagine you forgot your lunch at school. How would you feel? Use at least one emotion word and a sentence." },
+                { title: "Word Chains", prompt: "Create a story where each sentence starts with the last word from the previous sentence. Begin with ‘The dragon…’" },
+                { title: "Grammar in Context", prompt: "Use the verb ‘jump’ in three different sentences about animals." },
+                { title: "Build a Scene", prompt: "Describe a space adventure using at least two adjectives and one verb." },
+                { title: "What Happens Next?", prompt: "Continue this story: ‘The old map led to…’" },
+                { title: "Feelings Board", prompt: "Imagine it's your birthday tomorrow! How do you feel? Use one emotion word in your answer." },
+              ],
+            },
+            {
+              name: "Listening Skills",
+              color: "#BBD3F4",
+              ink: "#3F6AA6",
+              edge: "#7297C6",
+              body: "Tune in and focus! Fun games of clues, rhythms and responses help children improve attention, comprehension and active listening.",
+              front: { src: `${CARDS}/listening-front.webp`, alt: "Listening Skills card: a blue character in headphones walking, on pale blue." },
+              back: { src: `${CARDS}/listening-back.webp`, alt: "Card back: the leapsters wordmark over pastel dots, labelled Listening Skills." },
+              cards: [
+                { title: "Listening for Details", prompt: "Listen to this sentence and tell me the name of the animal." },
+                { title: "Following Instructions", prompt: "Listen and draw a circle around the correct picture when you hear the word ‘sun’." },
+                { title: "Listening Comprehension", prompt: "What did the boy find in the garden?" },
+                { title: "Emotion Recognition", prompt: "Was the girl excited or sad after opening the box?" },
+                { title: "Vocabulary Building", prompt: "Circle the word that means ‘happy’ after hearing the sentence." },
+                { title: "Following Instructions", prompt: "Follow these instructions: Stand up, touch your nose, and sit down." },
+                { title: "Listening for Details", prompt: "What colour did you hear in the sentence?" },
+                { title: "Emotion Recognition", prompt: "Which emotion did the boy show when he saw the rainbow?" },
+              ],
+            },
+            {
+              name: "Writing Skills",
+              color: "#F6C99D",
+              ink: "#9A541A",
+              edge: "#F08C21",
+              body: "Ready, set, write! Build sentences, complete stories and express thoughts creatively, nurturing clear and imaginative writing skills.",
+              front: { src: `${CARDS}/writing-front.webp`, alt: "Writing Skills card: an orange character holding up a pencil, on pale peach." },
+              back: { src: `${CARDS}/writing-back.webp`, alt: "Card back: the leapsters wordmark over pastel dots, labelled Writing Skills." },
+              cards: [
+                { title: "Sentence Construction", prompt: "Write a sentence about your pet using the verb ‘run’." },
+                { title: "Descriptive Writing", prompt: "Describe your favourite fruit using at least two adjectives." },
+                { title: "Descriptive Writing", prompt: "Continue this story: ‘The brave knight found a…’" },
+                { title: "Grammar Application", prompt: "Write a sentence using the correct form of ‘is’ or ‘are’." },
+                { title: "Creative Expression", prompt: "Write a story about a talking tree." },
+                { title: "Creative Expression", prompt: "Imagine you have wings: write what you would do." },
+                { title: "Sentence Construction", prompt: "Create a sentence using the word ‘happy’ and describe what makes you happy." },
+                { title: "Descriptive Writing", prompt: "Describe how your room smells or sounds." },
+              ],
+            },
+            {
+              name: "Speaking Skills",
+              color: "#F1BACA",
+              ink: "#A8405E",
+              edge: "#C84B6B",
+              body: "Time to shine! Act, speak and share stories while building confidence, clear pronunciation and expressive communication.",
+              front: { src: `${CARDS}/speaking-front.webp`, alt: "Speaking Skills card: a pink character speaking through a megaphone, on pale pink." },
+              back: { src: `${CARDS}/speaking-back.webp`, alt: "Card back: the leapsters wordmark over pastel dots, labelled Speaking Skills." },
+              cards: [
+                { title: "Sentence Speaking", prompt: "Say a sentence about your breakfast." },
+                { title: "Role Play & Dialogue", prompt: "Pretend you are a shopkeeper. Ask for money." },
+                { title: "Storytelling", prompt: "Tell us what you did yesterday in two sentences." },
+                { title: "Questioning & Responding", prompt: "Ask a question about someone's favourite animal." },
+                { title: "Expressing Emotions", prompt: "Tell us how you feel when it rains." },
+                { title: "Sentence Speaking", prompt: "Make a sentence about something you wore today." },
+                { title: "Role Play & Dialogue", prompt: "Act like you are giving directions to a friend." },
+                { title: "Expressing Emotions", prompt: "Describe how you feel when you see a puppy." },
+              ],
+            },
+          ],
+          players: [
+            { name: "Player 1", color: "#2E4756" },
+            { name: "Player 2", color: "#7B2A86" },
+            { name: "Player 3", color: "#4E8B2E" },
+          ],
+          rewards: ["Earn 2 extra points", "Place an extra token anywhere on the mat", "Swap one opponent's token with yours"],
+        },
+        {
+          type: "flipBook",
+          heading: "The instruction manual",
+          intro: "Every box comes with a manual that walks children through the components, the set-up, the four challenge decks and how to play. Turn the pages.",
+          title: "Leapsters instruction manual",
+          pages: [
+            { src: `${IMG}/manual/01.webp`, alt: "Cover: Instruction Manual, leapsters, 'Take small leaps with confidence.', on cream with pastel dots." },
+            { src: `${IMG}/manual/02.webp`, alt: "'Are you ready to play your way to confidence?' in white on slate." },
+            { src: `${IMG}/manual/03.webp`, alt: "'Where learning, laughter and little leaps collide!' with a short introduction to the game." },
+            { src: `${IMG}/manual/04.webp`, alt: "Game components: the 2 ft mat, magnetic tokens and four decks of challenge cards." },
+            { src: `${IMG}/manual/05.webp`, alt: "Game set-up: place the mat, sort the cards, distribute the tokens." },
+            { src: `${IMG}/manual/06.webp`, alt: "See your challenge: the Creative Thinking, Listening, Writing and Speaking decks, each with a description." },
+            { src: `${IMG}/manual/07.webp`, alt: "How to play, in five steps: choose your colour, spot the circles, draw a challenge card, do it to win it, keep conquering." },
+            { src: `${IMG}/manual/08.webp`, alt: "Bonus round alert! on orange: form a square to unlock a bonus round and its rewards." },
+            { src: `${IMG}/manual/09.webp`, alt: "Benefits of the game, in four numbered points." },
+            { src: `${IMG}/manual/10.webp`, alt: "'Take small leaps with confidence.' in cream on orange." },
+            { src: `${IMG}/manual/11.webp`, alt: "Back cover: the leapsters wordmark and its stacked mascot characters on cream with pastel dots." },
           ],
         },
         {
-          type: "features",
-          items: [
-            { title: "Home", body: "Daily challenges." },
-            {
-              title: "Lessons that talk back",
-              body: "Interactive dialogue where children speak their answers, fill a progress bar, earn streaks and unlock the next lesson.",
-            },
-            {
-              title: "Phrasebook",
-              body: "Chapters such as greetings, travel and directions, dining, shopping and emergencies.",
-            },
-            {
-              title: "Word Cards",
-              body: "Illustrated vocabulary by theme: animals, fruit, numbers, insects, food, vegetables.",
-            },
-            {
-              title: "Insights",
-              body: "Streaks, achievements and a growth chart across listening, pronunciation, fluency, intonation, word stress and grammar.",
-            },
+          type: "gallery",
+          heading: "In real life",
+          columns: 2,
+          images: [
+            { src: `${IMG}/real/mat-in-play.webp`, alt: "The printed Leapsters mat on a tiled floor mid-game, with green, purple, navy and silver tokens on its circles, a yellow sand timer, and the four illustrated challenge card decks beside it.", caption: "A game in progress." },
+            { src: `${IMG}/real/manual-in-box.webp`, alt: "A hand holding the printed Leapsters instruction manual over its navy box, with the folded mat inside.", caption: "The manual, in the box." },
           ],
         },
         {
-          type: "image",
-          image: {
-            src: `${IMG}/35.webp`,
-            alt: "Six high-fidelity phone screens on coral: English level selection with Koko, a 'Say the sentence' speaking exercise, the Phrasebook list, Word Cards, a My Progress radar chart, and Account settings.",
-            caption: "High-fidelity screens.",
-          },
-          size: "full",
-        },
-        {
-          type: "image",
-          image: {
-            src: `${IMG}/31.webp`,
-            alt: "UI style sheet: Fredoka and Poppins type specimens in coral, a colour arc around the leapsters wordmark, and active and inactive navigation icons for Home, Phrasebook, Word cards, Insights and Account.",
-            caption: "Type, colour and icons: Fredoka for headings, Poppins for everything else.",
-          },
-          size: "wide",
+          type: "octalysis",
+          heading: "Why it motivates: the Octalysis framework",
+          intro: "I checked the board game and the app against Octalysis's eight core drives. Pick a drive, or compare the two.",
+          versions: [
+            {
+              name: "Board game",
+              notes: [
+                "Strong emotional purpose connects learning to bravery, not pressure.",
+                "Central to gameplay: creativity and expression drive engagement.",
+                "Deeply social and emotionally reinforcing. A strong intrinsic motivator.",
+                "Keeps engagement lively and suspenseful.",
+                "A gentle avoidance drive, purposely kept low to reduce fear and pressure.",
+                "Adds fun tension and anticipation, but isn't core to motivation.",
+                "Tangible ownership via tokens; a moderate emotional tie to personal success.",
+                "Clear feedback loops and a sense of progress. A very strong extrinsic motivator.",
+              ],
+            },
+            {
+              name: "App",
+              notes: [
+                "A subtle but effective motivational narrative.",
+                "High creative autonomy and an immediate feedback loop.",
+                "An indirect social loop: not multiplayer, but community-supported.",
+                "Keeps novelty alive for long-term retention.",
+                "Low fear, with a focus on positive reinforcement.",
+                "Drives habit formation and consistent engagement.",
+                "A high sense of personal ownership over the learning journey.",
+                "Strong gamified progression and measurable achievements.",
+              ],
+            },
+          ],
         },
         {
           type: "needed",
-          items: [
-            "How the board game and the app connect in use (shared progress, QR codes, sync, or separate use)",
-          ],
+          items: ["How the board game and the app connect in use (shared progress, QR codes, sync, or separate use)"],
         },
       ],
     },
 
     /* 8 ─────────────────────────────────────────────── */
     {
-      id: "testing",
-      stage: "testing",
-      title: "122 tests later",
-      intro: "Then I put it in front of children: at tables, on classroom floors, phones in hand.",
+      id: "app",
+      stage: "solution",
+      title: "Koko, for every day",
+      intro: "Mobile first: since most children and parents rely on smartphones, a mobile-first design ensures easy access, on-the-go learning, and continuous engagement beyond classrooms.",
       blocks: [
         {
-          type: "image",
-          image: {
-            src: `${IMG}/37.webp`,
-            alt: "Collage of colour photos of children with faces blurred: groups playing on the dot mat and on an earlier path-style board, and individual children using the app on phones.",
-            caption: "Testing the prototype. Some sessions used an earlier path-style board.",
-          },
-          size: "full",
+          type: "mobileFirst",
+          phone: { src: `${PDF}/phone.webp`, alt: "A phone frame." },
+          koko: { src: `${PDF}/koko.webp`, alt: "Koko, the Leapsters mascot: a pink pillow-shaped character with big eyes, waving." },
+          logo: { src: `${PDF}/logo.webp`, alt: "leapsters." },
         },
         {
-          type: "testing",
-          summary:
-            "122 user tests across the board game and the app. Players found it fun and engaging; younger players and the reward system told me what to fix.",
-          metrics: [
-            {
-              label: "Overall feedback score",
-              after: "3.6/5",
-              note: "How the score was collected isn't specified",
-            },
-          ],
-          positives: [
-            "The visual design and illustrations of both the board game and the app were highly appreciated.",
-            "Players found learning through play fun and engaging.",
-            "Parents and teachers liked the blend of education and entertainment.",
-          ],
-          negatives: [
-            "Gameplay felt too long for younger players.",
-            "Short attention spans led to loss of focus and patience.",
-            "The XP and rewards system wasn't well understood.",
+          type: "versusTable",
+          heading: "Why not just Duolingo?",
+          intro: "Duolingo is a great course for a motivated learner on their own. The children I met weren't short of courses; they were short of confidence. So Leapsters is built around a different job.",
+          them: "Duolingo",
+          us: "Leapsters",
+          rows: [
+            { label: "Built for", them: "Self-motivated teens and adults working through a fixed course, alone.", us: "Children aged 5–12 still building basic English, learning alongside family, friends and teachers." },
+            { label: "Mistakes", them: "Mistakes cost you, and streaks pressure you to come back. Great for habit, hard on an anxious child.", us: "Avoidance is kept deliberately low. Positive reinforcement, so mistakes become milestones." },
+            { label: "Skills", them: "Mostly tap, match and translate. Speaking exercises can simply be switched off.", us: "Four equal skills: speaking, listening, writing and creative thinking. The app tracks listening, pronunciation, fluency, intonation, word stress and grammar." },
+            { label: "Where it happens", them: "One person, one screen.", us: "A mat on the floor with friends, plus an app for daily practice. Learning isn't locked behind a device." },
+            { label: "What it measures", them: "Course progress and streak length.", us: "Confidence: whether a child is ready to say it out loud." },
           ],
         },
         {
-          type: "needed",
-          items: [
-            "What the Fun 60% / Simple 50% / Adaptive 45% figures on the feedback slide measure, and how they were collected",
-            "Who the 122 tests were with (ages, settings, unique children vs sessions) and the test protocol",
+          type: "iaTree",
+          heading: "Information architecture",
+          root: "Leapsters",
+          branches: [
+            { name: "Home", items: ["Daily Challenges"] },
+            { name: "Phrasebook", items: ["Chapters"] },
+            { name: "Word Card", items: ["Chapters"] },
+            { name: "Insights", items: ["Insight", "Achievement"] },
+            { name: "Account", items: ["Profile", "Subscription", "Help Center", "Footer", "Sign out"] },
+          ],
+        },
+        {
+          type: "taskFlow",
+          heading: "Task flow 1: getting started with Leapsters",
+          columns: [
+            ["User opens app"],
+            ["Sees splash screen with Koko mascot loading animation"],
+            ["Welcome screen", "Intro message"],
+            ["Select learning goal", "Select English level"],
+            ["Choose skills to improve"],
+            ["Set daily study duration", "Pick reminder time"],
+            ["System generates learning plan"],
+            ["Enter name", "Enter email", "Create password", "Redirected to main dashboard"],
+          ],
+        },
+        {
+          type: "taskFlow",
+          heading: "Task flow 2: exploring Leapsters and completing a chapter",
+          columns: [
+            ["User opens app"],
+            ["Arrives on home dashboard"],
+            ["Selects a chapter", "Views lesson list"],
+            ["Opens a lesson", "Lesson loading screen appears"],
+            ["Interactive dialogue begins"],
+            ["Completes learning activities", "Speak answers"],
+            ["Progress bar fills"],
+            ["Lesson complete screen shows results", "User earns streak", "Option to share or continue", "Returns to chapter list", "Next lesson unlocked"],
+          ],
+        },
+        {
+          type: "appCoverflow",
+          heading: "High-fidelity screens",
+          ink: "#3E5262",
+          highlight: "#E27274",
+          screens: [
+            { title: "Your level", tag: "Onboarding", body: "Koko asks for the child's current English level: beginner, elementary, intermediate or advanced.", image: { src: `${IMG}/app/level.webp`, alt: "Phone screen: Koko asks 'Nice! What's your current level of English?' with Beginner, Elementary, Intermediate and Advanced options and a Continue button." } },
+            { title: "Say the sentence", tag: "Lesson", body: "Interactive dialogue: the child speaks the answer aloud, with a 'Can't speak now' option for when they aren't ready.", image: { src: `${IMG}/app/speak.webp`, alt: "Phone screen: 'Say the sentence!' with an illustration of two people talking, the line 'My name is Isabella', a 'Can't speak now' link and a microphone button." } },
+            { title: "Phrasebook", tag: "Phrasebook", body: "Chapters for real situations: greetings, travel and directions, dining, shopping, small talk, numbers and time, and emergencies.", image: { src: `${IMG}/app/phrasebook.webp`, alt: "Phone screen: the Phrasebook list with chapters such as Greetings and Introductions, Travel and Directions, Dining and Food, Shopping, Socializing, Numbers and Time, and Emergencies." } },
+            { title: "Word Cards", tag: "Word Card", body: "Illustrated vocabulary by theme: animals, fruit, numbers, insects, food and vegetables.", image: { src: `${IMG}/app/word-cards.webp`, alt: "Phone screen: Word Cards in a grid of illustrated categories: an owl for Animal, a pineapple for Fruit, a 3 for Number, a ladybird for Insect, a taco for Food and a radish for Vegetable." } },
+            { title: "My Progress", tag: "Insights", body: "Streaks, learning days and a growth chart across listening, pronunciation, fluency, intonation, word stress and grammar.", image: { src: `${IMG}/app/progress.webp`, alt: "Phone screen: My Progress with streak and learning-day counts and a radar chart of growth across listening, pronunciation, fluency, intonation, word stress and grammar." } },
+            { title: "Account", tag: "Account", body: "Preferences, courses, notifications, payments and subscriptions, with an upgrade prompt from Koko.", image: { src: `${IMG}/app/account.webp`, alt: "Phone screen: the Account page with an 'Upgrade Plan Now!' banner featuring Koko, a profile row and settings such as Preferences, Manage Courses, Notification and Billing." } },
+          ],
+        },
+        {
+          type: "figmaEmbed",
+          heading: "Try the prototype",
+          title: "Leapsters app, interactive Figma prototype",
+          url: "https://www.figma.com/proto/y0O7tQnLEJaNxSgJVKIarJ/capstone-fina?node-id=2-2&t=3h0reXixHdbAM3Q0-1&scaling=scale-down",
+          poster: `${DECK}/mobile-first.webp`,
+        },
+        {
+          type: "styleSheet",
+          heading: "Material design",
+          logo: { src: `${PDF}/logo.webp`, alt: "leapsters." },
+          fonts: [
+            { role: "Primary", name: "Fredoka", weights: "Bold, for headings" },
+            { role: "Secondary", name: "Poppins", weights: "Regular / Medium / Semi-bold" },
+          ],
+          ramp: [
+            { label: "Heading 1", px: 40, weight: 700 },
+            { label: "Heading 2", px: 36, weight: 600 },
+            { label: "Sub-heading", px: 24, weight: 500 },
+            { label: "Body", px: 20, weight: 400 },
+          ],
+          colors: [
+            { hex: "#E9E8D8", name: "Light grey" },
+            { hex: "#FFC3C3", name: "Light pink" },
+            { hex: "#323F48", name: "Dark slate" },
+            { hex: "#E27272", name: "Coral" },
+          ],
+          tabs: [
+            { label: "Home", icon: "home" },
+            { label: "Phrasebook", icon: "phrasebook" },
+            { label: "Word cards", icon: "cards" },
+            { label: "Insights", icon: "insights" },
+            { label: "Account", icon: "account" },
           ],
         },
       ],
@@ -601,46 +848,59 @@ const project: Project = {
 
     /* 9 ─────────────────────────────────────────────── */
     {
-      id: "reflection",
-      stage: "future",
-      title: "What I'd do next",
+      id: "testing",
+      stage: "testing",
+      title: "122 tests later",
+      intro: "Then I put it in front of children: at tables, on classroom floors, phones in hand.",
       blocks: [
         {
-          type: "text",
-          body: [
-            "The project moved through research, ideation with experts (therapists, caregivers and educators), low- to high-fidelity prototyping and testing, and a final pilot.",
-            "Testing left two clear threads to pull: a game that fits younger attention spans, and rewards children actually understand.",
+          type: "testingCollage",
+          heading: "Testing the prototype",
+          count: 122,
+          label: "user testings",
+          ratio: 1714 / 637,
+          photos: [
+            { image: { src: `${PDF}/test-a.webp`, alt: "Four children in school uniform playing an early board prototype at a red table; faces blurred." }, x: 0, y: 0, w: 20.01, h: 57.14 },
+            { image: { src: `${PDF}/test-b.webp`, alt: "A child in a yellow t-shirt holding a phone with the Leapsters app; face blurred." }, x: 20.01, y: 0, w: 17.74, h: 57.14 },
+            { image: { src: `${PDF}/test-c.webp`, alt: "A child in a black t-shirt using the app on a phone." }, x: 37.75, y: 0, w: 13.01, h: 43.17 },
+            { image: { src: `${PDF}/test-d.webp`, alt: "A child holding a phone with the app open; face blurred." }, x: 50.76, y: 0, w: 12.66, h: 43.17 },
+            { image: { src: `${PDF}/test-e.webp`, alt: "Children gathered on the floor of a colourful classroom around the board; faces blurred." }, x: 63.42, y: 0, w: 18.73, h: 41.92 },
+            { image: { src: `${PDF}/test-f.webp`, alt: "Children sitting on the floor around the dotted Leapsters mat with tokens; faces blurred." }, x: 82.15, y: 0, w: 17.85, h: 56.67 },
+            { image: { src: `${PDF}/test-g.webp`, alt: "Three children playing a board prototype on a living-room floor; faces blurred." }, x: 0, y: 57.14, w: 18.73, h: 42.86 },
+            { image: { src: `${PDF}/test-h.webp`, alt: "A child in an orange sweatshirt using the app on a phone; face blurred." }, x: 37.75, y: 43.17, w: 13.01, h: 56.83 },
+            { image: { src: `${PDF}/test-i.webp`, alt: "A hand holding a phone showing Koko on the app." }, x: 50.76, y: 43.17, w: 12.66, h: 56.83 },
+            { image: { src: `${PDF}/test-j.webp`, alt: "Three children in school uniform placing tokens on the dotted mat; faces blurred." }, x: 63.42, y: 41.92, w: 18.73, h: 58.08 },
+          ],
+        },
+        {
+          type: "testing",
+          summary: "122 user tests across the board game and the app.",
+          rating: { value: 4, max: 5, label: "Overall feedback" },
+          positives: [
+            "The visual design and illustrations of both the board game and the app were highly appreciated.",
+            "Players found the learning-through-play concept fun and engaging.",
+            "Parents and teachers liked that it offered a blend of education and entertainment.",
           ],
         },
         {
           type: "needed",
           items: [
+            "What the Fun 60% / Simple 50% / Adaptive 45% figures on the feedback slide measure, and how they were collected",
+            "Who the 122 tests were with (ages, settings, unique children vs sessions)",
             "Asmi's reflection: key learnings and what she would change",
-            "Iterations made after testing (game length, XP/rewards), if any",
-            "Learning or confidence outcomes measured (before/after), if any",
-            "Year, duration and the unit of the 1–12 timeline",
-            "Asmi's role and what she personally did",
-            "Faculty guide/mentor and any collaborators",
-            "Tools used (e.g. for UI, illustration, 3D renders, research boards)",
-            "Institution credit to show (NMIMS School of Design is not on the slides)",
+            "Iterations made after testing (game length, XP and rewards), if any",
+            "Asmi's role, faculty guide and tools used",
           ],
         },
       ],
     },
   ],
   contribution: {
-    mine: needed(
-      "What Asmi personally did on Leapsters (research, synthesis, game design, UI, illustration, testing…)",
-    ),
-  },
-  links: {
-    behance:
-      "https://www.behance.net/gallery/248075551/Leapsters-Nurturing-Confidence-Through-Play",
+    mine: needed("What Asmi personally did on Leapsters (research, synthesis, game design, UI, illustration, testing…)"),
   },
   seo: {
     title: "Leapsters — Play-based English for ages 5–12 · Asmi Shaikh",
-    description:
-      "A board game and app that help children aged 5–12 learn English with confidence. Research with 63 people, 30+ concepts, 122 user tests.",
+    description: "A board game and app that help children aged 5–12 learn English with confidence. Research with 63 people, 30+ concepts, 122 user tests.",
   },
 };
 

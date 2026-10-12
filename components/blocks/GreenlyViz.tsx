@@ -353,11 +353,12 @@ export type CoreValue =
   | "efficiency"
   | "networking"
   | "sustainability";
-type Actor = "supplier" | "customer" | "farmer" | "logistics";
-type Edge = { from: Actor; to: Actor; values: CoreValue[] };
+export type LeapstersValue = "trust" | "transparency" | "adaptivity" | "wellbeing" | "clarity";
+type Actor = "supplier" | "customer" | "farmer" | "logistics" | "teachers" | "counsellor" | "kids" | "parents";
+type Edge = { from: Actor; to: Actor; values: (CoreValue | LeapstersValue)[] };
 
 const VALUES: Record<
-  CoreValue,
+  string,
   { label: string; colour: string; ink: string; glyph: ReactNode }
 > = {
   reliability: {
@@ -419,12 +420,27 @@ const VALUES: Record<
   },
 };
 
-const SPOT: Record<Actor, { x: number; y: number; label: string }> = {
+const SPOT: Record<string, { x: number; y: number; label: string }> = {
   supplier: { x: 400, y: 56, label: "Supplier" },
   customer: { x: 112, y: 250, label: "Customer" },
   farmer: { x: 688, y: 250, label: "Farmer" },
   logistics: { x: 400, y: 444, label: "Logistics" },
 };
+// Leapsters' value map: same layout, its own people and values (deck slide "Value mapping")
+const L_VALUES: typeof VALUES = {
+  trust: { label: "Trust", colour: "#F28A1E", ink: "#9a5208", glyph: VALUES.reliability.glyph },
+  transparency: { label: "Transparency", colour: "#F2C14E", ink: "#80620a", glyph: VALUES.transparency.glyph },
+  adaptivity: { label: "Adaptivity", colour: "#A9C23F", ink: "#55700d", glyph: <path {...P} d="M12 4.5 15 9H9Zm-6 9.5h5v5H6Zm11.5 2.5a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0ZM8 12.5a6.5 6.5 0 0 1 2.6-4.2M16.6 10a6.5 6.5 0 0 1 .4 4M14 19.6a6.6 6.6 0 0 1-3 .2" /> },
+  wellbeing: { label: "Well-being", colour: "#52D8C0", ink: "#0f6b55", glyph: <path {...P} d="M3.5 12h3l2-5 3 9 1.7-4H15m1.5 7.5s-3.5-2.2-3.5-4.6a2 2 0 0 1 3.5-1.3 2 2 0 0 1 3.5 1.3c0 2.4-3.5 4.6-3.5 4.6Z" /> },
+  clarity: { label: "Clarity", colour: "#46C1EC", ink: "#0d6489", glyph: <path {...P} d="M4 13.5c2-3 4.8-4.5 8-4.5s6 1.5 8 4.5M12 17a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5ZM12 3.5v2.5M6.5 5.5 8 7.6M17.5 5.5 16 7.6" /> },
+};
+const L_SPOT: typeof SPOT = {
+  teachers: { x: 400, y: 56, label: "Teachers" },
+  counsellor: { x: 112, y: 250, label: "Counsellor" },
+  kids: { x: 688, y: 250, label: "Kids" },
+  parents: { x: 400, y: 444, label: "Parents" },
+};
+
 const BOX = { w: 164, h: 56 };
 
 /** Where a line from a box's centre towards (tx, ty) leaves the box. */
@@ -446,24 +462,27 @@ export function ValueMap({
   heading,
   edges,
   caption,
+  cast = "greenly",
 }: {
   heading?: string;
   edges: Edge[];
   caption?: string;
+  cast?: keyof typeof CASTS;
 }) {
-  const [value, setValue] = useState<CoreValue | null>(null);
+  const { values: V, spots: S, label: mapLabel } = CASTS[cast];
+  const [value, setValue] = useState<string | null>(null);
   const [actor, setActor] = useState<Actor | null>(null);
   const live = (e: Edge) =>
-    (!value || e.values.includes(value)) &&
+    (!value || (e.values as string[]).includes(value)) &&
     (!actor || e.from === actor || e.to === actor);
   const shown = edges.filter(live);
-  const counts = (v: CoreValue) =>
-    edges.filter((e) => e.values.includes(v)).length;
+  const counts = (v: string) =>
+    edges.filter((e) => (e.values as string[]).includes(v)).length;
 
   // Pairs that run both ways get pulled apart so both arrows read
   const geo = edges.map((e) => {
-    const a = SPOT[e.from];
-    const b = SPOT[e.to];
+    const a = S[e.from];
+    const b = S[e.to];
     const twin = edges.some((o) => o.from === e.to && o.to === e.from);
     const len = Math.hypot(b.x - a.x, b.y - a.y);
     const nx = (-(b.y - a.y) / len) * (twin ? 13 : 0);
@@ -487,8 +506,8 @@ export function ValueMap({
       <div className="rounded-media border border-line bg-card p-5 md:p-8">
         <div className="flex flex-wrap items-center gap-2">
           <span className="meta mr-1 text-ink-mute">Core values</span>
-          {(Object.keys(VALUES) as CoreValue[]).map((k) => {
-            const v = VALUES[k];
+          {Object.keys(V).map((k) => {
+            const v = V[k];
             const on = value === k;
             return (
               <button
@@ -531,7 +550,7 @@ export function ValueMap({
             viewBox="25 20 750 460"
             className="h-auto w-full"
             role="group"
-            aria-label="Value map of supplier, customer, farmer and logistics"
+            aria-label={mapLabel}
           >
             <defs>
               <marker
@@ -556,7 +575,7 @@ export function ValueMap({
             {edges.map((e, i) => {
               const g = geo[i];
               const on = live(e);
-              const tint = value ? VALUES[value].colour : "var(--accent-ink)";
+              const tint = value ? V[value].colour : "var(--accent-ink)";
               return (
                 <g
                   key={i}
@@ -606,7 +625,7 @@ export function ValueMap({
                           cy="17"
                           r="17"
                           fill="#fbf9f4"
-                          stroke={VALUES[k].colour}
+                          stroke={V[k].colour}
                           strokeWidth="1.8"
                         />
                         <svg
@@ -615,9 +634,9 @@ export function ValueMap({
                           width="24"
                           height="24"
                           viewBox="0 0 24 24"
-                          style={{ color: VALUES[k].ink }}
+                          style={{ color: V[k].ink }}
                         >
-                          {VALUES[k].glyph}
+                          {V[k].glyph}
                         </svg>
                       </g>
                     );
@@ -625,8 +644,8 @@ export function ValueMap({
                 </g>
               );
             })}
-            {(Object.keys(SPOT) as Actor[]).map((k) => {
-              const s = SPOT[k];
+            {(Object.keys(S) as Actor[]).map((k) => {
+              const s = S[k];
               const on = actor === k;
               const touched = shown.some((e) => e.from === k || e.to === k);
               return (
@@ -677,9 +696,9 @@ export function ValueMap({
           <div aria-live="polite">
             <p className="meta text-ink-mute">
               {actor
-                ? `${SPOT[actor].label}'s relationships`
+                ? `${S[actor].label}'s relationships`
                 : value
-                  ? `Carried by ${VALUES[value].label.toLowerCase()}`
+                  ? `Carried by ${V[value].label.toLowerCase()}`
                   : "Every relationship"}{" "}
               · {shown.length}
             </p>
@@ -698,7 +717,7 @@ export function ValueMap({
                       onClick={() => setActor(e.from)}
                       className="hover:underline"
                     >
-                      {SPOT[e.from].label}
+                      {S[e.from].label}
                     </button>
                     <span aria-label="to" className="mx-1.5 text-ink-mute">
                       →
@@ -708,26 +727,26 @@ export function ValueMap({
                       onClick={() => setActor(e.to)}
                       className="hover:underline"
                     >
-                      {SPOT[e.to].label}
+                      {S[e.to].label}
                     </button>
                   </span>
                   <span className="flex shrink-0 gap-1">
                     {e.values.map((k) => (
                       <span
                         key={k}
-                        title={VALUES[k].label}
+                        title={V[k].label}
                         className="grid h-6 w-6 place-items-center rounded-full border"
                         style={{
-                          borderColor: VALUES[k].colour,
-                          color: VALUES[k].ink,
+                          borderColor: V[k].colour,
+                          color: V[k].ink,
                         }}
                       >
                         <svg
                           viewBox="0 0 24 24"
                           className="h-3.5 w-3.5"
-                          aria-label={VALUES[k].label}
+                          aria-label={V[k].label}
                         >
-                          {VALUES[k].glyph}
+                          {V[k].glyph}
                         </svg>
                       </span>
                     ))}
@@ -749,6 +768,11 @@ export function ValueMap({
     </div>
   );
 }
+
+const CASTS = {
+  greenly: { values: VALUES, spots: SPOT, label: "Value map of supplier, customer, farmer and logistics" },
+  leapsters: { values: L_VALUES, spots: L_SPOT, label: "Value map of teachers, counsellor, kids and parents" },
+};
 
 /* ───────────────────────── Tech plan ───────────────────────── */
 
