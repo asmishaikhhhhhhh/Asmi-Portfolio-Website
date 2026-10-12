@@ -1099,3 +1099,21 @@ html[data-custom-cursor="on"] textarea {
     animation: none;
   }
 }
+.gv-nudge {
+  animation: gv-nudge 1.6s ease-in-out infinite;
+}
+@keyframes gv-nudge {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(4px);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .gv-nudge {
+    animation: none;
+  }
+}
+

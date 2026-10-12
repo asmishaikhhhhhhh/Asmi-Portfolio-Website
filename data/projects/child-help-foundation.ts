@@ -10,17 +10,14 @@ const project: Project = {
   subtitle: "An NGO internship across app, print and photography",
   oneLiner:
     "An internship with Child Help Foundation: an event tracker prototype, an annual report and print materials, and photography of the foundation's events.",
-  tier: "flagship",
-  order: 2,
+  tier: "focused",
+  order: -1,
   kind: "Internship · NGO design",
   // From Asmi's resume: Design Intern (NGO), May 2024 – Jun 2024
   year: "2024",
   duration: "2 months",
   role: "Design Intern (NGO)",
-  team: {
-    solo: true,
-    note: "The PDF is written in first person (\"I collaborated with Child Help Foundation\"); supervisors or other designers are not named",
-  },
+  team: { solo: true },
   disciplines: ["ux-ui", "physical-brand"],
   thinking: ["people", "visuals", "stories"],
   tags: [
@@ -43,7 +40,8 @@ const project: Project = {
       focus: "50% 45%",
     },
   },
-  proofPoint: "5 design tracks in one internship: UX/UI, editorial, print, collaterals, photography",
+  proofPoint:
+    "5 design tracks in one internship: UX/UI, editorial, print, collaterals, photography",
   quickRead: {
     problem:
       "Child Help Foundation runs events, coordinates volunteers and reports on its work across several UN SDGs. It needed design on both sides: managing events day to day, and presenting the foundation to the world.",
@@ -89,55 +87,51 @@ const project: Project = {
         "A high-fidelity prototype to streamline event management, volunteer coordination and engagement, designed for mobile and desktop.",
       blocks: [
         {
-          type: "image",
-          image: {
-            src: `${IMG}/01.webp`,
-            alt: "Five labelled phone screens: Sign In page, User Landing page, Admin Landing page, Event and Dashboard.",
-            caption: "The five core screens of the prototype.",
-          },
-          size: "full",
-        },
-        {
-          type: "features",
-          heading: "What each screen does",
-          items: [
+          type: "appCoverflow",
+          heading: "Walk through the prototype",
+          screens: [
             {
               title: "Sign in",
+              tag: "Sign In page",
               body: "A photo of the children the foundation works with, a welcome line and a simple username and password login.",
               image: {
-                src: `${IMG}/02.webp`,
+                src: `${IMG}/02-phone.webp`,
                 alt: "Phone sign-in screen with a photo of smiling children above 'Welcome to Child Help Foundation', username and password fields and a navy Login button.",
               },
             },
             {
               title: "Log an event",
+              tag: "User Landing page",
               body: "One form captures an event: project name, files, description, date, organiser, special guest, number of beneficiaries, total time, location and remarks.",
               image: {
-                src: `${IMG}/03.webp`,
+                src: `${IMG}/03-phone.webp`,
                 alt: "Phone screen headed 'Welcome, Jay' with a long form: project name, file uploads, description, date, event name, organiser, special guest, number of beneficiaries, total time, location, additional remarks and a Submit button.",
               },
             },
             {
               title: "Find events",
+              tag: "Admin Landing page",
               body: "Recommended events with filters for For you, This week, Upcoming and SDGs, each card leading to View Event.",
               image: {
-                src: `${IMG}/04.webp`,
+                src: `${IMG}/04-phone.webp`,
                 alt: "Phone screen titled Events with a search bar, filter tabs (For you, This week, Up coming, SDGs) and a 'Recommended for you' card showing a child eating, with a mustard View Event button.",
               },
             },
             {
               title: "Event list",
+              tag: "Event",
               body: "A searchable, sortable, paginated table of events by name, date and organiser.",
               image: {
-                src: `${IMG}/05.webp`,
+                src: `${IMG}/05-phone.webp`,
                 alt: "Phone screen listing events in a table: International Parent Day, Beach Cleaning Day, Children's Day, Food Distribution Day, Educational Day, Charity Day and Equality Day, each with a date and organiser.",
               },
             },
             {
               title: "Dashboard",
+              tag: "Dashboard",
               body: "Number of beneficiaries, total volunteers, an events trend line and the list of organisers at a glance.",
               image: {
-                src: `${IMG}/06.webp`,
+                src: `${IMG}/06-phone.webp`,
                 alt: "Phone dashboard for Child Help Foundation with cards for Number of Beneficiary and Total Volunteers, a rising Events line chart and an Organizers list.",
               },
             },
@@ -204,9 +198,10 @@ const project: Project = {
           image: {
             src: `${IMG}/12.webp`,
             alt: "Annual report mockup: the cover reads 'Enriching Minds, Providing Care.' over a collage of child photos; the open spread shows Objectives & Activities with SDG 3 and SDG 4 statistics and before-and-after portraits.",
-            caption: "Annual report: \"Enriching Minds, Providing Care.\"",
+            caption: 'Annual report: "Enriching Minds, Providing Care."',
           },
           size: "full",
+          fill: true,
         },
         {
           type: "gallery",
@@ -239,7 +234,8 @@ const project: Project = {
             alt: "Photo of the printed Skypath Solutions India Pvt. Ltd. roll-up banner standing indoors.",
             caption: "Execution",
           },
-          caption: "A roll-up banner, designed during the internship and then printed.",
+          caption:
+            "A roll-up banner, designed during the internship and then printed.",
         },
         {
           type: "image",

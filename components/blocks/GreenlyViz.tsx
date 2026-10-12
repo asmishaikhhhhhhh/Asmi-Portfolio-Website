@@ -1632,3 +1632,371 @@ export function ScreenTour({
     </div>
   );
 }
+
+/* ───────────────────────── System layers ───────────────────────── */
+
+type Who = { who: string };
+type SysLayers = {
+  scenarios: (Who & { body: string })[];
+  flows: (Who & { steps: string[] })[];
+  points: (Who & { groups: { name: string; items: string[] }[] })[];
+  tech: { chains: { name: string; steps: string[] }[]; link?: { label: string; href: string } };
+  trees: { name: string; sections: { name?: string; pages: { name: string; items: string[] }[] }[] }[];
+  artefacts: {
+    name: string;
+    kind: "Digital" | "Physical";
+    icon: "network" | "cart" | "unit" | "truck";
+    skeuomorphism?: string;
+    signifier: string[];
+    metaphor: string[];
+    codes?: { label: string; swatches: { color: string; meaning: string }[] }[];
+  }[];
+};
+
+const LAYER_NAMES = ["Scenarios", "Task flow", "Data points", "Tech plan", "Data flow", "Artefacts"] as const;
+
+const ART_ICONS: Record<SysLayers["artefacts"][number]["icon"], ReactNode> = {
+  network: (
+    <>
+      <circle {...P} cx="12" cy="12" r="3" />
+      <circle {...P} cx="5" cy="6" r="1.8" />
+      <circle {...P} cx="19" cy="6" r="1.8" />
+      <circle {...P} cx="5" cy="18" r="1.8" />
+      <circle {...P} cx="19" cy="18" r="1.8" />
+      <path {...P} d="M6.5 7.2 9.6 10M17.5 7.2 14.4 10M6.5 16.8 9.6 14M17.5 16.8 14.4 14" />
+    </>
+  ),
+  cart: <path {...P} d="M3 4h2.5l2 10h10l2-7H6.6M9.5 19a1 1 0 1 0 0 .01M16.5 19a1 1 0 1 0 0 .01" />,
+  unit: (
+    <>
+      <rect {...P} x="3.5" y="9" width="17" height="3.5" rx="1" />
+      <rect {...P} x="3.5" y="17" width="17" height="3.5" rx="1" />
+      <path {...P} d="M8 9V6.5m0 0c0-1.5-1.5-2-2.5-2 0 1.2.8 2 2.5 2Zm0 0c0-1.5 1.5-2 2.5-2 0 1.2-.8 2-2.5 2ZM16 9V6.5m0 0c0-1.5-1.5-2-2.5-2 0 1.2.8 2 2.5 2Zm0 0c0-1.5 1.5-2 2.5-2 0 1.2-.8 2-2.5 2ZM8 17v-2.2M16 17v-2.2" />
+    </>
+  ),
+  truck: <path {...P} d="M2.5 6.5h11v9h-11zM13.5 9.5h4l3 3v3h-7M6 18.5a1.6 1.6 0 1 0 0 .01M17 18.5a1.6 1.6 0 1 0 0 .01" />,
+};
+
+/**
+ * A system mapped as a stack of layers, from the people it serves up to the
+ * artefacts it produces. Pick a layer to lift it and open what's inside.
+ */
+export function SystemLayers({ heading, intro, data }: { heading?: string; intro?: string; data: SysLayers }) {
+  const [layer, setLayer] = useState(0);
+  const [who, setWho] = useState(0);
+  const [tree, setTree] = useState(0);
+  const [art, setArt] = useState(0);
+  const id = useId();
+  const n = LAYER_NAMES.length;
+  const stakeholders = data.scenarios.map((s) => s.who);
+  const pickLayer = (i: number) => setLayer(Math.max(0, Math.min(n - 1, i)));
+  const onKey = (e: KeyboardEvent) => {
+    const d = e.key === "ArrowUp" || e.key === "ArrowRight" ? 1 : e.key === "ArrowDown" || e.key === "ArrowLeft" ? -1 : 0;
+    if (!d) return;
+    e.preventDefault();
+    pickLayer(layer + d);
+    document.getElementById(`${id}-l-${Math.max(0, Math.min(n - 1, layer + d))}`)?.focus();
+  };
+  // Plate tone: light at the base, deepening toward the top, like the deck
+  const tone = (i: number) => `color-mix(in oklab, var(--accent) ${18 + i * 16}%, #fbf9f4)`;
+  const pills = (items: string[], cur: number, set: (i: number) => void, label: string) => (
+    <div role="group" aria-label={label} className="flex flex-wrap gap-1.5">
+      {items.map((x, i) => {
+        const on = i === cur;
+        return (
+          <button
+            key={x}
+            type="button"
+            aria-pressed={on}
+            onClick={() => set(i)}
+            className={`rounded-full border px-3 py-1.5 text-sm transition-colors ${on ? "border-transparent text-paper" : "border-line bg-card hover:border-ink/30"}`}
+            style={on ? { background: "var(--accent-ink)" } : undefined}
+          >
+            {x}
+          </button>
+        );
+      })}
+    </div>
+  );
+  const w = Math.min(who, stakeholders.length - 1);
+
+  const body = () => {
+    switch (layer) {
+      case 0:
+        return (
+          <>
+            {pills(stakeholders, w, setWho, "Stakeholder")}
+            <p key={`s${w}`} className="pl-fade mt-5 max-w-[60ch] text-[1.02rem] leading-relaxed text-ink-soft">
+              {data.scenarios[w].body}
+            </p>
+          </>
+        );
+      case 1: {
+        const f = data.flows.find((x) => x.who === stakeholders[w]) ?? data.flows[0];
+        return (
+          <>
+            {pills(stakeholders, w, setWho, "Stakeholder")}
+            <ol key={`f${w}`} className="mt-5 flex flex-wrap items-center gap-x-1.5 gap-y-2.5">
+              {f.steps.map((st, i) => (
+                <li key={st} className="flex items-center gap-1.5">
+                  <span className="gv-pop inline-flex items-center gap-2 rounded-control border border-line bg-card px-3 py-2 text-[0.85rem] leading-snug" style={{ animationDelay: `${i * 70}ms` }}>
+                    <span className="meta tabular-nums" style={{ color: "var(--accent-ink)" }}>
+                      {String(i + 1).padStart(2, "0")}
+                    </span>
+                    {st}
+                  </span>
+                  {i < f.steps.length - 1 && (
+                    <svg viewBox="0 0 24 24" className="h-3.5 w-3.5 shrink-0 text-ink-mute" aria-hidden>
+                      <path {...P} d="M5 12h14m-5-5 5 5-5 5" />
+                    </svg>
+                  )}
+                </li>
+              ))}
+            </ol>
+          </>
+        );
+      }
+      case 2: {
+        const pt = data.points.find((x) => x.who === stakeholders[w]) ?? data.points[0];
+        return (
+          <>
+            {pills(stakeholders, w, setWho, "Stakeholder")}
+            <div key={`p${w}`} className="mt-5 grid gap-4" style={{ gridTemplateColumns: `repeat(auto-fit, minmax(10.5rem, 1fr))` }}>
+              {pt.groups.map((g, gi) => (
+                <div key={g.name} className="gv-rise" style={{ animationDelay: `${gi * 80}ms` }}>
+                  <p className="meta mb-2 font-semibold" style={{ color: "var(--accent-ink)" }}>
+                    {g.name}
+                  </p>
+                  <ul className="space-y-1.5">
+                    {g.items.map((x) => (
+                      <li key={x} className="rounded-control px-2.5 py-1.5 text-[0.84rem] leading-snug" style={{ background: tone(1) }}>
+                        {x}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </div>
+          </>
+        );
+      }
+      case 3:
+        return (
+          <div className="space-y-5">
+            {data.tech.chains.map((c, ci) => (
+              <div key={c.name} className="gv-rise" style={{ animationDelay: `${ci * 90}ms` }}>
+                <p className="meta mb-2 font-semibold" style={{ color: "var(--accent-ink)" }}>
+                  {c.name}
+                </p>
+                <ol className="flex flex-wrap items-center gap-x-1.5 gap-y-2">
+                  {c.steps.map((st, i) => (
+                    <li key={st} className="flex items-center gap-1.5">
+                      <span
+                        className="rounded-full px-3 py-1.5 text-[0.84rem]"
+                        style={i === c.steps.length - 1 ? { background: "var(--accent-ink)", color: "#fbf9f4" } : { background: tone(1) }}
+                      >
+                        {st}
+                      </span>
+                      {i < c.steps.length - 1 && (
+                        <svg viewBox="0 0 24 24" className="h-3.5 w-3.5 shrink-0 text-ink-mute" aria-hidden>
+                          <path {...P} d="M5 12h14m-5-5 5 5-5 5" />
+                        </svg>
+                      )}
+                    </li>
+                  ))}
+                </ol>
+              </div>
+            ))}
+            {data.tech.link && (
+              <a href={data.tech.link.href} className="inline-flex items-center gap-1.5 text-sm font-medium hover:underline" style={{ color: "var(--accent-ink)" }}>
+                {data.tech.link.label}
+                <svg viewBox="0 0 24 24" className="h-3.5 w-3.5" aria-hidden>
+                  <path {...P} d="M5 12h14m-5-5 5 5-5 5" />
+                </svg>
+              </a>
+            )}
+          </div>
+        );
+      case 4: {
+        const t = data.trees[tree];
+        return (
+          <>
+            {pills(
+              data.trees.map((x) => x.name),
+              tree,
+              setTree,
+              "Platform",
+            )}
+            <div key={`t${tree}`} className="mt-5 space-y-5">
+              {t.sections.map((sec, si) => (
+                <div key={sec.name ?? si}>
+                  {sec.name && (
+                    <p className="meta mb-2 flex items-center gap-2 font-semibold" style={{ color: "var(--accent-ink)" }}>
+                      <span className="h-1.5 w-1.5 rounded-full" style={{ background: "var(--accent)" }} />
+                      {sec.name}
+                    </p>
+                  )}
+                  <div className="grid gap-2.5" style={{ gridTemplateColumns: "repeat(auto-fill, minmax(9.5rem, 1fr))" }}>
+                    {sec.pages.map((pg, pi) => (
+                      <div key={pg.name} className="gv-pop rounded-control border border-line bg-card p-3" style={{ animationDelay: `${(si * 3 + pi) * 45}ms` }}>
+                        <p className="text-[0.86rem] font-medium leading-tight">{pg.name}</p>
+                        {pg.items.length > 0 && (
+                          <ul className="mt-2 space-y-1 border-l pl-2.5" style={{ borderColor: tone(2) }}>
+                            {pg.items.map((x) => (
+                              <li key={x} className="text-[0.78rem] leading-snug text-ink-soft">
+                                {x}
+                              </li>
+                            ))}
+                          </ul>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </>
+        );
+      }
+      default: {
+        const a = data.artefacts[art];
+        const rules = [
+          ["Skeuomorphism", a.skeuomorphism ? [a.skeuomorphism] : []],
+          ["Signifier", a.signifier],
+          ["Metaphor", a.metaphor],
+        ].filter(([, v]) => (v as string[]).length) as [string, string[]][];
+        return (
+          <>
+            <div role="group" aria-label="Artefact" className="grid grid-cols-2 gap-2 sm:grid-cols-4">
+              {data.artefacts.map((x, i) => {
+                const on = i === art;
+                return (
+                  <button
+                    key={x.name}
+                    type="button"
+                    aria-pressed={on}
+                    onClick={() => setArt(i)}
+                    className={`flex items-center gap-2.5 rounded-control border px-3 py-2.5 text-left transition-colors ${on ? "border-transparent text-paper" : "border-line bg-card hover:border-ink/30"}`}
+                    style={on ? { background: "var(--accent-ink)" } : undefined}
+                  >
+                    <svg viewBox="0 0 24 24" className="h-6 w-6 shrink-0" aria-hidden>
+                      {ART_ICONS[x.icon]}
+                    </svg>
+                    <span className="min-w-0">
+                      <span className={`meta block ${on ? "text-paper/65" : "text-ink-mute"}`}>{x.kind}</span>
+                      <span className="block truncate text-[0.88rem] font-medium">{x.name}</span>
+                    </span>
+                  </button>
+                );
+              })}
+            </div>
+            <div key={`a${art}`} className="mt-5 grid gap-5 md:grid-cols-3">
+              {rules.map(([k, v], ri) => (
+                <div key={k} className="gv-rise" style={{ animationDelay: `${ri * 90}ms` }}>
+                  <p className="meta mb-2 font-semibold" style={{ color: "var(--accent-ink)" }}>
+                    {k}
+                  </p>
+                  <ul className="space-y-2 text-[0.88rem] leading-snug text-ink-soft">
+                    {v.map((x) => (
+                      <li key={x}>{x}</li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </div>
+            {a.codes && (
+              <div key={`c${art}`} className="pl-fade mt-5 flex flex-wrap gap-x-8 gap-y-4 border-t border-line pt-5">
+                {a.codes.map((c) => (
+                  <div key={c.label}>
+                    <p className="meta mb-2 text-ink-mute">{c.label}</p>
+                    <ul className="flex flex-wrap gap-3">
+                      {c.swatches.map((sw) => (
+                        <li key={sw.meaning} className="flex items-center gap-1.5 text-[0.8rem]">
+                          <span className="h-3.5 w-3.5 rounded-full ring-1 ring-black/10" style={{ background: sw.color }} />
+                          {sw.meaning}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                ))}
+              </div>
+            )}
+          </>
+        );
+      }
+    }
+  };
+
+  return (
+    <div>
+      {heading && <h3 className="mb-3 font-display-soft text-h3">{heading}</h3>}
+      {intro && <p className="mb-6 max-w-[64ch] text-ink-soft">{intro}</p>}
+      <div className="grid overflow-hidden rounded-media border border-line bg-card md:grid-cols-[15rem_1fr]">
+        {/* the stack */}
+        <div className="border-b border-line p-5 md:border-b-0 md:border-r md:p-6" style={{ background: "color-mix(in oklab, var(--accent) 5%, #fbf9f4)" }}>
+          <div role="tablist" aria-label="System layers" aria-orientation="vertical" onKeyDown={onKey} className="flex flex-col-reverse">
+            {LAYER_NAMES.map((name, i) => {
+              const on = i === layer;
+              return (
+                <button
+                  key={name}
+                  id={`${id}-l-${i}`}
+                  type="button"
+                  role="tab"
+                  aria-selected={on}
+                  aria-controls={`${id}-p`}
+                  tabIndex={on ? 0 : -1}
+                  onClick={() => pickLayer(i)}
+                  className="group flex items-center gap-3 py-[3px] text-left"
+                >
+                  <svg viewBox="0 0 120 34" className="h-[26px] w-[82px] shrink-0 overflow-visible md:h-[30px] md:w-[92px]" aria-hidden>
+                    <g className="transition-transform duration-300" style={{ transform: on ? "translate(-7px, -7px)" : undefined }}>
+                      <path d="M30 4h88L90 30H2Z" fill={on ? "var(--accent)" : tone(i)} stroke={on ? "var(--accent-ink)" : "rgb(0 0 0 / .06)"} strokeWidth="1" className="transition-[fill] duration-300 group-hover:brightness-95" />
+                      {on && <path d="M30 4h88L90 30H2Z" fill="none" stroke="#fbf9f4" strokeOpacity=".5" strokeWidth="1" strokeDasharray="3 4" />}
+                    </g>
+                  </svg>
+                  <span className={`whitespace-nowrap text-[0.85rem] leading-tight transition-colors ${on ? "font-semibold text-ink" : "text-ink-mute group-hover:text-ink"}`}>
+                    <span className="meta mr-1.5 tabular-nums">{i + 1}</span>
+                    {name}
+                  </span>
+                </button>
+              );
+            })}
+          </div>
+          <p className="mt-4 hidden text-[0.78rem] text-ink-mute md:block">Pick a layer, or use the arrow keys, to lift it.</p>
+        </div>
+
+        {/* what's inside */}
+        <div id={`${id}-p`} role="tabpanel" aria-labelledby={`${id}-l-${layer}`} className="min-w-0 p-6 md:p-8">
+          <div className="mb-5 flex items-baseline justify-between gap-3">
+            <p key={`h${layer}`} className="pl-fade font-display-soft text-h3 leading-tight">
+              <span className="meta mr-2 align-middle tabular-nums" style={{ color: "var(--accent-ink)" }}>
+                Layer {layer + 1}
+              </span>
+              {LAYER_NAMES[layer]}
+            </p>
+            <span className="flex shrink-0 gap-1.5">
+              {[-1, 1].map((d) => (
+                <button
+                  key={d}
+                  type="button"
+                  aria-label={d < 0 ? "Layer below" : "Layer above"}
+                  disabled={d < 0 ? layer === 0 : layer === n - 1}
+                  onClick={() => pickLayer(layer + d)}
+                  className="grid h-8 w-8 place-items-center rounded-full border border-line hover:border-ink/30 disabled:opacity-30"
+                >
+                  <svg viewBox="0 0 24 24" className="h-3.5 w-3.5" aria-hidden>
+                    <path {...P} d={d < 0 ? "M6 9l6 6 6-6" : "M6 15l6-6 6 6"} />
+                  </svg>
+                </button>
+              ))}
+            </span>
+          </div>
+          <div key={layer} className="pl-fade">
+            {body()}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}

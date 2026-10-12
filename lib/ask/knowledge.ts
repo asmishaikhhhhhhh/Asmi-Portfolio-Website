@@ -78,8 +78,20 @@ function blockText(b: Block): string {
         .join(" | ");
     case "systemSpecimen":
       return `Type and spacing: ${b.family} (${b.scale.map((t) => `${t.name} ${t.size}px`).join(", ")}); spacing ${b.spacing.join(", ")} px`;
+    case "designTokens":
+      return `Colour tokens: ${[...b.neutrals, ...b.brand, ...b.severity].map((c) => `${c.name} ${c.hex}`).join(", ")}`;
+    case "termMap":
+      return `${b.heading ?? "Terminology"}: ${b.branches.map((x) => `${x.name}: ${x.terms.map((t) => t.term).join(", ")}`).join(" | ")}`;
+    case "issueFeed":
+      return `${b.heading ?? "Problems"}: ${b.items.map((x) => `${x.title} (${x.module}): ${x.body} Addressed by: ${x.fix.join("; ")}`).join(" | ")}`;
+    case "phoneCarousel":
+      return `${b.heading ?? "Posts"}: ${b.slides.map((x) => `${x.kind}: ${x.title}`).join("; ")}`;
+    case "appCoverflow":
+      return `${b.heading ?? "App screens"}: ${b.screens.map((x) => `${x.title}${x.tag ? ` (${x.tag})` : ""}: ${x.body}`).join(" | ")}`;
     case "learnings":
       return `Learnings: ${b.items.map((l) => `${l.title}: ${l.lead} ${l.points.join(" ")}`).join(" | ")}`;
+    case "systemLayers":
+      return `${b.heading ?? "System architecture"}: scenarios: ${b.scenarios.map((x) => `${x.who}: ${x.body}`).join(" | ")}. Task flows: ${b.flows.map((x) => `${x.who}: ${x.steps.join(" → ")}`).join(" | ")}. Data points: ${b.points.map((x) => `${x.who}: ${x.groups.map((g) => `${g.name} (${g.items.join(", ")})`).join("; ")}`).join(" | ")}. Tech plan: ${b.tech.chains.map((c) => `${c.name}: ${c.steps.join(" → ")}`).join(" | ")}. Data flow: ${b.trees.map((t) => `${t.name}: ${t.sections.map((s) => s.pages.map((p) => `${p.name}${p.items.length ? ` (${p.items.join(", ")})` : ""}`).join(", ")).join("; ")}`).join(" | ")}. Artefacts: ${b.artefacts.map((a) => `${a.name} (${a.kind}): ${[a.skeuomorphism, ...a.signifier, ...a.metaphor].filter(Boolean).join(" ")}`).join(" | ")}`;
     case "testRack":
       return `${b.heading ?? "Testing"}: ${b.tiers.map((t) => `${t.title}: ${t.notes.map((n) => `[${n.tone}] ${n.text}`).join("; ")}`).join(" | ")}`;
     case "clabMaterial":

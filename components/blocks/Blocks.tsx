@@ -14,12 +14,14 @@ import { Ecosystem } from "./Ecosystem";
 import { ConceptTabs, HeardBubbles, InsightFlow, StageStairs } from "./FireSafeViz";
 import { FigmaEmbed } from "./FigmaEmbed";
 import { ImageTabs } from "./ImageTabs";
+import { ScrollStrip } from "./ScrollStrip";
+import { AppCoverflow } from "./ChfViz";
 import { ResearchExplorer } from "./ResearchExplorer";
 import { ClabDemo } from "@/components/clab/ClabDemo";
 import { MaterialDesign } from "@/components/clab/MaterialDesign";
 import { BusinessCanvas } from "./BusinessCanvas";
-import { Learnings, ModuleStory, RoleCard, SystemSpecimen, VennProcess } from "./AiStrikeViz";
-import { ScreenTour, SurfaceRoots, TechPlan, TestRack, ValueMap } from "./GreenlyViz";
+import { DesignTokens, IssueFeed, PhoneCarousel, Learnings, ModuleStory, RoleCard, SystemSpecimen, TermMap, VennProcess } from "./AiStrikeViz";
+import { ScreenTour, SurfaceRoots, SystemLayers, TechPlan, TestRack, ValueMap } from "./GreenlyViz";
 import manifest from "@/data/image-manifest.json";
 
 /** Minimal inline formatting for data strings: **bold** and *italic*. */
@@ -821,16 +823,56 @@ export function BlockView({ block }: { block: Block }) {
     case "moduleStory":
       return (
         <ModuleStory
-          modules={block.modules.map(({ shots, ...m }) => ({ ...m, shots: shots.map(({ label, views }) => ({ label, views })) }))}
-          media={block.modules.map((m) => m.shots.map((s) => <Picture key={s.image.src} img={s.image} size="wide" contain rounded={false} className="!bg-transparent" />))}
+          modules={block.modules.map(({ shots, ...m }) => ({
+            ...m,
+            shots: shots?.map(({ label, views, nda, bands, image }) => {
+              const dim = (manifest as Record<string, { w: number; h: number }>)[image.src];
+              return { label, views, nda, bands, ratio: dim ? dim.w / dim.h : undefined };
+            }),
+          }))}
+          media={block.modules.map((m) => (m.shots ?? []).map((s) => <Picture key={s.image.src} img={s.image} size="wide" contain rounded={false} className="!bg-transparent" />))}
         />
       );
 
     case "systemSpecimen":
       return <SystemSpecimen family={block.family} tracking={block.tracking} scale={block.scale} spacing={block.spacing} />;
 
+    case "designTokens":
+      return <DesignTokens neutrals={block.neutrals} brand={block.brand} severity={block.severity} />;
+
+    case "termMap":
+      return <TermMap heading={block.heading} intro={block.intro} centre={block.centre} branches={block.branches} />;
+
+    case "issueFeed":
+      return <IssueFeed heading={block.heading} items={block.items} />;
+
+    case "phoneCarousel":
+      return (
+        <PhoneCarousel
+          heading={block.heading}
+          intro={block.intro}
+          slides={block.slides.map(({ kind, title }) => ({ kind, title }))}
+          media={block.slides.map((x) => <Picture key={x.image.src} img={x.image} size="third" rounded={false} className="!bg-transparent h-full object-cover" />)}
+        />
+      );
+
+    case "appCoverflow":
+      return (
+        <AppCoverflow
+          heading={block.heading}
+          intro={block.intro}
+          screens={block.screens.map(({ title, tag, body }) => ({ title, tag, body }))}
+          media={block.screens.map((x) => <Picture key={x.image.src} img={x.image} size="phone" contain rounded={false} className="!bg-transparent" />)}
+        />
+      );
+
     case "learnings":
       return <Learnings items={block.items} />;
+
+    case "systemLayers": {
+      const { scenarios, flows, points, tech, trees, artefacts } = block;
+      return <SystemLayers heading={block.heading} intro={block.intro} data={{ scenarios, flows, points, tech, trees, artefacts }} />;
+    }
 
     case "testRack":
       return <TestRack heading={block.heading} tiers={block.tiers} />;
@@ -1007,20 +1049,14 @@ export function BlockView({ block }: { block: Block }) {
         return (
           <div>
             {block.heading && <H>{block.heading}</H>}
-            <div
-              tabIndex={0}
-              role="region"
-              aria-label={`${block.heading ?? "Gallery"}, scrollable`}
-              className="no-scrollbar -mx-4 flex snap-x snap-mandatory gap-4 overflow-x-auto px-4 pb-2 md:-mx-0 md:px-0"
-            >
+            <ScrollStrip label={block.heading ?? "Gallery"} count={block.images.length}>
               {block.images.map((img) => (
                 <figure key={img.src} className="w-[78%] shrink-0 snap-start sm:w-[46%] lg:w-[34%]">
                   <Picture img={img} size="third" />
                   {img.caption && <figcaption className="mt-2 text-sm text-ink-mute">{img.caption}</figcaption>}
                 </figure>
               ))}
-            </div>
-            <p className="meta mt-3 text-ink-mute md:hidden">Swipe →</p>
+            </ScrollStrip>
           </div>
         );
       }

@@ -261,7 +261,8 @@ export type Block =
         kicker?: string;
         headline?: string;
         body?: string;
-        shots: { label: string; image: Img; views?: string[] }[];
+        /** nda: the screen is blurred on purpose; shows a confidential badge over it. */
+        shots?: { label: string; image: Img; views?: string[]; nda?: boolean; bands?: { label: string; top: number; height: number }[] }[];
         chips?: string[];
         challenge?: string[];
         approach?: string[];
@@ -278,6 +279,42 @@ export type Block =
     }
   /** Learnings as expandable cards. */
   | { type: "learnings"; items: { title: string; lead: string; points: string[] }[] }
+  /** Colour tokens with live components built from them. */
+  | { type: "designTokens"; neutrals: { name: string; hex: string }[]; brand: { name: string; hex: string }[]; severity: { name: string; hex: string }[] }
+  /** Domain vocabulary as a mind map: branches of terms around a core. */
+  | {
+      type: "termMap";
+      heading?: string;
+      intro?: string;
+      centre: string;
+      branches: { name: string; module?: string; terms: { term: string; def: string }[] }[];
+    }
+  /** Design problems as an alert feed; each opens to how it was addressed. */
+  | { type: "issueFeed"; heading?: string; items: { title: string; body: string; module: string; fix: string[] }[] }
+  /** Phone screenshots in an iPhone frame, swipeable. */
+  | { type: "phoneCarousel"; heading?: string; intro?: string; slides: { kind: string; title: string; image: Img }[] }
+  /** App screens as a coverflow of phones with the journey on top. tag: the screen's own label. */
+  | { type: "appCoverflow"; heading?: string; intro?: string; screens: { title: string; tag?: string; body: string; image: Img }[] }
+  /** A system as a stack of six layers (scenarios → artefacts), each opening its own view. */
+  | {
+      type: "systemLayers";
+      heading?: string;
+      intro?: string;
+      scenarios: { who: string; body: string }[];
+      flows: { who: string; steps: string[] }[];
+      points: { who: string; groups: { name: string; items: string[] }[] }[];
+      tech: { chains: { name: string; steps: string[] }[]; link?: { label: string; href: string } };
+      trees: { name: string; sections: { name?: string; pages: { name: string; items: string[] }[] }[] }[];
+      artefacts: {
+        name: string;
+        kind: "Digital" | "Physical";
+        icon: "network" | "cart" | "unit" | "truck";
+        skeuomorphism?: string;
+        signifier: string[];
+        metaphor: string[];
+        codes?: { label: string; swatches: { color: string; meaning: string }[] }[];
+      }[];
+    }
   /** Usability feedback as plants on a rack: one tier per stakeholder. */
   | { type: "testRack"; heading?: string; tiers: { title: string; notes: { tone: "worked" | "fix" | "learned"; text: string }[] }[] }
   /** CLAB's material design as a live component sheet (Clab case study only). */

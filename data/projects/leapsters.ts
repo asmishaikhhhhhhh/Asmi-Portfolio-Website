@@ -16,7 +16,6 @@ const project: Project = {
   role: needed("Asmi's role title on Leapsters"),
   team: {
     solo: true,
-    note: "Solo capstone per Behance ownership; mentor/guide not stated",
   },
   disciplines: ["research", "ux-ui", "systems", "physical-brand"],
   thinking: ["people", "research", "play", "systems"],

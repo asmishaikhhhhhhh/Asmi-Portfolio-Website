@@ -7,6 +7,8 @@ const sizesFor = {
   wide: "(min-width: 1024px) 70vw, 100vw",
   half: "(min-width: 768px) 50vw, 100vw",
   third: "(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw",
+  /** a phone mockup shown at a fixed size, about 220px wide */
+  phone: "240px",
 } as const;
 
 /**

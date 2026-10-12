@@ -64,6 +64,11 @@ const project: Project = {
         "AiStrike is a startup cybersecurity company working on intelligent, adaptive digital defence systems, with a growing focus on AI-powered security.",
       blocks: [
         {
+          type: "callout",
+          label: "Disclaimer · under NDA",
+          body: "I've signed a non-disclosure agreement with AiStrike, and the product isn't live yet, so I can't show the screens in full. What's shared here is limited, with identifying details blurred. I'm happy to walk you through the work in more depth in person.",
+        },
+        {
           type: "text",
           body: [
             "I joined as a UX/UI intern for the industry internship in my B.Des final year at NMIMS School of Design.",
@@ -113,28 +118,38 @@ const project: Project = {
         "Analysts need to monitor, prioritise and investigate threats fast. The interfaces were working against them.",
       blocks: [
         {
-          type: "features",
+          type: "issueFeed",
           heading: "What got in the way",
           items: [
             {
               title: "Hard to scan",
               body: "Complex, data-heavy security alerts were difficult to scan quickly, and dense layouts were hard to read.",
+              module: "01 Alert dashboard",
+              fix: ["Severity-based colour coding", "Collapsible panels to manage data density", "Table readability through spacing, tags and filters"],
             },
             {
               title: "No clear priority",
               body: "Nothing clearly separated critical threats from low ones.",
+              module: "01 Alert dashboard",
+              fix: ["A structured dashboard with severity-based colour coding", "Multiple layout iterations for better hierarchy"],
             },
             {
               title: "Scattered risk",
               body: "There was no structured view for risk and remediation, and managing vulnerabilities across hosts and containers was complex.",
+              module: "02 Vulnerabilities",
+              fix: ["Vulnerability, host and container views", "Detail pages with risk indicators, remediation steps and an attack path"],
             },
             {
               title: "No home for cases",
               body: "Tasks, timelines and dashboards had no central system, and the work needed both manual and AI-assisted flows.",
+              module: "03 Case center",
+              fix: ["A Case Center dashboard and table views", "User flows for creating dashboards and widgets", "A task system (manual and AI), a timeline view and case insights"],
             },
             {
               title: "AI that confused",
               body: "AI outputs were complex and hard to understand, and AI had to be added without overwhelming users.",
+              module: "04 AI integration",
+              fix: ["Multiple versions iterated for clarity", "A clean UI for AI explanations", "AI summaries, insights, recommendations and AI-assisted flows"],
             },
           ],
         },
@@ -161,13 +176,91 @@ const project: Project = {
           ],
         },
         {
-          type: "image",
-          image: {
-            src: `${IMG}/13.webp`,
-            alt: "A laptop showing a zoomed-out research board on black: dozens of small white frames and notes arranged in columns, with two collaborator avatars marked A and S.",
-            caption: "The research board, zoomed out.",
-          },
-          size: "inset",
+          type: "termMap",
+          heading: "The vocabulary behind the screens",
+          intro: "A map of the cybersecurity language the platform runs on, grouped by where each term shows up in the product. Pick a term to read what it means, or search.",
+          centre: "Security operations",
+          branches: [
+            {
+              name: "Detection & alerts",
+              module: "01 Alert dashboard",
+              terms: [
+                { term: "Alert", def: "A signal that something suspicious happened, raised by a detection rule or a security tool." },
+                { term: "Triage", def: "Sorting incoming alerts to decide which need attention first and which can wait or be closed." },
+                { term: "Severity", def: "How much damage a threat could do, usually graded critical, high, medium, low or info." },
+                { term: "False positive", def: "An alert that fires when nothing malicious actually happened. Too many of them bury the real threats." },
+                { term: "Alert fatigue", def: "When analysts see so many alerts that they start missing or ignoring the important ones." },
+                { term: "MITRE ATT&CK", def: "A public framework that catalogues attacker tactics and techniques, used to label what an alert represents." },
+                { term: "Composite alert", def: "Several related alerts grouped into one, so a single attack doesn't show up as dozens of separate rows." },
+                { term: "IOC", def: "Indicator of compromise: evidence such as a malicious IP address, file hash or domain that points to an attack." },
+              ],
+            },
+            {
+              name: "Vulnerabilities",
+              module: "02 Vulnerabilities",
+              terms: [
+                { term: "Vulnerability", def: "A weakness in software or configuration that an attacker could exploit." },
+                { term: "CVE", def: "Common Vulnerabilities and Exposures: a public ID given to each known vulnerability." },
+                { term: "CVSS", def: "A 0–10 score that rates how severe a vulnerability is." },
+                { term: "Host", def: "A machine, such as a server or virtual machine, that runs software and can be exposed." },
+                { term: "Container", def: "A packaged application that runs isolated on a host; one image can carry vulnerabilities into many containers." },
+                { term: "Misconfiguration", def: "A setting left insecure, like an open storage bucket or an over-permissive rule." },
+                { term: "Patch", def: "An update that fixes a vulnerability." },
+                { term: "Attack surface", def: "Everything reachable that an attacker could try to break into." },
+              ],
+            },
+            {
+              name: "Incident response",
+              module: "03 Case center",
+              terms: [
+                { term: "Incident", def: "A confirmed security event that needs a response, not just an alert to look at." },
+                { term: "Case", def: "The record that tracks one investigation, from the first alert to closing it out." },
+                { term: "SOC", def: "Security operations centre: the team that monitors, investigates and responds to threats." },
+                { term: "Playbook", def: "A step-by-step procedure for responding to a known type of incident." },
+                { term: "Timeline", def: "The ordered sequence of events in an incident, used to reconstruct what happened." },
+                { term: "Escalation", def: "Passing a case to a more senior analyst or team when it's more serious than first thought." },
+                { term: "Remediation", def: "The actions that remove a threat or fix its cause." },
+                { term: "MTTR", def: "Mean time to respond (or resolve): how long, on average, it takes to deal with an incident." },
+              ],
+            },
+            {
+              name: "Attacks & threats",
+              module: "attack paths across modules",
+              terms: [
+                { term: "Attack path", def: "The chain of steps an attacker could take from an entry point to a valuable target." },
+                { term: "Credential access", def: "Techniques for stealing usernames, passwords or keys." },
+                { term: "Privilege escalation", def: "Gaining higher permissions than an account was meant to have." },
+                { term: "Lateral movement", def: "Moving from one compromised system to others inside the network." },
+                { term: "Backdoor", def: "A hidden way back into a system that bypasses normal authentication." },
+                { term: "Impossible travel", def: "Logins from two places too far apart to travel between in the time that passed." },
+                { term: "Phishing", def: "Tricking people into revealing credentials or running malicious files, usually by email." },
+                { term: "Exfiltration", def: "Moving stolen data out of an organisation." },
+              ],
+            },
+            {
+              name: "Cloud & identity",
+              terms: [
+                { term: "IAM", def: "Identity and access management: who can access what, and with which permissions." },
+                { term: "Least privilege", def: "Giving every account only the access it needs, and nothing more." },
+                { term: "MFA", def: "Multi-factor authentication: a second proof of identity beyond a password." },
+                { term: "Audit log", def: "A record of who did what, and when, across cloud services." },
+                { term: "Zero trust", def: "Never assume a request is safe because it comes from inside the network; verify every time." },
+                { term: "Cloud workload", def: "Anything running in the cloud, such as virtual machines, containers or functions." },
+              ],
+            },
+            {
+              name: "AI in security",
+              module: "04 AI integration",
+              terms: [
+                { term: "Anomaly detection", def: "Spotting behaviour that differs from what's normal, without a fixed rule." },
+                { term: "AI summary", def: "A plain-language overview of an alert or case, so analysts don't read raw data first." },
+                { term: "Recommendation", def: "A suggested next action, such as isolating a host or resetting credentials." },
+                { term: "Verdict", def: "The system's judgement on an alert: likely malicious, suspicious or benign." },
+                { term: "Explainability", def: "Showing why the AI reached a conclusion, so people can trust or challenge it." },
+                { term: "Human in the loop", def: "AI proposes, people decide: analysts confirm actions before they happen." },
+              ],
+            },
+          ],
         },
         {
           type: "needed",
@@ -199,9 +292,10 @@ const project: Project = {
               shots: [
                 {
                   label: "Dashboard",
+                  nda: true,
                   image: {
-                    src: `${IMG}/01.webp`,
-                    alt: "A tablet in tent mode showing the dark AI Alert Dashboard: an Alerts Triage bubble diagram, an alerts overview bar chart by severity, filters and an alerts table with priority tags.",
+                    src: `${IMG}/nda/alert-dashboard-dark.webp`,
+                    alt: "The dark AI Alert Dashboard, deliberately blurred: an alerts triage bubble diagram, an alerts overview bar chart in severity colours, filters and an alerts table with red, amber and yellow priority tags.",
                   },
                 },
                 {
@@ -236,9 +330,10 @@ const project: Project = {
               shots: [
                 {
                   label: "Dashboard",
+                  nda: true,
                   image: {
-                    src: `${IMG}/03.webp`,
-                    alt: "A tablet showing the dark Vulnerabilities Dashboard: group-by toggles for Vulnerability, Host and Container, a stacked bar chart of 50 vulnerabilities by severity, and a cases table.",
+                    src: `${IMG}/nda/vulnerabilities-dashboard.webp`,
+                    alt: "The dark Vulnerabilities Dashboard, deliberately blurred: group-by toggles, a row of severity counters, a stacked bar chart in severity colours and a cases table.",
                   },
                 },
                 {
@@ -266,9 +361,10 @@ const project: Project = {
               shots: [
                 {
                   label: "Dashboard",
+                  nda: true,
                   image: {
-                    src: `${IMG}/05.webp`,
-                    alt: "A laptop showing the dark Case Center dashboard: a Dashboard Categories sidebar, a New Dashboard button, case count cards, three ring charts for status, severity and priority, and pie charts by tag, stage and product.",
+                    src: `${IMG}/nda/case-center-dashboard.webp`,
+                    alt: "The dark Case Center dashboard, deliberately blurred: a dashboard categories sidebar with a green New Dashboard button, case count cards, three ring charts and three pie charts.",
                   },
                 },
                 {
@@ -301,9 +397,10 @@ const project: Project = {
               shots: [
                 {
                   label: "Ask for a dashboard",
+                  nda: true,
                   image: {
-                    src: `${IMG}/07.webp`,
-                    alt: "A dark Create Dashboard panel with the AI tab selected. The user asks for an alert workload trend for the last 30 days; the assistant replies with three dashboard options, Threat Intelligence View, Health & Attack Matrix View and SOC Operational Overview, and asks which to create.",
+                    src: `${IMG}/nda/ai-create-dashboard.webp`,
+                    alt: "A dark Create Dashboard panel with the AI tab selected, deliberately blurred. The user asks for an alert workload trend for the last 30 days; the assistant replies with three dashboard options, Threat Intelligence View, Health & Attack Matrix View and SOC Operational Overview, and asks which to create.",
                   },
                 },
                 {
@@ -349,16 +446,10 @@ const project: Project = {
               shots: [
                 {
                   label: "Components & colour",
+                  nda: true,
                   image: {
-                    src: `${IMG}/09.webp`,
-                    alt: "Design system board: accordion components, ten sidebar navigation states, active and inactive icon sets, New Case buttons, and rows of base neutral and base brand colour swatches with hex codes.",
-                  },
-                },
-                {
-                  label: "Type & spacing",
-                  image: {
-                    src: `${IMG}/10.webp`,
-                    alt: "Typography and spacing board: an Inter character specimen, the Inter type scale from Header 1 to input field, accordion default, hover and clicked states, and a spacing ladder from 4 px to 40 px.",
+                    src: `${IMG}/nda/components-colour.webp`,
+                    alt: "The design system board, deliberately blurred: accordion components, ten sidebar navigation states, active and inactive icon sets, buttons, and rows of neutral and brand colour swatches.",
                   },
                 },
               ],
@@ -414,10 +505,16 @@ const project: Project = {
               shots: [
                 {
                   label: "Prototype map",
-                  views: ["Dashboard (Case Centre)", "Widget", "Table", "AI overview", "Timeline"],
+                  bands: [
+                    { label: "Dashboard", top: 9, height: 23 },
+                    { label: "Widget", top: 35, height: 14 },
+                    { label: "Table", top: 58, height: 10.5 },
+                    { label: "AI overview", top: 75.5, height: 10 },
+                    { label: "Timeline", top: 87, height: 10.5 },
+                  ],
                   image: {
-                    src: `${IMG}/11.webp`,
-                    alt: "A laptop showing a Figma prototype map: rows of frames labelled Dashboard, Widget, Table, AI Overview and Timeline, joined by dense blue connector wires.",
+                    src: `${IMG}/nda/prototype-map.webp`,
+                    alt: "A Figma prototype map on dark: rows of small frames for the Case Centre dashboard, widgets, table, AI overview and timeline, joined by dense blue connector wires, with manual and AI branches.",
                   },
                 },
               ],
@@ -454,16 +551,18 @@ const project: Project = {
               shots: [
                 {
                   label: "Light",
+                  nda: true,
                   image: {
-                    src: `${IMG}/12.webp`,
-                    alt: "A laptop showing the light-mode AI Alert Dashboard: a pale blue header, an Alerts Triage bubble diagram, a stacked bar chart with severity counts, filters, and an alerts table with red, amber and green priority tags.",
+                    src: `${IMG}/nda/alert-dashboard-light.webp`,
+                    alt: "The light-mode AI Alert Dashboard, deliberately blurred: a pale blue header, an alerts triage bubble diagram, a stacked bar chart in severity colours, filters and an alerts table with red, amber and green priority tags.",
                   },
                 },
                 {
                   label: "Dark",
+                  nda: true,
                   image: {
-                    src: `${IMG}/01.webp`,
-                    alt: "The same AI Alert Dashboard in dark mode, on a tablet in tent mode.",
+                    src: `${IMG}/nda/alert-dashboard-dark.webp`,
+                    alt: "The same AI Alert Dashboard in dark mode, deliberately blurred.",
                   },
                 },
               ],
@@ -489,17 +588,55 @@ const project: Project = {
               name: "LinkedIn creative posts",
               kicker: "Branding & visual communication",
               headline: "Creative communication aligned with the brand identity.",
-              body: "Posts for AiStrike's company page, designed to the brand.",
+              body: "Posts for AiStrike's company page, designed to the brand and now live on LinkedIn.",
               chips: ["New Year", "Christmas", "Republic Day", "Welcome posts (8+ iterations)"],
-              shots: [
-                {
-                  label: "Festive posts",
-                  image: {
-                    src: `${IMG}/14.webp`,
-                    alt: "Four AiStrike LinkedIn posts: a Merry Christmas octopus in a Santa hat, a Happy New Year 2026 card with fireworks, and two Republic Day posts with the Indian flag.",
-                  },
-                },
-              ],
+            },
+          ],
+        },
+        {
+          type: "phoneCarousel",
+          heading: "Swipe through the live posts",
+          intro: "The posts as they appear on AiStrike's LinkedIn page, captured on my phone.",
+          slides: [
+            {
+              kind: "Welcome",
+              title: "Welcoming the Sr. Director Engineering & India Head",
+              image: {
+                src: `${IMG}/linkedin/phone-welcome-sr-director.webp`,
+                alt: "Phone screenshot of AiStrike's LinkedIn posts: a 'Welcome to the team' post with bold black type on a white-to-peach gradient, orange brand shapes and a portrait of the new Sr. Director Engineering & India Head.",
+              },
+            },
+            {
+              kind: "Festive",
+              title: "Happy New Year 2026",
+              image: {
+                src: `${IMG}/linkedin/phone-new-year-2026.webp`,
+                alt: "Phone screenshot of AiStrike's LinkedIn New Year post: 'Happy New Year 2026' on deep navy, the 5 of 2025 giving way to a 6, with red fireworks.",
+              },
+            },
+            {
+              kind: "Welcome",
+              title: "Welcome on board, two new hires",
+              image: {
+                src: `${IMG}/linkedin/phone-welcome-two.webp`,
+                alt: "Phone screenshot of AiStrike's LinkedIn post: 'Congratulations, welcome on board' over dark, rust and teal shapes, with two portrait cards and orange name plates.",
+              },
+            },
+            {
+              kind: "Welcome",
+              title: "Welcoming the VP of Sales",
+              image: {
+                src: `${IMG}/linkedin/phone-welcome-vp-sales.webp`,
+                alt: "Phone screenshot of AiStrike's LinkedIn post: a giant white 'Welcome' behind a portrait of the new VP of Sales on a dark grid, with a hand-drawn orange arrow to his name.",
+              },
+            },
+            {
+              kind: "Festive",
+              title: "Merry Christmas",
+              image: {
+                src: `${IMG}/linkedin/phone-christmas.webp`,
+                alt: "Phone screenshot of AiStrike's LinkedIn Christmas post: an orange octopus in a Santa hat wrapped in fairy lights, with 'Merry Christmas' in red.",
+              },
             },
           ],
         },

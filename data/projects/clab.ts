@@ -9,8 +9,8 @@ const project: Project = {
   subtitle: "Connecting creative minds",
   oneLiner:
     "A mobile platform where companies, working professionals and university students meet, collaborate on projects, join webinars and competitions, and build portfolios in one place.",
-  tier: "focused",
-  order: 0,
+  tier: "flagship",
+  order: 2,
   kind: "Mobile app · Collaboration and networking platform",
   year: "2024",
   duration: "8 weeks",
