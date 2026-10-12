@@ -1,6 +1,12 @@
 export const site = {
-  /** Set NEXT_PUBLIC_SITE_URL in production (e.g. https://asmishaikh.com). */
-  url: (process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000").replace(/\/$/, ""),
+  /**
+   * NEXT_PUBLIC_SITE_URL wins (set it for a custom domain); on Vercel it falls
+   * back to the project's production domain, which Vercel provides itself.
+   */
+  url: (
+    process.env.NEXT_PUBLIC_SITE_URL ??
+    (process.env.VERCEL_PROJECT_PRODUCTION_URL ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}` : "http://localhost:3000")
+  ).replace(/\/$/, ""),
   name: "Asmi Shaikh",
   title: "Asmi Shaikh — Multidisciplinary Designer",
   description:
