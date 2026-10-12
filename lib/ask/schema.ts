@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-/** What the chatbot returns, from Claude (structured output) or the local fallback. */
+/** What the chatbot returns, from Gemini (structured output) or the local fallback. */
 export const AskReplySchema = z.object({
   answer: z.string().describe("Answer in 1–4 short sentences, plain text, third person about Asmi."),
   links: z.array(z.string()).describe("Project slugs from the knowledge pack to show as buttons. Empty if none."),

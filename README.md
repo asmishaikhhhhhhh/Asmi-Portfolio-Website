@@ -18,7 +18,7 @@ npm run build        # production build (must pass before deploying)
 | Variable | Needed for | Notes |
 |---|---|---|
 | `NEXT_PUBLIC_SITE_URL` | SEO, sitemap, social cards | e.g. `https://asmishaikh.com` |
-| `ANTHROPIC_API_KEY` | Ask Asmi (AI answers) | Without it the bot uses its local, data-only matcher |
+| `GEMINI_API_KEY` | Ask Asmi (AI answers, Gemini; model via `ASK_MODEL`, default `gemini-3.5-flash-lite`) | Without it the bot uses its local, data-only matcher |
 | `ASK_MODEL` | optional | Defaults to `claude-haiku-4-5` |
 | `RESEND_API_KEY` | Contact form | Without it the form offers a prefilled email instead |
 | `CONTACT_FROM` | Contact form | A sender on a domain verified in Resend, e.g. `Portfolio <hello@asmishaikh.com>` |
