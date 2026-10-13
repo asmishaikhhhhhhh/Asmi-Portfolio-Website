@@ -196,11 +196,6 @@
 }
 
 /* ─────────────────────────── process loop (About) ─────────────────────────── */
-.pl-orbit {
-  transform-box: view-box;
-  transform-origin: 200px 200px;
-  animation: pl-orbit 14s linear infinite;
-}
 .pl-arc {
   transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
@@ -223,7 +218,6 @@
   }
 }
 @media (prefers-reduced-motion: reduce) {
-  .pl-orbit,
   .pl-spin {
     animation: none !important;
   }

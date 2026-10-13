@@ -1,7 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { useId, useState, type KeyboardEvent } from "react";
+import { useEffect, useId, useRef, useState, type KeyboardEvent } from "react";
+import { useAnimationFrame, useReducedMotion } from "motion/react";
 
 export type LoopStage = {
   verb: string;
@@ -14,24 +15,62 @@ export type LoopStage = {
 const C = 200, R = 150;
 const ANGLES = [-90, 30, 150];
 const at = (deg: number, r = R) => [C + r * Math.cos((deg * Math.PI) / 180), C + r * Math.sin((deg * Math.PI) / 180)] as const;
+// One lap of the dot, and how far (degrees) before a stage's centre the dot touches its circle
+const LAP = 14000;
+const TOUCH = 18;
 
 /**
- * How I work, as a loop: research → conceptualise → experiment → iterate. Pick a
- * stage (click, hover or arrow keys) to see the skills behind it and where
- * they show up in the work. A dot keeps travelling the loop, because it never
- * really stops.
+ * How I work, as a loop: research → conceptualise → experiment → iterate. A
+ * dot keeps travelling the loop, because it never really stops, and each stage
+ * fills the moment the dot touches it, showing the skills behind it and where
+ * they show up in the work. Clicking a stage (or arrow keys) sends the dot
+ * there. The dot waits while someone reads the details card.
+ *
+ * Reduced motion: the dot sits still on the chosen stage; click to move it.
  */
 export function ProcessLoop({ stages }: { stages: LoopStage[] }) {
-  const [active, setActive] = useState(0);
+  const n = stages.length;
+  const step = 360 / n;
+  const reduce = useReducedMotion();
+  // how many stages the dot has reached so far; only grows, so the arc always turns forwards
+  const [turn, setTurn] = useState(0);
+  const active = turn % n;
   const id = useId();
   const stage = stages[active];
 
+  const orbit = useRef<SVGGElement>(null);
+  const angle = useRef(0); // degrees travelled, ever
+  const reading = useRef(false);
+
+  const place = (deg: number) => orbit.current?.setAttribute("transform", `rotate(${deg % 360} ${C} ${C})`);
+
+  useAnimationFrame((_, delta) => {
+    if (reduce || reading.current) return;
+    angle.current += (Math.min(delta, 64) / LAP) * 360;
+    place(angle.current);
+    const t = Math.floor((angle.current + TOUCH) / step);
+    if (t !== turn) setTurn(t);
+  });
+
+  // with reduced motion the dot just sits on the chosen stage
+  useEffect(() => {
+    if (reduce) place(active * step);
+  }, [reduce, active, step]);
+
+  /** Send the dot (forwards) to stage i. */
+  const go = (i: number) => {
+    const next = turn + ((i - active + n) % n);
+    angle.current = next * step;
+    place(angle.current);
+    setTurn(next);
+  };
+
   const onKey = (e: KeyboardEvent) => {
-    const step = e.key === "ArrowRight" || e.key === "ArrowDown" ? 1 : e.key === "ArrowLeft" || e.key === "ArrowUp" ? -1 : 0;
-    if (!step) return;
+    const dir = e.key === "ArrowRight" || e.key === "ArrowDown" ? 1 : e.key === "ArrowLeft" || e.key === "ArrowUp" ? -1 : 0;
+    if (!dir) return;
     e.preventDefault();
-    const next = (active + step + stages.length) % stages.length;
-    setActive(next);
+    const next = (active + dir + n) % n;
+    go(next);
     document.getElementById(`${id}-tab-${next}`)?.focus();
   };
 
@@ -61,18 +100,18 @@ export function ProcessLoop({ stages }: { stages: LoopStage[] }) {
             pathLength={360}
             strokeDasharray="120 240"
             className="pl-arc"
-            style={{ transform: `rotate(${ANGLES[active]}deg)`, transformOrigin: `${C}px ${C}px`, transformBox: "view-box" }}
+            style={{ transform: `rotate(${ANGLES[0] + turn * step}deg)`, transformOrigin: `${C}px ${C}px`, transformBox: "view-box" }}
           />
-          <g className="pl-orbit">
+          <g ref={orbit}>
             <circle cx={C} cy={C - R} r={7} fill="var(--color-marigold)" />
           </g>
         </svg>
 
-        {/* Centre: the "then do it again" */}
+        {/* Centre: "always a work in progress" */}
         <div className="pointer-events-none absolute inset-0 flex flex-col items-center justify-center text-center">
           <span aria-hidden className="pl-spin text-2xl text-marigold-ink">↻</span>
           <span className="font-display-wonk text-h3 italic text-forest">Iterate</span>
-          <span className="meta mt-1 text-ink-mute">then do it again</span>
+          <span className="meta mt-1 text-ink-mute">always a work in progress</span>
         </div>
 
         {/* Stage buttons sit on the loop */}
@@ -89,8 +128,7 @@ export function ProcessLoop({ stages }: { stages: LoopStage[] }) {
                 aria-selected={on}
                 aria-controls={`${id}-panel`}
                 tabIndex={on ? 0 : -1}
-                onClick={() => setActive(i)}
-                onPointerEnter={() => setActive(i)}
+                onClick={() => go(i)}
                 className={`absolute flex aspect-square w-[24%] -translate-x-1/2 -translate-y-1/2 flex-col items-center justify-center rounded-full border text-center shadow-float transition-[background-color,color,transform,border-color] duration-300 ${
                   on ? "scale-105 border-forest bg-forest text-paper" : "border-line bg-card text-ink hover:border-ink"
                 }`}
@@ -105,7 +143,16 @@ export function ProcessLoop({ stages }: { stages: LoopStage[] }) {
       </div>
 
       {/* The selected stage */}
-      <div id={`${id}-panel`} role="tabpanel" aria-labelledby={`${id}-tab-${active}`} className="md:col-span-7">
+      <div
+        id={`${id}-panel`}
+        role="tabpanel"
+        aria-labelledby={`${id}-tab-${active}`}
+        className="md:col-span-7"
+        onPointerEnter={() => (reading.current = true)}
+        onPointerLeave={() => (reading.current = false)}
+        onFocus={() => (reading.current = true)}
+        onBlur={() => (reading.current = false)}
+      >
         <div key={active} className="pl-fade rounded-media border border-line bg-card p-6 md:p-10">
           <p className="meta text-ink-mute">
             Stage 0{active + 1} / 0{stages.length}
