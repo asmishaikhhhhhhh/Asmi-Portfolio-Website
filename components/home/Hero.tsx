@@ -20,13 +20,16 @@ export function Hero() {
         }}
       />
       <div className="container-page relative">
-        {/* Eyebrow: what and where, then the fields she works across */}
-        <p className="meta flex flex-wrap items-center gap-x-4 gap-y-2 text-ink-mute">
-          <span>{profile.role}</span>
-          <span aria-hidden className="text-line">/</span>
-          <span>{profile.location}</span>
-        </p>
-        <Disciplines className="mt-3" />
+        {/* Eyebrow, one line: what and where, then the fields she works across */}
+        <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
+          <p className="meta flex flex-wrap items-center gap-x-4 gap-y-2 text-ink-mute">
+            <span>{profile.role}</span>
+            <span aria-hidden className="text-line">/</span>
+            <span>{profile.location}</span>
+          </p>
+          <span aria-hidden className="meta text-line">/</span>
+          <Disciplines />
+        </div>
 
         {/* Photo + name */}
         <div className="mt-12 flex min-w-0 flex-col gap-5 sm:flex-row sm:items-center sm:gap-7 md:mt-16">
