@@ -5,9 +5,10 @@ import { useEffect, useRef, useState } from "react";
 const INTERACTIVE = "a, button, [role=button], label, summary, select, input[type=range], [data-cursor]";
 
 /**
- * A small circle that follows the pointer and grows over anything clickable.
- * Only for fine pointers with motion allowed; touch, keyboard and reduced-motion
- * users keep the native cursor. Text fields keep the native I-beam.
+ * A soft ring that appears around the pointer only over things you can click
+ * (links, buttons, cards, CTAs). Everywhere else it is hidden and the native
+ * cursor does the work, so plain content never looks interactive. The native
+ * cursor is never hidden. Only for fine pointers with motion allowed.
  */
 export function Cursor() {
   const dot = useRef<HTMLDivElement>(null);
@@ -67,22 +68,23 @@ export function Cursor() {
 
   if (!enabled) return null;
 
-  const size = hovering ? (pressed ? 36 : 44) : pressed ? 8 : 12;
+  const size = pressed ? 34 : 42;
   return (
     <div
       ref={dot}
       aria-hidden
       className="pointer-events-none fixed left-0 top-0 z-[200]"
-      // Difference blending keeps the circle visible on light and dark sections alike.
-      style={{ opacity: visible ? 1 : 0, transition: "opacity 200ms", mixBlendMode: "difference" }}
+      // Difference blending keeps the ring visible on light and dark sections alike.
+      style={{ opacity: visible && hovering ? 1 : 0, transition: "opacity 200ms", mixBlendMode: "difference" }}
     >
       <div
-        className="-translate-x-1/2 -translate-y-1/2 rounded-full border transition-[width,height,background-color,border-color] duration-300 ease-out-soft"
+        className="-translate-x-1/2 -translate-y-1/2 rounded-full border transition-[width,height,transform] duration-300 ease-out-soft"
         style={{
           width: size,
           height: size,
-          backgroundColor: hovering ? "rgb(255 255 255 / 0.12)" : "#fff",
-          borderColor: hovering ? "#fff" : "transparent",
+          transform: `scale(${hovering ? 1 : 0.4})`,
+          backgroundColor: "rgb(255 255 255 / 0.1)",
+          borderColor: "#fff",
           borderWidth: 1.5,
         }}
       />

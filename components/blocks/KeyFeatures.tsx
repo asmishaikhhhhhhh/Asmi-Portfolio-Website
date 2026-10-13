@@ -101,6 +101,7 @@ export function KeyFeatures({ heading, centre, items }: { heading?: string; cent
                 key={f.title}
                 type="button"
                 tabIndex={-1}
+                aria-label={f.title}
                 onPointerEnter={() => setActive(i)}
                 onClick={() => setActive(i)}
                 className="absolute grid aspect-square w-[26%] -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full border-4 border-paper shadow-float transition-all duration-300"

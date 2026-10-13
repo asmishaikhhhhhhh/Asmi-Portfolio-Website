@@ -26,7 +26,8 @@ export function PhotoTicker({ photos }: { photos: Img[] }) {
             alt={copy > 0 ? "" : img.alt}
             width={d.w}
             height={d.h}
-            sizes="(min-width: 768px) 420px, 300px"
+            // the strip is height-led (15rem / 19rem), so each photo's width follows its aspect ratio
+            sizes={`(min-width: 768px) ${Math.round((304 * d.w) / d.h)}px, ${Math.round((240 * d.w) / d.h)}px`}
             className="pt-photo h-[15rem] w-auto rounded-media bg-paper-deep object-cover md:h-[19rem]"
             style={{ aspectRatio: `${d.w} / ${d.h}`, ["--tilt" as string]: `${i % 2 ? 1.2 : -1.2}deg` }}
             draggable={false}

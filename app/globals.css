@@ -698,16 +698,8 @@
   }
 }
 
-/* Native cursor hidden only when the custom cursor is active (fine pointer, motion OK). */
-html[data-custom-cursor="on"] body,
-html[data-custom-cursor="on"] a,
-html[data-custom-cursor="on"] button {
-  cursor: none;
-}
-html[data-custom-cursor="on"] input,
-html[data-custom-cursor="on"] textarea {
-  cursor: text;
-}
+/* The native cursor always stays: the custom ring (components/ui/Cursor.tsx) only
+   appears around things you can click, so it never suggests that plain content is interactive. */
 
 /* ─────────────────────────── covers ─────────────────────────── */
 .cover-drift {
@@ -1263,6 +1255,22 @@ html[data-custom-cursor="on"] textarea {
   .lv-bob,
   .lv-hop,
   .lv-shout {
+    animation: none;
+  }
+}
+
+/* ── Hero name: letters rise in once on load ── */
+.intro-letter {
+  animation: intro-rise 0.6s var(--ease-out-soft) both;
+}
+@keyframes intro-rise {
+  from {
+    opacity: 0;
+    transform: translateY(0.28em);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .intro-letter {
     animation: none;
   }
 }

@@ -1,8 +1,11 @@
 "use client";
 
+import { poppins } from "@/components/clab/font";
+
 /**
- * Fire Safe hero: the project mark (three interlocking chevrons around a core)
- * and wordmark, traced from the logo artwork into SVG so it stays crisp.
+ * Fire Safe hero: the project mark (three interlocking chevrons around a core,
+ * traced from the logo artwork) and the wordmark, set as live Poppins Medium
+ * text (the logo's typeface) so it stays sharp at any size.
  *
  * Loop: the three chevrons fly in and lock together, the emblem turns a third
  * of a turn like a beacon (it is 3-fold symmetric, so the loop is seamless), a
@@ -30,8 +33,6 @@ const PIECES: { d: string; ox: number; oy: number }[] = [
     "oy": 203
   }
 ];
-
-const WORDMARK = "M956 744 L958 745 L958 748 L954 749 L954 754 L957 754 L958 758 L954 758 L954 778 L949 779 L949 759 L946 758 L946 755 L949 753 L949 748 Z M838 745 L842 745 L843 750 L841 751 L838 750 Z M818 748 L836 748 L835 752 L822 752 L822 761 L831 761 L833 763 L832 765 L822 766 L822 779 L818 779 Z M900 748 L911 748 L916 753 L916 756 L911 756 L909 752 L902 752 L900 754 L900 758 L902 760 L911 762 L916 766 L916 770 L917 770 L916 774 L914 777 L910 779 L899 778 L895 772 L899 770 L903 775 L909 775 L912 772 L912 769 L909 766 L900 764 L896 761 L895 754 L897 750 L899 750 Z M839 754 L843 755 L843 778 L842 779 L838 778 L838 755 Z M848 754 L851 754 L852 757 L855 756 L856 754 L859 754 L859 759 L855 759 L852 762 L852 779 L847 778 L847 755 Z M868 754 L876 754 L880 756 L884 762 L884 768 L866 768 L865 769 L866 773 L869 775 L875 775 L878 772 L883 772 L883 774 L879 778 L868 779 L864 777 L860 771 L861 760 L864 756 Z M927 754 L934 754 L936 756 L939 756 L940 754 L944 755 L944 778 L943 779 L939 779 L938 776 L934 779 L927 779 L927 778 L924 778 L920 774 L920 771 L918 768 L920 759 Z M967 754 L975 754 L978 757 L980 757 L980 759 L982 760 L982 764 L983 764 L982 768 L964 768 L964 772 L968 775 L974 775 L976 774 L976 772 L981 772 L980 776 L975 779 L964 778 L960 774 L960 771 L959 771 L960 759 L964 755 L967 755 Z M870 758 L865 762 L865 764 L879 764 L877 759 Z M930 758 L924 762 L924 771 L926 772 L926 774 L934 775 L938 772 L939 764 L936 759 Z M969 758 L964 761 L964 764 L978 764 L978 762 L974 758 Z";
 
 export function FireSafeLogo({ playing }: { playing: boolean }) {
   return (
@@ -68,7 +69,10 @@ export function FireSafeLogo({ playing }: { playing: boolean }) {
         ))}
       </g>
 
-      <path className="fs-word" d={WORDMARK} fill={RED} fillRule="evenodd" />
+      {/* Sized to the logo artwork: the wordmark is half the emblem's width, on the same baseline */}
+      <text className={`fs-word ${poppins.className}`} x="900" y="779" textAnchor="middle" fontSize="40" fontWeight={500} fill={RED}>
+        Fire Safe
+      </text>
     </svg>
   );
 }

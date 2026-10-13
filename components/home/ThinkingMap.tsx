@@ -20,6 +20,19 @@ const POS: Record<ThinkingNode, [number, number]> = {
   business: [70, 46],
 };
 
+/** How many projects lean on a way of thinking, as dots, so it never reads as the item's number. */
+function Pips({ n, on }: { n: number; on: boolean }) {
+  return (
+    <span className="inline-flex items-center gap-[3px]" aria-label={`${n} project${n === 1 ? "" : "s"}`} role="img">
+      {Array.from({ length: n }, (_, i) => (
+        <span key={i} className={`h-[5px] w-[5px] rounded-full ${on ? "bg-marigold" : "bg-ink/35"}`} />
+      ))}
+    </span>
+  );
+}
+
+const ord = (i: number) => String(i + 1).padStart(2, "0");
+
 /**
  * "How I think": pick one way of thinking to see the belief and the projects
  * that prove it; pick two to see where they meet. Driven by each project's
@@ -154,7 +167,7 @@ export function ThinkingMap({ nodes, projects }: { nodes: ThinkingNodeInfo[]; pr
                 );
               })}
             </svg>
-            {nodes.map((n) => {
+            {nodes.map((n, i) => {
               const on = sel.includes(n.id);
               return (
                 <button
@@ -162,13 +175,14 @@ export function ThinkingMap({ nodes, projects }: { nodes: ThinkingNodeInfo[]; pr
                   type="button"
                   aria-pressed={on}
                   onClick={() => toggle(n.id)}
-                  className={`absolute -translate-x-1/2 -translate-y-1/2 rounded-full border px-4 py-2.5 text-[0.95rem] font-medium transition-[background,color,border-color,transform] duration-300 ease-out-soft hover:scale-105 ${
+                  className={`absolute flex -translate-x-1/2 -translate-y-1/2 items-center gap-2 rounded-full border px-4 py-2.5 text-[0.95rem] font-medium transition-[background,color,border-color,transform] duration-300 ease-out-soft hover:scale-105 ${
                     on ? "border-ink bg-ink text-paper" : "border-ink/15 bg-card text-ink"
                   }`}
                   style={{ left: `${POS[n.id][0]}%`, top: `${POS[n.id][1]}%` }}
                 >
+                  <span className={`text-xs tabular-nums ${on ? "text-paper/60" : "text-ink-mute"}`}>{ord(i)}</span>
                   {n.label}
-                  <span className={`ml-2 text-xs tabular-nums ${on ? "text-marigold" : "text-ink-mute"}`}>{counts[n.id]}</span>
+                  <Pips n={counts[n.id]} on={on} />
                 </button>
               );
             })}
@@ -176,7 +190,7 @@ export function ThinkingMap({ nodes, projects }: { nodes: ThinkingNodeInfo[]; pr
 
           {/* Chips (mobile): same buttons, no spatial map to squint at. */}
           <div className="grid grid-cols-2 gap-2 sm:hidden" role="group" aria-label="Ways of thinking">
-            {nodes.map((n) => {
+            {nodes.map((n, i) => {
               const on = sel.includes(n.id);
               return (
                 <button
@@ -184,17 +198,20 @@ export function ThinkingMap({ nodes, projects }: { nodes: ThinkingNodeInfo[]; pr
                   type="button"
                   aria-pressed={on}
                   onClick={() => toggle(n.id)}
-                  className={`flex items-center justify-between rounded-control border px-4 py-3 text-left font-medium ${
+                  className={`flex flex-col items-start gap-1.5 rounded-control border px-4 py-3 text-left font-medium ${
                     on ? "border-ink bg-ink text-paper" : "border-ink/15 bg-card"
                   }`}
                 >
-                  {n.label}
-                  <span className={`text-xs tabular-nums ${on ? "text-marigold" : "text-ink-mute"}`}>{counts[n.id]}</span>
+                  <span className="flex items-baseline gap-2">
+                    <span className={`text-xs tabular-nums ${on ? "text-paper/60" : "text-ink-mute"}`}>{ord(i)}</span>
+                    {n.label}
+                  </span>
+                  <Pips n={counts[n.id]} on={on} />
                 </button>
               );
             })}
           </div>
-          <p className="meta mt-4 text-center text-ink-mute">Numbers show how many projects lean on each</p>
+          <p className="meta mt-4 text-center text-ink-mute">Dots show how many projects lean on each</p>
         </div>
       </div>
     </section>

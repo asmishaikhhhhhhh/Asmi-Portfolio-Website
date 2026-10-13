@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { MultilingualName } from "@/components/hero/MultilingualName";
+import { IntroName } from "@/components/hero/IntroName";
 import { Magnetic } from "@/components/ui/Magnetic";
 import Image from "next/image";
 import { education, experience, profile, recognition } from "@/data/portfolio";
@@ -79,7 +79,7 @@ export function Hero() {
         <div className="mt-12 flex flex-col gap-10 md:mt-16 lg:flex-row lg:items-center lg:justify-between lg:gap-12">
         <div className="flex min-w-0 flex-col gap-5 sm:flex-row sm:items-center sm:gap-7 lg:flex-1">
           {/* Round photo beside the name: paper ring and hairline */}
-          {/* Sized to span the name line plus its language caption, so the three align */}
+          {/* Sized to span the name line plus its caption, so the two align */}
           <div className="group relative w-fit shrink-0">
             <Image
               src={profile.avatar.src}
@@ -92,7 +92,7 @@ export function Hero() {
               style={{ background: "var(--color-card)" }}
             />
           </div>
-          <MultilingualName className="min-w-0 flex-1" />
+          <IntroName name={profile.name} className="min-w-0 flex-1" />
         </div>
 
         <div className="flex shrink-0 flex-wrap items-center gap-x-6 gap-y-4 lg:justify-end">

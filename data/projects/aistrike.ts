@@ -37,7 +37,7 @@ const project: Project = {
     type: "motion",
     composition: "aistrike",
     poster: {
-      src: `${IMG}/01.webp`,
+      src: `${IMG}/nda/alert-dashboard-dark.webp`,
       alt: "A tablet in tent mode showing the dark AI Alert Dashboard: an Alerts Triage bubble diagram, an Alerts overview bar chart with severity counts, filter chips and an alerts table, over an orange band.",
       focus: "50% 40%",
     },
@@ -299,11 +299,12 @@ const project: Project = {
                   },
                 },
                 {
+                  nda: true,
                   label: "Alert detail",
                   views: ["Timeline", "Attack path", "AI overview", "Investigation", "Remediation"],
                   image: {
-                    src: `${IMG}/02.webp`,
-                    alt: "Collage of five dark alert detail screens around a laptop: Timeline, Attack path, AI Overview, Investigation and Remediation tabs for one alert, with an AiStrike Verdict panel and prioritisation factors. Identifying details are blurred.",
+                    src: `${IMG}/nda/alert-detail-collage.webp`,
+                    alt: "Collage of five dark alert detail screens around a laptop: Timeline, Attack path, AI Overview, Investigation and Remediation tabs for one alert, with an AiStrike Verdict panel and prioritisation factors. Deliberately blurred: the product is under NDA.",
                   },
                 },
               ],
@@ -337,11 +338,12 @@ const project: Project = {
                   },
                 },
                 {
+                  nda: true,
                   label: "Detail pages",
                   views: ["Dashboard", "Incident detail", "AI overview", "Remediation", "Attack path"],
                   image: {
-                    src: `${IMG}/04.webp`,
-                    alt: "Collage of dark vulnerability screens around a laptop: the dashboard, an incident detail table, a CVE AI overview with key findings, a code-to-cloud remediation flow and an attack path graph. Identifying details are blurred.",
+                    src: `${IMG}/nda/vulnerabilities-collage.webp`,
+                    alt: "Collage of dark vulnerability screens around a laptop: the dashboard, an incident detail table, a CVE AI overview with key findings, a code-to-cloud remediation flow and an attack path graph. Deliberately blurred: the product is under NDA.",
                   },
                 },
               ],
@@ -368,11 +370,12 @@ const project: Project = {
                   },
                 },
                 {
+                  nda: true,
                   label: "Tasks & timeline",
                   views: ["Widget", "Timeline", "Case center dashboard", "Selected task", "Task"],
                   image: {
-                    src: `${IMG}/06.webp`,
-                    alt: "Collage of dark Case Center screens around a laptop: a widget added to a dashboard, an event timeline, the case dashboard, a selected task's details and a task table, each with a green success toast. Names and identifiers are blurred.",
+                    src: `${IMG}/nda/case-center-collage.webp`,
+                    alt: "Collage of dark Case Center screens around a laptop: a widget added to a dashboard, an event timeline, the case dashboard, a selected task's details and a task table, each with a green success toast. Deliberately blurred: the product is under NDA.",
                   },
                 },
               ],
@@ -404,11 +407,12 @@ const project: Project = {
                   },
                 },
                 {
+                  nda: true,
                   label: "Assistant flows",
                   views: ["Create events", "Create a dashboard", "Assistant home", "Create a task", "Create a widget"],
                   image: {
-                    src: `${IMG}/08.webp`,
-                    alt: "Collage of AI assistant flows around a laptop showing the assistant home, 'How can I help you Today?', with suggestions for Alert Details, Investigation, Remediation and Attack Path; around it, chat panels to create events, a dashboard, a task and a widget.",
+                    src: `${IMG}/nda/ai-assistant-collage.webp`,
+                    alt: "Collage of AI assistant flows around a laptop showing the assistant home, 'How can I help you Today?', with suggestions for Alert Details, Investigation, Remediation and Attack Path; around it, chat panels to create events, a dashboard, a task and a widget. Deliberately blurred: the product is under NDA.",
                   },
                 },
               ],
