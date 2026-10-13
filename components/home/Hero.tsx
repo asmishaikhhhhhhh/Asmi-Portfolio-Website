@@ -9,17 +9,29 @@ import { Statement } from "./Statement";
 export function Hero() {
   return (
     <section aria-label="Introduction" className="relative overflow-hidden pt-24 md:pt-28">
-      <div className="container-page">
-        <p className="meta flex flex-wrap items-center gap-x-4 gap-y-2 text-ink-mute">
-          <span>{profile.role}</span>
-          <span aria-hidden className="text-line">/</span>
-          <span>{profile.location}</span>
-          <CurrentRole className="normal-case tracking-normal" />
-        </p>
+      {/* faint dot grid behind the intro, fading out before the statement */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-x-0 top-0 h-[44rem] md:h-[52rem]"
+        style={{
+          backgroundImage: "radial-gradient(circle, rgb(26 25 22 / 0.16) 1px, transparent 1.6px)",
+          backgroundSize: "24px 24px",
+          maskImage: "linear-gradient(180deg, #000 55%, transparent)",
+        }}
+      />
+      <div className="container-page relative">
+        {/* Eyebrow: where she is now, then what and where */}
+        <div className="flex flex-wrap items-center gap-x-4 gap-y-3">
+          <CurrentRole />
+          <p className="meta flex flex-wrap items-center gap-x-4 gap-y-2 text-ink-mute">
+            <span>{profile.role}</span>
+            <span aria-hidden className="text-line">/</span>
+            <span>{profile.location}</span>
+          </p>
+        </div>
 
-        {/* One line on large screens: photo + name on the left, actions at the right end */}
-        <div className="mt-12 flex flex-col gap-10 md:mt-16 lg:flex-row lg:items-center lg:justify-between lg:gap-12">
-        <div className="flex min-w-0 flex-col gap-5 sm:flex-row sm:items-center sm:gap-7 lg:flex-1">
+        {/* Photo + name */}
+        <div className="mt-12 flex min-w-0 flex-col gap-5 sm:flex-row sm:items-center sm:gap-7 md:mt-16">
           {/* Round photo beside the name: paper ring and hairline */}
           {/* Sized to span the name line plus its caption, so the two align */}
           <div className="group relative w-fit shrink-0">
@@ -37,26 +49,35 @@ export function Hero() {
           <IntroName name={profile.name} className="min-w-0 flex-1" />
         </div>
 
-        <div className="flex shrink-0 flex-wrap items-center gap-x-6 gap-y-4 lg:justify-end">
+        {/* One line on what she does, then the two ways in */}
+        <p className="mt-10 max-w-[34ch] text-lede text-ink-soft md:mt-12">{profile.headline}.</p>
+        <div className="relative z-10 mt-8 flex flex-wrap items-center gap-3 md:mt-10">
           <Magnetic>
             <Link
-              href="/resume"
+              href="#work"
               className="group/cta inline-flex items-center gap-2 rounded-full bg-ink px-6 py-3.5 font-medium text-paper transition-transform duration-200 hover:-translate-y-0.5"
             >
-              View resume
-              <span aria-hidden className="inline-block transition-transform duration-300 ease-out-soft group-hover/cta:-translate-y-0.5 group-hover/cta:translate-x-0.5">
-                ↗
+              See my work
+              <span aria-hidden className="inline-block transition-transform duration-300 ease-out-soft group-hover/cta:translate-y-0.5">
+                ↓
               </span>
             </Link>
           </Magnetic>
-        </div>
+          <Link
+            href="/resume"
+            className="group/cv inline-flex items-center gap-2 rounded-full border border-ink/25 bg-card/70 px-6 py-3.5 font-medium transition-colors duration-200 hover:border-ink"
+          >
+            View resume
+            <span aria-hidden className="inline-block transition-transform duration-300 ease-out-soft group-hover/cv:-translate-y-0.5 group-hover/cv:translate-x-0.5">
+              ↗
+            </span>
+          </Link>
         </div>
 
-        {/* Far-flung words gathering into one sentence */}
-        <div className="mt-24 md:mt-36">
+        {/* Far-flung words gathering into one sentence (its words start scattered, so leave room above) */}
+        <div className="mt-36 md:mt-52">
           <Statement segments={profile.statement} />
         </div>
-
       </div>
     </section>
   );
