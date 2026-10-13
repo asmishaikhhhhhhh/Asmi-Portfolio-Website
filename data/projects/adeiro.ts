@@ -27,7 +27,7 @@ const project: Project = {
     composition: "adeiro",
     poster: {
       src: `${P}/cover/hero-poster.webp`,
-      alt: "The ADEIRO wordmark and “Make Them Adore” in white over a soft photo of a woman with curly hair holding a palm frond",
+      alt: "Adeiro face wash, skin mist toner and deep cleanser bottles beside a sage carton, each labelled ADEIRO, Make Them Adore, on cream and green plinths",
     },
   },
   proofPoint: "5 products prototyped with real Adeiro labels",

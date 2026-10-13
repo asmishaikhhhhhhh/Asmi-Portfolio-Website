@@ -120,7 +120,7 @@ const clapIt: Composition = {
 const adeiro: Composition = {
   dark: true,
   bg: "#2b211a",
-  // No image layers: the brand photo with the wordmark spelling itself in (AdeiroWord).
+  // No image layers: the product photo drifting in under a sweep of light (AdeiroWord).
   scenes: [[]],
   sceneMs: 7000,
   overlay: ({ playing }) => <AdeiroWord playing={playing} />,

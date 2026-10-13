@@ -660,25 +660,22 @@
 .ad-stage[data-playing="true"] .ad-photo {
   animation: ad-drift 7s ease-out infinite;
 }
-.ad-stage[data-playing="true"] .ad-letter {
-  animation: ad-letter 7s cubic-bezier(0.2, 0.8, 0.2, 1) infinite both;
+.ad-sheen {
+  opacity: 0;
 }
-.ad-stage[data-playing="true"] .ad-word {
-  animation: ad-word 7s cubic-bezier(0.2, 0.8, 0.2, 1) infinite both;
+.ad-stage[data-playing="true"] .ad-sheen {
+  animation: ad-sheen 7s cubic-bezier(0.45, 0, 0.25, 1) infinite;
 }
 @keyframes ad-drift {
-  0% { transform: scale(1.1); }
+  0% { transform: scale(1.08); }
   100% { transform: scale(1); }
 }
-@keyframes ad-letter {
-  0% { opacity: 0; filter: blur(10px); transform: translateX(var(--d)) translateY(14px); }
-  14%, 80% { opacity: 1; filter: blur(0); transform: none; }
-  92%, 100% { opacity: 0; filter: blur(6px); transform: none; }
-}
-@keyframes ad-word {
-  0% { opacity: 0; transform: translateY(12px); }
-  12%, 72% { opacity: 1; transform: none; }
-  84%, 100% { opacity: 0; transform: none; }
+/* a soft band of light crossing the bottles, tilted a little like a lamp turning */
+@keyframes ad-sheen {
+  0%, 22% { opacity: 0; transform: translateX(0) skewX(-14deg); }
+  30% { opacity: 1; }
+  70% { opacity: 1; }
+  78%, 100% { opacity: 0; transform: translateX(1480px) skewX(-14deg); }
 }
 
 /* ─────────────────────────── reduced motion ─────────────────────────── */
