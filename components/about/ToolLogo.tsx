@@ -10,8 +10,6 @@ const TILES: Record<string, { t: string; fg: string; bg: string }> = {
   "After Effects": { t: "Ae", fg: "#9999FF", bg: "#00005B" },
   "Fusion 360": { t: "F", fg: "#FF6B00", bg: "#1A1916" },
   Tableau: { t: "Tb", fg: "#E97627", bg: "#1F3A5F" },
-  Relume: { t: "R", fg: "#FFFFFF", bg: "#1A1916" },
-  Lovable: { t: "L", fg: "#FFFFFF", bg: "#FF5A6E" },
 };
 
 /**
