@@ -3,6 +3,7 @@ import Link from "next/link";
 import { Confessions } from "@/components/about/Confessions";
 import { PhotoTicker } from "@/components/about/PhotoTicker";
 import { ProcessLoop } from "@/components/about/ProcessLoop";
+import { ToolLogo } from "@/components/about/ToolLogo";
 import { CurrentRole } from "@/components/ui/CurrentRole";
 import { Picture } from "@/components/ui/Picture";
 import { MaybeText } from "@/components/ui/Needed";
@@ -137,25 +138,28 @@ export default function AboutPage() {
           <dl className="md:col-span-9">
             {(
               [
-                ["Every day", tools.daily, "full", "font-display-soft text-[clamp(1.6rem,1.2rem+1.6vw,2.6rem)] leading-[1.15] text-ink"],
-                ["Regularly", tools.also, "half", "font-display-soft text-[clamp(1.15rem,1rem+0.6vw,1.5rem)] leading-snug text-ink-soft"],
-                ["Getting comfortable with", tools.basic, "ring", "font-display-wonk italic text-[clamp(1.05rem,0.95rem+0.4vw,1.3rem)] leading-snug text-ink-mute"],
+                ["Every day", tools.daily, "full", "gap-x-9 gap-y-6", "flex-col items-start gap-3", "h-10 w-10", "font-display-soft text-[clamp(1.25rem,1.05rem+0.8vw,1.75rem)] text-ink"],
+                ["Regularly", tools.also, "half", "gap-x-7 gap-y-4", "items-center gap-2.5", "h-5 w-5", "font-display-soft text-[1.1rem] text-ink-soft"],
+                ["Getting comfortable with", tools.basic, "ring", "gap-x-7 gap-y-4", "items-center gap-2", "h-[1.125rem] w-[1.125rem]", "font-display-wonk italic text-[1.05rem] text-ink-mute"],
               ] as const
-            ).map(([k, list, dot, type], i) => (
-              <div key={k} className={`grid gap-3 py-6 sm:grid-cols-[11rem_1fr] sm:gap-8 ${i ? "border-t border-line" : "pt-0"}`}>
-                <dt className="meta flex items-center gap-2.5 self-start text-ink-mute sm:pt-[0.6em]">
+            ).map(([k, list, dot, gaps, item, logo, type], i) => (
+              <div key={k} className={`grid gap-4 py-7 sm:grid-cols-[11rem_1fr] sm:gap-8 ${i ? "border-t border-line" : "pt-0"}`}>
+                <dt className="meta flex items-center gap-2.5 self-start text-ink-mute sm:pt-1">
                   <span
                     aria-hidden
                     className={`h-2.5 w-2.5 shrink-0 rounded-full border border-forest ${dot === "full" ? "bg-forest" : dot === "half" ? "bg-[linear-gradient(90deg,var(--color-forest)_50%,transparent_50%)]" : ""}`}
                   />
                   {k}
                 </dt>
-                <dd className={`flex flex-wrap gap-x-[0.85em] gap-y-[0.1em] ${type}`}>
-                  {list.map((t) => (
-                    <span key={t} className="whitespace-nowrap decoration-marigold decoration-2 underline-offset-[0.2em] transition-colors hover:text-ink hover:underline">
-                      {t}
-                    </span>
-                  ))}
+                <dd>
+                  <ul className={`flex flex-wrap ${gaps}`}>
+                    {list.map((t) => (
+                      <li key={t} className={`group/tool flex ${item} ${type}`}>
+                        <ToolLogo name={t} className={`${logo} text-ink/80`} />
+                        <span className="whitespace-nowrap leading-none">{t}</span>
+                      </li>
+                    ))}
+                  </ul>
                 </dd>
               </div>
             ))}
