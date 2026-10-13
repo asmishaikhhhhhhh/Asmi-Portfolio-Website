@@ -6,10 +6,10 @@ import { useMediaQuery } from "@/lib/use-browser";
 import { motion, useReducedMotion } from "motion/react";
 import type { PlaygroundItem } from "@/data/playground";
 
-/** The Clap It clip: a hinged black clamshell, drawn in SVG. */
-function Clip() {
+/** The Clap It clip: a hinged black clamshell, drawn in SVG. Also pins the About page's design-lens card. */
+export function Clip({ className = "-top-4 h-8 w-12" }: { className?: string }) {
   return (
-    <svg viewBox="0 0 44 30" className="absolute -top-4 left-1/2 z-10 h-8 w-12 -translate-x-1/2 drop-shadow" aria-hidden>
+    <svg viewBox="0 0 44 30" className={`absolute left-1/2 z-10 -translate-x-1/2 drop-shadow ${className}`} aria-hidden>
       <path d="M4 22 L18 4 Q22 0 26 4 L40 22 Q42 26 38 26 L6 26 Q2 26 4 22 Z" fill="#242422" />
       <rect x="8" y="24" width="28" height="5" rx="2" fill="#3a3a37" />
       <circle cx="22" cy="15" r="3" fill="#4a4a46" />
