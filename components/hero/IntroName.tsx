@@ -2,9 +2,8 @@
 
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
-import { disciplineLabels } from "@/lib/projects";
-
-const DISCIPLINES = Object.values(disciplineLabels);
+// the fields Asmi works across, in her words
+const DISCIPLINES = ["Research", "UX/UI", "Systems & Service", "UX Strategy"];
 const INTERVAL = 2400;
 
 /**

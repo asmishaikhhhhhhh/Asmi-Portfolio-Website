@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { IntroName } from "@/components/hero/IntroName";
 import { Magnetic } from "@/components/ui/Magnetic";
+import { CurrentRole } from "@/components/ui/CurrentRole";
 import Image from "next/image";
 import { education, experience, profile, recognition } from "@/data/portfolio";
 import { Statement } from "./Statement";
@@ -65,14 +66,7 @@ export function Hero() {
           <span>{profile.role}</span>
           <span aria-hidden className="text-line">/</span>
           <span>{profile.location}</span>
-          <span aria-hidden className="text-line">/</span>
-          <span className="inline-flex items-center gap-2 text-forest">
-            <span className="relative inline-flex h-2 w-2">
-              <span className="absolute inset-0 animate-ping rounded-full bg-marigold/70 motion-reduce:hidden" />
-              <span className="relative inline-flex h-2 w-2 rounded-full bg-marigold" />
-            </span>
-            {profile.availability.status}
-          </span>
+          <CurrentRole className="normal-case tracking-normal" />
         </p>
 
         {/* One line on large screens: photo + name on the left, actions at the right end */}

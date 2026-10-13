@@ -50,8 +50,10 @@ export const profile = {
   ] as { text: string; link?: string; theme?: boolean }[],
   positioning:
     "I design systems: the research, products, services and screens in between, usually where something physical meets something digital.",
+  /** Where she works now. Shown in the hero, About and Resume as the highlighted current role. */
+  current: { role: "User Experience Designer", org: "IBM" },
   availability: {
-    status: "Available for work",
+    status: "Currently a User Experience Designer at IBM",
     detail: needed("What kind of roles (full-time / freelance / internship) and from when?") as Maybe<string>,
   },
   photo: { src: "/images/about/hilltop-portrait.webp", alt: "Asmi Shaikh smiling at a hilltop viewpoint, a hand in her hair, with a valley and lake behind her" },
@@ -90,6 +92,15 @@ export const education: EducationItem[] = [
 ];
 
 export const experience: ExperienceItem[] = [
+  {
+    role: "User Experience Designer",
+    org: "IBM",
+    start: "", // needed: month and year Asmi started at IBM
+    end: "Present",
+    location: "", // needed: city · on-site / hybrid / remote
+    summary: needed("One line on what Asmi does at IBM (team, product area, focus)"),
+    current: true,
+  },
   {
     role: "UX/UI Intern",
     org: "AiStrike Cybersecurity",

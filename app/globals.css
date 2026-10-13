@@ -698,8 +698,36 @@
   }
 }
 
-/* The native cursor always stays: the custom ring (components/ui/Cursor.tsx) only
-   appears around things you can click, so it never suggests that plain content is interactive. */
+/* Cursor: the normal arrow everywhere, the hand only on things you can click.
+   (Tailwind v4 leaves buttons on the arrow, so links, buttons and CTAs opt in here;
+   utilities like cursor-grab still win because they sit in a later layer.) */
+@layer base {
+  /* the arrow, even over text; only real text fields get the I-beam */
+  body {
+    cursor: default;
+  }
+  input:not([type="checkbox"], [type="radio"], [type="range"], [type="submit"], [type="button"]),
+  textarea,
+  [contenteditable="true"] {
+    cursor: text;
+  }
+  a[href],
+  button:not(:disabled),
+  [role="button"]:not([aria-disabled="true"]),
+  [role="tab"],
+  summary,
+  select,
+  label[for],
+  input[type="checkbox"],
+  input[type="radio"],
+  input[type="range"] {
+    cursor: pointer;
+  }
+  button:disabled,
+  [aria-disabled="true"] {
+    cursor: not-allowed;
+  }
+}
 
 /* ─────────────────────────── covers ─────────────────────────── */
 .cover-drift {

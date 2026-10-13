@@ -2,7 +2,6 @@ import type { Metadata, Viewport } from "next";
 import { Fraunces, Geist } from "next/font/google";
 import { Nav } from "@/components/layout/Nav";
 import { Footer } from "@/components/layout/Footer";
-import { Cursor } from "@/components/ui/Cursor";
 import { AskAsmi } from "@/components/chat/AskAsmi";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { personJsonLd } from "@/lib/seo";
@@ -72,7 +71,6 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         </main>
         <Footer />
         <AskAsmi />
-        <Cursor />
         <JsonLd data={personJsonLd()} />
       </body>
     </html>

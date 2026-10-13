@@ -593,10 +593,13 @@ export type Project = {
 export type ExperienceItem = {
   role: string;
   org: string;
+  /** Empty when not yet confirmed; the period then shows the end alone ("Present"). */
   start: string;
   end: string;
   location: string;
   summary: Maybe<string>;
+  /** Her current role: highlighted wherever experience is listed. */
+  current?: boolean;
 };
 
 export type EducationItem = {

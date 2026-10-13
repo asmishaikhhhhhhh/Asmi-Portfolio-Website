@@ -59,7 +59,7 @@ export function localAnswer(question: string): AskReply {
 
   if (has(q, "available", "hire", "hiring", "open to", "freelance", "job", "work with")) {
     return {
-      answer: `Asmi is currently ${profile.availability.status.toLowerCase()}. The quickest way to talk about a role or project is email (${contact.email}) or LinkedIn.`,
+      answer: `Asmi is currently a ${profile.current.role} at ${profile.current.org}. The quickest way to talk about a role or project is email (${contact.email}) or LinkedIn.`,
       links: [],
       actions: ["email", "linkedin", "resume"],
     };

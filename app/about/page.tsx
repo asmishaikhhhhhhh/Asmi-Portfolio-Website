@@ -3,6 +3,7 @@ import Link from "next/link";
 import { Confessions } from "@/components/about/Confessions";
 import { PhotoTicker } from "@/components/about/PhotoTicker";
 import { ProcessLoop } from "@/components/about/ProcessLoop";
+import { CurrentRole } from "@/components/ui/CurrentRole";
 import { Picture } from "@/components/ui/Picture";
 import { MaybeText } from "@/components/ui/Needed";
 import { Reveal } from "@/components/ui/Reveal";
@@ -23,7 +24,8 @@ export default function AboutPage() {
       <section className="container-page grid gap-10 md:grid-cols-12">
         <div className="md:col-span-7">
           <p className="meta text-ink-mute">About</p>
-          <h1 className="mt-3 font-display-soft text-h1">
+          <CurrentRole className="mt-5" />
+          <h1 className="mt-5 font-display-soft text-h1">
             A little more about the person <em className="font-display-wonk italic text-forest">behind the pixels</em>
           </h1>
           <div className="mt-8 max-w-[52ch] space-y-4 text-[clamp(1.125rem,1.05rem+0.4vw,1.375rem)] leading-[1.5] text-ink-soft">
@@ -52,21 +54,40 @@ export default function AboutPage() {
       <section aria-labelledby="path" className="container-page mt-28 grid gap-10 md:mt-36 md:grid-cols-12">
         <div className="md:col-span-4">
           <p className="meta text-ink-mute">The path so far</p>
-          <h2 id="path" className="mt-3 font-display-soft text-h2">Design school, five roles and a lot of side quests</h2>
+          <h2 id="path" className="mt-3 font-display-soft text-h2">Design school, six roles and a lot of side quests</h2>
         </div>
         <ol className="relative border-l border-line md:col-span-7 md:col-start-6">
           {[
-            ...experience.map((x) => ({ k: `${x.start} – ${x.end}`, t: x.role, o: x.org, l: x.location, s: x.summary })),
-            { k: education[0].period, t: education[0].qualification, o: education[0].institution, l: education[0].location ?? "", s: undefined },
-          ].map((e) => (
-            <Reveal as="li" key={e.t + e.o} className="relative pb-10 pl-8 last:pb-0">
-              <span aria-hidden className="absolute -left-[5px] top-2 h-2.5 w-2.5 rounded-full bg-marigold" />
-              <p className="meta text-ink-mute">{e.k}</p>
-              <p className="mt-1 font-display-soft text-h3">{e.t}</p>
-              <p className="text-ink-soft">{e.o} · {e.l}</p>
-              {e.s && <p className="mt-2 text-sm text-ink-soft"><MaybeText value={e.s} /></p>}
-            </Reveal>
-          ))}
+            ...experience.map((x) => ({ k: x.start ? `${x.start} – ${x.end}` : x.end, t: x.role, o: x.org, l: x.location, s: x.summary, now: !!x.current })),
+            { k: education[0].period, t: education[0].qualification, o: education[0].institution, l: education[0].location ?? "", s: undefined, now: false },
+          ].map((e) =>
+            e.now ? (
+              // the current role: a lit card with a live dot on the line
+              <Reveal as="li" key={e.t + e.o} className="relative pb-10 pl-8">
+                <span aria-hidden className="absolute -left-[7px] top-6 inline-flex h-3.5 w-3.5">
+                  <span className="absolute inset-0 animate-ping rounded-full bg-forest/40 motion-reduce:hidden" />
+                  <span className="relative inline-flex h-3.5 w-3.5 rounded-full border-2 border-paper bg-forest" />
+                </span>
+                <div className="rounded-media border border-forest/25 bg-forest-soft/60 p-5 md:p-6">
+                  <p className="meta flex items-center gap-2 text-forest">
+                    <span className="rounded-full bg-forest px-2 py-0.5 text-paper">Current</span>
+                    {e.k}
+                  </p>
+                  <p className="mt-2 font-display-soft text-h3">{e.t}</p>
+                  <p className="font-medium text-forest">{e.o}{e.l ? ` · ${e.l}` : ""}</p>
+                  {e.s && <p className="mt-2 text-sm text-ink-soft"><MaybeText value={e.s} /></p>}
+                </div>
+              </Reveal>
+            ) : (
+              <Reveal as="li" key={e.t + e.o} className="relative pb-10 pl-8 last:pb-0">
+                <span aria-hidden className="absolute -left-[5px] top-2 h-2.5 w-2.5 rounded-full bg-marigold" />
+                <p className="meta text-ink-mute">{e.k}</p>
+                <p className="mt-1 font-display-soft text-h3">{e.t}</p>
+                <p className="text-ink-soft">{e.o}{e.l ? ` · ${e.l}` : ""}</p>
+                {e.s && <p className="mt-2 text-sm text-ink-soft"><MaybeText value={e.s} /></p>}
+              </Reveal>
+            ),
+          )}
         </ol>
       </section>
 

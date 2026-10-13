@@ -1,3 +1,4 @@
+import { CurrentRole } from "@/components/ui/CurrentRole";
 import fs from "node:fs";
 import path from "node:path";
 import type { Metadata } from "next";
@@ -26,6 +27,7 @@ export default function ResumePage() {
         <div>
           <p className="meta text-ink-mute">Resume</p>
           <h1 className="mt-3 font-display-soft text-h1">The short version</h1>
+          <CurrentRole className="mt-4" />
         </div>
         <div className="flex flex-wrap gap-3">
           {hasPdf && (
@@ -80,12 +82,15 @@ export default function ResumePage() {
             <h3 className="meta font-bold text-forest">Experience</h3>
             <ul className="mt-4 space-y-5">
               {experience.map((x) => (
-                <li key={x.role + x.org}>
+                <li key={x.role + x.org} className={x.current ? "-mx-3 rounded-control border-l-4 border-forest bg-forest-soft/60 px-3 py-2.5" : ""}>
                   <p className="flex flex-wrap justify-between gap-x-4 font-medium">
-                    <span>{x.role} · {x.org}</span>
-                    <span className="text-sm font-normal text-ink-mute">{x.start} – {x.end}</span>
+                    <span className="flex flex-wrap items-center gap-2">
+                      {x.role} · {x.org}
+                      {x.current && <span className="meta rounded-full bg-forest px-2 py-0.5 text-paper">Current</span>}
+                    </span>
+                    <span className={`text-sm font-normal ${x.current ? "font-medium text-forest" : "text-ink-mute"}`}>{x.start ? `${x.start} – ${x.end}` : x.end}</span>
                   </p>
-                  <p className="text-sm text-ink-mute">{x.location}</p>
+                  {x.location && <p className="text-sm text-ink-mute">{x.location}</p>}
                   <p className="mt-1 text-sm text-ink-soft"><MaybeText value={x.summary} /></p>
                 </li>
               ))}
