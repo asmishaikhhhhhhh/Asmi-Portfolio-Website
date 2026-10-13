@@ -131,21 +131,30 @@ export default function AboutPage() {
           />
         </div>
 
+        {/* Tools, set like a type specimen: the more she uses it, the bigger and darker it's set */}
         <div className="mt-14 grid gap-8 border-t border-line pt-10 md:grid-cols-12">
           <h3 className="meta text-ink-mute md:col-span-3">Tools</h3>
-          <dl className="grid gap-6 md:col-span-9 md:grid-cols-3">
+          <dl className="md:col-span-9">
             {(
               [
-                ["Every day", tools.daily],
-                ["Regularly", tools.also],
-                ["Getting comfortable with", tools.basic],
+                ["Every day", tools.daily, "full", "font-display-soft text-[clamp(1.6rem,1.2rem+1.6vw,2.6rem)] leading-[1.15] text-ink"],
+                ["Regularly", tools.also, "half", "font-display-soft text-[clamp(1.15rem,1rem+0.6vw,1.5rem)] leading-snug text-ink-soft"],
+                ["Getting comfortable with", tools.basic, "ring", "font-display-wonk italic text-[clamp(1.05rem,0.95rem+0.4vw,1.3rem)] leading-snug text-ink-mute"],
               ] as const
-            ).map(([k, list]) => (
-              <div key={k}>
-                <dt className="font-medium">{k}</dt>
-                <dd className="mt-2 flex flex-wrap gap-1.5">
+            ).map(([k, list, dot, type], i) => (
+              <div key={k} className={`grid gap-3 py-6 sm:grid-cols-[11rem_1fr] sm:gap-8 ${i ? "border-t border-line" : "pt-0"}`}>
+                <dt className="meta flex items-center gap-2.5 self-start text-ink-mute sm:pt-[0.6em]">
+                  <span
+                    aria-hidden
+                    className={`h-2.5 w-2.5 shrink-0 rounded-full border border-forest ${dot === "full" ? "bg-forest" : dot === "half" ? "bg-[linear-gradient(90deg,var(--color-forest)_50%,transparent_50%)]" : ""}`}
+                  />
+                  {k}
+                </dt>
+                <dd className={`flex flex-wrap gap-x-[0.85em] gap-y-[0.1em] ${type}`}>
                   {list.map((t) => (
-                    <span key={t} className="rounded-tag bg-paper-deep px-2 py-1 text-sm text-ink-soft">{t}</span>
+                    <span key={t} className="whitespace-nowrap decoration-marigold decoration-2 underline-offset-[0.2em] transition-colors hover:text-ink hover:underline">
+                      {t}
+                    </span>
                   ))}
                 </dd>
               </div>
