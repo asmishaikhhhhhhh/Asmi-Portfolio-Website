@@ -35,6 +35,18 @@ export const profile = {
   ],
   /** Her own value proposition from the current site. */
   valueProposition: "Inclined towards connecting far-flung thoughts into a single theme.",
+  /** "What I can help with", from her Framer site. Shown around the value proposition on the home page. */
+  helpWith: [
+    "Service Design",
+    "User Experience Design",
+    "User Interface Design",
+    "Product Design",
+    "Visual Communication",
+    "Ethnographic Research",
+    "Data Visualization",
+    "Design Research",
+    "System Design",
+  ],
   /**
    * Her statement, in her words, shown as the "gathering" sentence on the home page.
    * Segments with `link` or `theme` are the key phrases the thread connects.

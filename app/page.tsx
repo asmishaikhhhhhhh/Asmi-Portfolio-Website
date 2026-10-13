@@ -2,6 +2,7 @@ import Link from "next/link";
 import { Hero } from "@/components/home/Hero";
 import { SelectedWork } from "@/components/home/SelectedWork";
 import { ThinkingMap } from "@/components/home/ThinkingMap";
+import { ValueProposition } from "@/components/home/ValueProposition";
 import { Pinboard } from "@/components/playground/Pinboard";
 import { thinkingNodes } from "@/data/thinking";
 import { playground } from "@/data/playground";
@@ -16,6 +17,7 @@ export default function Home() {
       <Hero />
       <SelectedWork flagship={flagship} />
       <ThinkingMap nodes={thinkingNodes} projects={all} />
+      <ValueProposition />
 
       <section aria-labelledby="playground-heading" className="container-page py-24 md:py-36">
         <div className="mb-10 flex flex-wrap items-end justify-between gap-6">
