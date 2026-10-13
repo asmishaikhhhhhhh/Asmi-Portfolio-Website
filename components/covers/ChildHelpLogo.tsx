@@ -1,8 +1,11 @@
 "use client";
 
+import { montserrat } from "./montserrat";
+
 /**
  * Child Help Foundation hero: the foundation's mark (a roof sheltering three
- * figures, the centre one in yellow), traced from the logo into SVG.
+ * figures, the centre one in yellow), traced from the logo into SVG, with the
+ * CHILD HELP / FOUNDATION wordmark below it as live Montserrat text.
  *
  * Loop: the three figures pop up one by one with their arms raised, the roof
  * sweeps down to shelter them, and they bounce, the centre figure highest.
@@ -31,6 +34,8 @@ export function ChildHelpLogo({ playing }: { playing: boolean }) {
       aria-hidden
     >
       <rect width="1684" height="1190" fill={NAVY} />
+      {/* Mark + wordmark, scaled together to fit the stage; type sizes match the logo artwork's line widths */}
+      <g transform="translate(234.7 -8.4) scale(0.72)">
       <path className="chf-roof" d={ROOF} fill={WHITE} />
       <g className="chf-fig" style={{ transformOrigin: FEET.left, animationDelay: "0ms" }}>
         <path d={LEFT} fill={WHITE} fillRule="evenodd" />
@@ -40,6 +45,15 @@ export function ChildHelpLogo({ playing }: { playing: boolean }) {
       </g>
       <g className="chf-fig" style={{ transformOrigin: FEET.right, animationDelay: "320ms" }}>
         <path d={RIGHT} fill={WHITE} fillRule="evenodd" />
+      </g>
+      <g className={montserrat.className} fill={WHITE} textAnchor="middle">
+        <text x="843.5" y="1141" fontSize="197" fontWeight={700}>
+          CHILD HELP
+        </text>
+        <text x="843.5" y="1381" fontSize="175" fontWeight={400}>
+          FOUNDATION
+        </text>
+      </g>
       </g>
     </svg>
   );
