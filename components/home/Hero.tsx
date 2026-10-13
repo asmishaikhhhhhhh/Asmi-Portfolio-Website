@@ -3,62 +3,10 @@ import { IntroName } from "@/components/hero/IntroName";
 import { Magnetic } from "@/components/ui/Magnetic";
 import { CurrentRole } from "@/components/ui/CurrentRole";
 import Image from "next/image";
-import { education, experience, profile, recognition } from "@/data/portfolio";
+import { profile } from "@/data/portfolio";
 import { Statement } from "./Statement";
-import { ProofCards, type ProofCard } from "./ProofCards";
 
 export function Hero() {
-  const cards: ProofCard[] = [
-    {
-      key: "education",
-      label: "Education",
-      big: "B.Des",
-      title: "Humanising Technology",
-      sub: `${education[0].institution}, ${education[0].period}`,
-      details: [`Batch ${education[0].period.replace(/\s/g, "")}`, `${education[0].location}`],
-      href: "/about",
-      hrefLabel: "My background",
-      motif: "cap",
-      tone: "forest",
-    },
-    {
-      key: "experience",
-      label: "Experience",
-      big: String(experience.length).padStart(2, "0"),
-      title: "roles across design and outreach",
-      sub: experience.slice(0, 2).map((e) => e.org.split(" (")[0]).join(" · "),
-      details: experience.map((e) => `${e.role}, ${e.org.split(" (")[0]}`),
-      href: "/resume",
-      hrefLabel: "View resume",
-      motif: "stack",
-      tone: "paper",
-      count: experience.length,
-    },
-    {
-      key: "recognition",
-      label: "Recognition",
-      big: "Award",
-      title: recognition[0].title,
-      sub: `${recognition[0].detail}`,
-      details: [recognition[0].date],
-      motif: "rosette",
-      tone: "marigold",
-    },
-    {
-      key: "published",
-      label: "Published",
-      big: "Paper",
-      title: "White paper, IIP Series 2024",
-      sub: "Iterative International Publishers",
-      details: ["“A New Era of Connectivity: Exploring the Potential of PI Network”", recognition[1].date],
-      href: recognition[1].href,
-      hrefLabel: "Read the paper",
-      external: true,
-      motif: "page",
-      tone: "sage",
-    },
-  ];
-
   return (
     <section aria-label="Introduction" className="relative overflow-hidden pt-24 md:pt-28">
       <div className="container-page">
@@ -109,10 +57,6 @@ export function Hero() {
           <Statement segments={profile.statement} />
         </div>
 
-        {/* At a glance: facts as cards that open up */}
-        <div className="mt-20 md:mt-28">
-          <ProofCards cards={cards} />
-        </div>
       </div>
     </section>
   );
