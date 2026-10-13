@@ -9,14 +9,14 @@ import { Statement } from "./Statement";
 export function Hero() {
   return (
     <section aria-label="Introduction" className="relative overflow-hidden pt-24 md:pt-28">
-      {/* faint dot grid behind the intro, fading out before the statement */}
+      {/* faint dot grid behind the intro, fading out below the statement */}
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-x-0 top-0 h-[44rem] md:h-[52rem]"
+        className="pointer-events-none absolute inset-x-0 top-0 h-[70rem] md:h-[82rem]"
         style={{
           backgroundImage: "radial-gradient(circle, rgb(26 25 22 / 0.16) 1px, transparent 1.6px)",
           backgroundSize: "24px 24px",
-          maskImage: "linear-gradient(180deg, #000 55%, transparent)",
+          maskImage: "linear-gradient(180deg, #000 65%, transparent)",
         }}
       />
       <div className="container-page relative">
@@ -49,8 +49,13 @@ export function Hero() {
           <IntroName name={profile.name} className="min-w-0 flex-1" />
         </div>
 
-        {/* The two ways in */}
-        <div className="relative z-10 mt-10 flex flex-wrap items-center gap-3 md:mt-12">
+        {/* Far-flung words gathering into one sentence (its words start scattered, so leave room above) */}
+        <div className="mt-28 md:mt-40">
+          <Statement segments={profile.statement} />
+        </div>
+
+        {/* Then the two ways in */}
+        <div className="relative z-10 mt-16 flex flex-wrap items-center gap-3 md:mt-20">
           <Magnetic>
             <Link
               href="#work"
@@ -71,11 +76,6 @@ export function Hero() {
               ↗
             </span>
           </Link>
-        </div>
-
-        {/* Far-flung words gathering into one sentence (its words start scattered, so leave room above) */}
-        <div className="mt-36 md:mt-52">
-          <Statement segments={profile.statement} />
         </div>
       </div>
     </section>

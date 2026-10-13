@@ -16,7 +16,7 @@ export default function Home() {
     <>
       <Hero />
       <SelectedWork flagship={flagship} />
-      <ThinkingMap nodes={thinkingNodes} projects={all} />
+      <ThinkingMap nodes={thinkingNodes} />
       <ValueProposition />
 
       <section aria-labelledby="playground-heading" className="container-page py-24 md:py-36">

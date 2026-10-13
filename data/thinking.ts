@@ -1,9 +1,6 @@
 /**
- * "How I think": the nodes of the interactive map on the home page.
- *
- * Which projects light up for a node (or a pair of nodes) is NOT hardcoded here.
- * It's derived from each project's `thinking` field in /data/projects, so adding
- * a project automatically updates the map.
+ * "How I think": the eight ways of thinking on the ring on the home page,
+ * each with the belief shown when it's chosen.
  *
  * The belief lines are drafts in Asmi's voice; she should rewrite them freely.
  */
