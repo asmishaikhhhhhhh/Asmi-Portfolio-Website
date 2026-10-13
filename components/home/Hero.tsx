@@ -51,7 +51,7 @@ export function Hero() {
 
         {/* Far-flung words gathering into one sentence (its words start scattered, so leave room above) */}
         <div className="mt-28 md:mt-40">
-          <Statement segments={profile.statement} />
+          <Statement segments={profile.statement} connectTo="see-work" />
         </div>
 
         {/* Then the two ways in */}
@@ -59,7 +59,14 @@ export function Hero() {
           <Magnetic>
             <Link
               href="#work"
-              className="group/cta inline-flex items-center gap-2 rounded-full bg-ink px-6 py-3.5 font-medium text-paper transition-transform duration-200 hover:-translate-y-0.5"
+              id="see-work"
+              // the statement's thread drops onto this and pours marigold in from the top (--fill, 0 → 1)
+              className="group/cta inline-flex items-center gap-2 rounded-full px-6 py-3.5 font-medium transition-transform duration-200 hover:-translate-y-0.5"
+              style={{
+                background:
+                  "linear-gradient(180deg, var(--color-marigold) calc(var(--fill, 0) * 100%), var(--color-ink) calc(var(--fill, 0) * 100%))",
+                color: "color-mix(in oklab, var(--color-ink) calc(var(--fill, 0) * 100%), var(--color-paper))",
+              }}
             >
               See my work
               <span aria-hidden className="inline-block transition-transform duration-300 ease-out-soft group-hover/cta:translate-y-0.5">

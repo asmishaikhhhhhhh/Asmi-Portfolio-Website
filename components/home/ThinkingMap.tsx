@@ -4,8 +4,6 @@ import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion, useInView, useReducedMotion } from "motion/react";
 import type { ThinkingNodeInfo } from "@/data/thinking";
 
-const ord = (i: number) => String(i + 1).padStart(2, "0");
-
 /* The eight sit evenly on a ring (viewBox units, 0–100), starting at the top. */
 const R = 40;
 const at = (i: number, n: number): [number, number] => {
@@ -20,11 +18,11 @@ const thread = ([ax, ay]: [number, number], [bx, by]: [number, number]) => {
 };
 
 /** The belief for the chosen way of thinking. */
-function Belief({ node, i, small = false }: { node: ThinkingNodeInfo; i: number; small?: boolean }) {
+function Belief({ node, small = false }: { node: ThinkingNodeInfo; small?: boolean }) {
   return (
     <div>
       <p className="meta text-forest">
-        {ord(i)} · {node.label}
+        {node.label}
       </p>
       <p className={`mt-3 font-display-soft leading-snug ${small ? "text-[clamp(0.95rem,0.7rem+0.55vw,1.2rem)]" : "text-[1.2rem]"}`}>&ldquo;{node.belief}&rdquo;</p>
     </div>
@@ -81,7 +79,7 @@ export function ThinkingMap({ nodes }: { nodes: ThinkingNodeInfo[] }) {
                 exit={reduce ? undefined : { opacity: 0, y: -6 }}
                 transition={{ duration: 0.25 }}
               >
-                <Belief node={nodes[active]} i={active} />
+                <Belief node={nodes[active]} />
               </motion.div>
             </AnimatePresence>
           </div>
@@ -133,7 +131,7 @@ export function ThinkingMap({ nodes }: { nodes: ThinkingNodeInfo[] }) {
                   exit={reduce ? undefined : { opacity: 0, scale: 0.98 }}
                   transition={{ duration: 0.3 }}
                 >
-                  <Belief node={nodes[active]} i={active} small />
+                  <Belief node={nodes[active]} small />
                 </motion.div>
               </AnimatePresence>
             </div>
@@ -152,7 +150,6 @@ export function ThinkingMap({ nodes }: { nodes: ThinkingNodeInfo[] }) {
                   }`}
                   style={{ left: `${pts[i][0]}%`, top: `${pts[i][1]}%` }}
                 >
-                  <span className={`text-xs tabular-nums ${on ? "text-marigold" : "text-ink-mute"}`}>{ord(i)}</span>
                   {n.label}
                 </button>
               );
@@ -169,11 +166,10 @@ export function ThinkingMap({ nodes }: { nodes: ThinkingNodeInfo[] }) {
                   type="button"
                   aria-pressed={on}
                   onClick={() => pick(i)}
-                  className={`flex items-baseline gap-2 rounded-control border px-4 py-3 text-left font-medium transition-colors ${
+                  className={`flex items-baseline rounded-control border px-4 py-3 text-left font-medium transition-colors ${
                     on ? "border-ink bg-ink text-paper" : "border-ink/15 bg-card"
                   }`}
                 >
-                  <span className={`text-xs tabular-nums ${on ? "text-marigold" : "text-ink-mute"}`}>{ord(i)}</span>
                   {n.label}
                 </button>
               );
