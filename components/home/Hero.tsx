@@ -49,9 +49,8 @@ export function Hero() {
           <IntroName name={profile.name} className="min-w-0 flex-1" />
         </div>
 
-        {/* One line on what she does, then the two ways in */}
-        <p className="mt-10 max-w-[34ch] text-lede text-ink-soft md:mt-12">{profile.headline}.</p>
-        <div className="relative z-10 mt-8 flex flex-wrap items-center gap-3 md:mt-10">
+        {/* The two ways in */}
+        <div className="relative z-10 mt-10 flex flex-wrap items-center gap-3 md:mt-12">
           <Magnetic>
             <Link
               href="#work"

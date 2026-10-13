@@ -106,31 +106,17 @@ function Pill({
   );
 }
 
-/** The statement, with its two key phrases set apart. */
+/** The heading at the centre, with its key phrase set apart. */
 function Line() {
-  const text = profile.valueProposition;
-  const parts = text.split(/(far-flung thoughts|a single theme)/);
   return (
     <>
-      {parts.map((p, k) =>
-        p === "far-flung thoughts" ? (
-          <em key={k} className="whitespace-nowrap font-display-wonk italic text-marigold">
-            {p}
-          </em>
-        ) : p === "a single theme" ? (
-          <em key={k} className="whitespace-nowrap font-display-wonk italic">
-            {p}
-          </em>
-        ) : (
-          p
-        ),
-      )}
+      What I bring <em className="whitespace-nowrap font-display-wonk italic text-marigold">to the table</em>
     </>
   );
 }
 
 /**
- * "My value proposition", from Asmi's first portfolio, said the way it reads:
+ * "What I bring to the table", from Asmi's first portfolio's value proposition:
  * the things she can help with float far apart, and threads pull them into one
  * theme at the centre. Pills can be dragged; their threads follow.
  *
@@ -159,7 +145,7 @@ export function ValueProposition() {
   const knot: [number, number] = [size.w / 2, size.h / 2];
 
   return (
-    <section aria-label="My value proposition" className="container-page py-24 md:py-32">
+    <section aria-label="What I bring to the table" className="container-page py-24 md:py-32">
       <div className="relative overflow-hidden rounded-[2rem] bg-night px-6 py-16 text-paper md:px-10 md:py-10">
         {/* soft glow where the threads meet */}
         <div
@@ -170,12 +156,10 @@ export function ValueProposition() {
 
         {/* Small screens: statement first, skills below */}
         <div className="relative md:hidden">
-          <p className="meta text-paper/60">My value proposition</p>
-          <h2 className="mt-4 font-display-soft text-h2">
+          <h2 className="font-display-soft text-h2">
             <Line />
           </h2>
-          <p className="meta mt-10 text-paper/60">What I can help with</p>
-          <ul className="mt-4 flex flex-wrap gap-2.5">
+          <ul className="mt-8 flex flex-wrap gap-2.5">
             {skills.map((s, i) => (
               <li
                 key={s}
@@ -213,11 +197,9 @@ export function ValueProposition() {
           )}
 
           <div className="absolute left-1/2 top-1/2 w-[min(34rem,52%)] -translate-x-1/2 -translate-y-1/2 text-center">
-            <p className="meta text-paper/60">My value proposition</p>
-            <h2 className="mt-4 font-display-soft text-[clamp(2rem,1.3rem+2.2vw,3.25rem)] leading-[1.08] tracking-[-0.015em]">
+            <h2 className="font-display-soft text-[clamp(2rem,1.3rem+2.2vw,3.25rem)] leading-[1.08] tracking-[-0.015em]">
               <Line />
             </h2>
-            <p className="meta mt-6 text-paper/45">Drag the pieces around</p>
           </div>
 
           <ul aria-label="What I can help with">
