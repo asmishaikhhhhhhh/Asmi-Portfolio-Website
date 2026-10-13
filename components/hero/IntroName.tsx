@@ -8,29 +8,13 @@ const INTERVAL = 2400;
 
 /**
  * The hero name: "Asmi Shaikh", readable from the first frame. The letters rise
- * in once (CSS, ~0.6s, nothing waits on it), and the caption names the fields
- * she works across, one at a time.
- *
- * - The name is a real <h1> in the HTML, so it is the page's first, largest text.
- * - The caption pauses on hover and while the tab is hidden; with reduced motion
- *   the letters don't animate and the caption lists every field at once.
+ * in once (CSS, ~0.6s, nothing waits on it). Anything passed as children sits
+ * under the name. A real <h1>, so it is the page's first, largest text.
  */
-export function IntroName({ name, className = "" }: { name: string; className?: string }) {
-  const reduce = useReducedMotion();
-  const [i, setI] = useState(0);
-  const [paused, setPaused] = useState(false);
-
-  useEffect(() => {
-    if (reduce || paused) return;
-    const t = setInterval(() => {
-      if (document.visibilityState === "visible") setI((n) => (n + 1) % DISCIPLINES.length);
-    }, INTERVAL);
-    return () => clearInterval(t);
-  }, [reduce, paused]);
-
+export function IntroName({ name, className = "", children }: { name: string; className?: string; children?: React.ReactNode }) {
   let k = 0;
   return (
-    <div className={className} onPointerEnter={() => setPaused(true)} onPointerLeave={() => setPaused(false)}>
+    <div className={className}>
       <h1 className="font-display-soft text-display tracking-[-0.03em]" style={{ fontSize: "calc(var(--text-display) * 0.82)", lineHeight: 1.15 }}>
         <span className="sr-only">{name}</span>
         <span aria-hidden className="whitespace-nowrap">
@@ -46,32 +30,57 @@ export function IntroName({ name, className = "" }: { name: string; className?: 
           ))}
         </span>
       </h1>
-      {/* wraps on narrow screens so the longest field name is never clipped */}
-      <p className="meta mt-3 flex flex-wrap items-center gap-x-3 gap-y-1 text-ink-mute">
-        <span aria-hidden className="hidden h-px w-8 bg-line sm:inline-block" />
-        <span>Designing across</span>
-        {reduce ? (
-          <span className="text-ink-soft">{DISCIPLINES.join(" · ")}</span>
-        ) : (
-          <>
-            <span className="sr-only">{DISCIPLINES.join(", ")}</span>
-            <span aria-hidden className="relative inline-block h-[1.35em] overflow-hidden align-bottom">
-              <AnimatePresence mode="popLayout" initial={false}>
-                <motion.span
-                  key={DISCIPLINES[i]}
-                  className="block whitespace-nowrap text-forest"
-                  initial={{ y: "100%", opacity: 0 }}
-                  animate={{ y: 0, opacity: 1 }}
-                  exit={{ y: "-100%", opacity: 0 }}
-                  transition={{ duration: 0.45, ease: [0.2, 0.8, 0.2, 1] }}
-                >
-                  {DISCIPLINES[i]}
-                </motion.span>
-              </AnimatePresence>
-            </span>
-          </>
-        )}
-      </p>
+      {children}
     </div>
+  );
+}
+
+/**
+ * "Designing across" + the fields she works across, one at a time. Pauses on
+ * hover and while the tab is hidden; with reduced motion it lists every field.
+ */
+export function Disciplines({ className = "" }: { className?: string }) {
+  const reduce = useReducedMotion();
+  const [i, setI] = useState(0);
+  const [paused, setPaused] = useState(false);
+
+  useEffect(() => {
+    if (reduce || paused) return;
+    const t = setInterval(() => {
+      if (document.visibilityState === "visible") setI((n) => (n + 1) % DISCIPLINES.length);
+    }, INTERVAL);
+    return () => clearInterval(t);
+  }, [reduce, paused]);
+
+  return (
+    // wraps on narrow screens so the longest field name is never clipped
+    <p
+      className={`meta flex flex-wrap items-center gap-x-3 gap-y-1 text-ink-mute ${className}`}
+      onPointerEnter={() => setPaused(true)}
+      onPointerLeave={() => setPaused(false)}
+    >
+      <span>Designing across</span>
+      {reduce ? (
+        <span className="text-ink-soft">{DISCIPLINES.join(" · ")}</span>
+      ) : (
+        <>
+          <span className="sr-only">{DISCIPLINES.join(", ")}</span>
+          <span aria-hidden className="relative inline-block h-[1.35em] overflow-hidden align-bottom">
+            <AnimatePresence mode="popLayout" initial={false}>
+              <motion.span
+                key={DISCIPLINES[i]}
+                className="block whitespace-nowrap text-forest"
+                initial={{ y: "100%", opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                exit={{ y: "-100%", opacity: 0 }}
+                transition={{ duration: 0.45, ease: [0.2, 0.8, 0.2, 1] }}
+              >
+                {DISCIPLINES[i]}
+              </motion.span>
+            </AnimatePresence>
+          </span>
+        </>
+      )}
+    </p>
   );
 }

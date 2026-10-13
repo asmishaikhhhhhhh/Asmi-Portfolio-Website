@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { IntroName } from "@/components/hero/IntroName";
+import { Disciplines, IntroName } from "@/components/hero/IntroName";
 import { Magnetic } from "@/components/ui/Magnetic";
 import { CurrentRole } from "@/components/ui/CurrentRole";
 import Image from "next/image";
@@ -20,15 +20,13 @@ export function Hero() {
         }}
       />
       <div className="container-page relative">
-        {/* Eyebrow: where she is now, then what and where */}
-        <div className="flex flex-wrap items-center gap-x-4 gap-y-3">
-          <CurrentRole />
-          <p className="meta flex flex-wrap items-center gap-x-4 gap-y-2 text-ink-mute">
-            <span>{profile.role}</span>
-            <span aria-hidden className="text-line">/</span>
-            <span>{profile.location}</span>
-          </p>
-        </div>
+        {/* Eyebrow: what and where, then the fields she works across */}
+        <p className="meta flex flex-wrap items-center gap-x-4 gap-y-2 text-ink-mute">
+          <span>{profile.role}</span>
+          <span aria-hidden className="text-line">/</span>
+          <span>{profile.location}</span>
+        </p>
+        <Disciplines className="mt-3" />
 
         {/* Photo + name */}
         <div className="mt-12 flex min-w-0 flex-col gap-5 sm:flex-row sm:items-center sm:gap-7 md:mt-16">
@@ -46,7 +44,10 @@ export function Hero() {
               style={{ background: "var(--color-card)" }}
             />
           </div>
-          <IntroName name={profile.name} className="min-w-0 flex-1" />
+          <IntroName name={profile.name} className="min-w-0 flex-1">
+            {/* where she is now, right under her name */}
+            <CurrentRole className="mt-3" />
+          </IntroName>
         </div>
 
         {/* Far-flung words gathering into one sentence (its words start scattered, so leave room above) */}
